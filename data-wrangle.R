@@ -27,7 +27,7 @@ for(i in 1:nrow(ds)){
 }
 
 
-# Loop for making some breaks in the aggregated count be consistent - that is that for somereason the total count of an industry sector would break where its not supposed to.
+# Loop for making some breaks in the aggregated count be consistent - that is that for some reason the total count of an industry sector would break where its not supposed to.
 #like 1,1,1,NA, 1,1,3,3,3,NA,3,3,3
 
 Q <- c()
