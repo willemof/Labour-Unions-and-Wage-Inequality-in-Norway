@@ -3,6 +3,11 @@ library(tidyverse)
 library(klassR)
 library(janitor)
 
+# Getting the path of your current open file
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path ))
+
+
 nb_indus <- GetKlass(
   klass ="6", 
   date = NULL,
@@ -28,7 +33,7 @@ en_indus <- GetKlass(
 #indus<- full_join(nb_indus, en_indus)
 indus_filter <- en_indus
 
-list_hnar <- read_delim("C:/Users/wille/OneDrive - Universitetet i Oslo/Master Thesis/Stata generated files/list hnar.txt", 
+list_hnar <- read_delim("csv/list hnar.txt", 
                         delim = "\t", escape_double = FALSE, 
                         col_names = FALSE, trim_ws = TRUE)
 list_hnar <- rename(list_hnar, navn=X1)
@@ -49,3 +54,4 @@ mutate(navnn = navn)
 list_hnar$navnn <- substr(list_hnar$navn, 1, 55)
 
 indus_filter <- full_join(en_indus, list_hnar)
+

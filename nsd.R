@@ -1,9 +1,20 @@
 #inner join
+
+library(rstudioapi)
+
+# Getting the path of your current open file
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path ))
+
+
+
 library(data.table) #for fast if else
-x2013 <- read_csv("C:/Users/wille/OneDrive - Universitetet i Oslo/Master Thesis/Stata generated files/2013.csv")
-x2014 <- read_csv("C:/Users/wille/OneDrive - Universitetet i Oslo/Master Thesis/Stata generated files/2014.csv")
-x2016 <- read_csv("C:/Users/wille/OneDrive - Universitetet i Oslo/Master Thesis/Stata generated files/2016.csv")
-x2017 <- read_csv("C:/Users/wille/OneDrive - Universitetet i Oslo/Master Thesis/Stata generated files/2017.csv")
+
+
+x2013 <- read_csv("csv/2013.csv")
+x2014 <- read_csv("csv/2014.csv")
+x2016 <- read_csv("csv/2016.csv")
+x2017 <- read_csv("csv/2017.csv")
 
 
 x <- full_join(x2013, x2014)
