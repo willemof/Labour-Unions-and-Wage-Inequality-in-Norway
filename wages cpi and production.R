@@ -1,4 +1,4 @@
-#Wages, cpi and production
+#run after running ssb wages.R, ssb cpi.R, and production ssb.R
 library(plotly)
 
 ssb <- inner_join(ssb.wages.expand, ssb.cpi.expand)
@@ -22,30 +22,19 @@ ssb_select <- ssb %>%
          total_hours_worked_employees_mill_of_workhours,
          consumer_price_index_2015_100,
          industry)
-
-
-ssb_gg <- ggplot(
-  data = ssb_select,
-  mapping = aes(x = date, y = wages_and_salaries_nok_million)) +
-  geom_line() + geom_point()
-
-ssb_gg
-
-plotly::
-
-ggplot() +
-  geom_line(data = ssb, aes(x=date, wages_and_salaries_nok_million), color = "red") +
-  geom_line(data = ssb, aes(x=date, wages_and_salaries_nok_million*0.01*consumer_price_index_2015_100), color = "blue") + 
-  scale_linetype_manual() +
-  xlab('date') +
-  ylab('wages (nok million)')
-
-Series1$series = 1
-Series2$series = 2
-all_series = rbind(Series1, Series2)
-
-ggplot(ssb,
-       aes(x = date, y = wages_and_salaries_nok_million, color = wages_and_salaries_nok_million*0.01*consumer_price_index_2015_100, linetype = factor(ssb))) + 
-  geom_line()
-
-
+s_g <- c()
+s_t <- ssb_select
+s_f <- ssb_select
+for (i in 1:NROW(indus)) {
+  s_f <- s_t %>%
+    filter(s_t$industry==indus$name[i])
+  s_t <- s_t %>%
+    filter(s_t$industry!=indus$name[i])
+#  s_f$hnar=indus$name[i] #add in english industry names
+  s_f$code=indus$code[i] #add in level 2 industrial codes
+#  s_f$parentcode=indus$parentCode[i] # add in parentcode
+  s_g <- rbind(s_g, s_f)
+}
+s_g <- s_g %>%
+  filter(quarter==4) %>%
+  filter(year %in% unique(x$year))

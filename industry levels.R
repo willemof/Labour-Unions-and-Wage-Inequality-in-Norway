@@ -1,3 +1,4 @@
+#run first
 options(encoding="UTF-8")
 library(tidyverse)
 library(klassR)
@@ -18,7 +19,7 @@ nb_indus <- GetKlass(
   output_style = "normal",
   notes = FALSE)
 
-nb_indus <- nb_indus %>% rename(navn = name)
+nb_indus <- nb_indus %>% rename(nb_name = name)
 
 en_indus <- GetKlass(
   klass ="6", 
@@ -30,8 +31,9 @@ en_indus <- GetKlass(
   output_style = "normal",
   notes = FALSE)
 
-#indus<- full_join(nb_indus, en_indus)
-indus_filter <- en_indus
+indus<- full_join(nb_indus, en_indus)
+indus_filter <- indus %>%
+  select(code, parentCode, level,name,nb_name)
 
 list_hnar <- read_delim("csv/list hnar.txt", 
                         delim = "\t", escape_double = FALSE, 
@@ -45,13 +47,19 @@ for (i in 1:NROW(list_hnar)) {
   list_hnar[i,1] <- str_remove_all(list_hnar[i,1],"^[0-9]+")
 }
 list_hnar$code<- as.character(list_hnar$code)
-for (i in 1:8) {
+for (i in 1:9) {
   list_hnar$code[i]<- str_c("0",list_hnar$code[i])
 }
 
-list_hnar$navnn <- list_hnar %>%
-mutate(navnn = navn)
-list_hnar$navnn <- substr(list_hnar$navn, 1, 55)
 
-indus_filter <- full_join(en_indus, list_hnar)
+new_row <- c("00","0","2","Unspecified or unidentifiable industry","Uspesifisert eller uidentifiserbar næring")
+indus_filter <- rbind(new_row, indus_filter)
 
+indus <-full_join(indus_filter,list_hnar) 
+indus$navn <-  str_squish(indus$navn)
+indus$navn <- str_sub(indus$navn,1,45)
+mainindus<- indus %>%
+  filter(level==1)
+indus <- indus %>%
+  filter(level==2)
+remove(list_hnar, nb_indus, en_indus, new_row, indus_filter)

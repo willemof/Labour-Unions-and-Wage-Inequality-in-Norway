@@ -1,3 +1,4 @@
+0 0
 1 Jordbruk og tjenester tilknyttet jordbruk, jakt og viltstell
 2 Skogbruk og tjenester tilknyttet skogbruk
 3 Fiske, fangst og akvakultur
