@@ -1,40 +1,45 @@
 #GG plots
 library(ggplot2)
 library(plotly)
-#wage
-
-ggplot(data=ssb.wages.year,
-       aes(x=date, y= industry))
-
-
-
-ggplot(data=filter_wages_2016,
-       aes(x=industry, y= filter_wages_2016$wages_and_salaries_nok_million/filter_wages_2016$employed_persons_employees_and_self_employed_1_000_persons))+
-  geom_point()
-
 
 ##plotly plots
 
-stringdetect <- str_subset(ssb_select$industry,"Mainland") #to detect and filter ¬
-ssb_filter <- ssb_select %>%
-  filter (!(industry %in%  stringdetect)) %>%  #filtering everything that doesn't include "Mainland"
-filter(industry != "Total industry") %>%
-  filter(quarter==4)
 
-#stringdetect <- str_subset(ssb_filter$industry,"¬") #to detect and filter ¬
-#ssb_filter_subindustry <- ssb_filter %>%
-#filter(industry %in% stringdetect)
+fig <- plot_ly(data=nsdssb_2016,
+               x= nsdssb_2016$is.union,
+               y= nsdssb_2016$average_monthly_earnings_nok)
 
+colnames(nsdssb_2016)
+
+##after getting nsdssb filter for 2016 graphs
 
 
-
-fig <- plot_ly(data=ssb_filter,
-               x= ssb_filter$industry,
-               y= ssb_filter$wages_and_salaries_nok_million)
-
-fig <- fig %>%
-  layout=title='Wages and LUD across time',
-data = ssb_select,
-x
+nsdssb_2016 <- nsdssb  %>%
+  filter(year==2016) 
 
 
+nsdssb_2016 <- nsdssb_2016 %>%
+  mutate(number=1:NROW(nsdssb_2016))
+
+
+#ggplotly
+unionvearningsbyindustry <- ggplot(data=nsdssb_2016,
+       aes(x= is.union,
+           y= average_monthly_earnings_nok,
+           colour=shortname
+           ))+
+  geom_point()    +theme(legend.position="none")
+unionvearningsbyindustry <- unionvearningsbyindustry +
+  ggtitle("Labour Union Density and Monthly Wages Across 88 Industries in 2016")+
+  xlab("Labour Union Density")+
+  ylab("Average Monthly Wage (NOK)")
+
+fig <- ggplotly(unionvearningsbyindustry) 
+fig <- style(fig,                 
+      hovertext = paste0(nsdssb_2016$parentcode, nsdssb_2016$number,"--",
+        nsdssb_2016$industry, " (", formatC(nsdssb_2016$is.union, digits=3),", ", formatC(nsdssb_2016$average_monthly_earnings_nok, format="f", big.mark =" ",digits=0)," NOK)."),
+      hoverinfo = "text")
+fig
+unionvearningsbyindustry
+
+##vignette("ggplot2-specs")

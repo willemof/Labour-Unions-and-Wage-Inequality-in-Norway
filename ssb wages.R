@@ -84,9 +84,7 @@ ssb.wages.year <- tibble(ssb.wages)
 
 ssb.wages.year<- separate(ssb.wages.year, quarter, into = c("year", "quarter"), sep = "K")
 
-#ssb.wages.year <- ssb.wages.year %>%
-  #filter(quarter == 1 | 2 |3 | 4) %>%
-  #filter(industry == "Total industry")
+
 
 
 ssb.wages.year$date  <- paste0(ssb.wages.year$year," Q", ssb.wages.year$quarter) 

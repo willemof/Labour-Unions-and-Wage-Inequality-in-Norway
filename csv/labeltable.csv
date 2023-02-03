@@ -1,0 +1,704 @@
+"Ans",1,"Fast ansatt",0
+"Ans",2,"Midlertidig ansatt",0
+"Ans",3,"Vet ikke",0
+"Antarbfh",0,"Ikke sysselsatt",0
+"Antarbfh",1,"1 arbeidsforhold",0
+"Antarbfh",2,"2 arbeidsforhold",0
+"Betrkt",1,"Yrkesaktiv",0
+"Betrkt",2,"Student eller skoleelev",0
+"Betrkt",3,"Alderspensjonist",0
+"Betrkt",4,"Førtidspensjonist",0
+"Betrkt",5,"Arbeidsufør",0
+"Betrkt",6,"Hjemmearbeidende",0
+"Betrkt",7,"Arbeidsledig",0
+"Betrkt",8,"Vernepliktig",0
+"Betrkt",9,"Annet",0
+"Bfravgr1",1,"Ferie",0
+"Bfravgr1",2,"Egen sykdom/skade",0
+"Bfravgr1",3,"Sykdom i hjemmet",0
+"Bfravgr1",4,"Fødsels-svangerskapspermisjon",0
+"Bfravgr1",5,"Permisjon barneomsorg",0
+"Bfravgr1",6,"Permisjon andre forhold",0
+"Bfravgr1",7,"Avspasering",0
+"Bfravgr1",8,"Arbeidstidsordning",0
+"Bfravgr1",9,"Utdanning/opplæring",0
+"Bfravgr1",10,"Helligdag, fridag",0
+"Bfravgr1",11,"Arbeidskonflikt",0
+"Bfravgr1",12,"Dårlig vær",0
+"Bfravgr1",13,"Arbeidsstans",0
+"Bfravgr1",14,"Ufrivillig permisjon",0
+"Bfravgr1",15,"Ny jobb",0
+"Bfravgr1",16,"Slutt jobb",0
+"Bfravgr1",17,"Hadde ikke oppdrag",0
+"Bfravgr1",18,"Annet",0
+"Bi26",1,"Fast arbeidstid",0
+"Bi26",2,"Varierende timetall fra uke til uke",0
+"Bi26",3,"Ingen avtale om arbeidstid",0
+"Bi26",4,"Tilfeldig arbeidsforhold",0
+"Bi26",5,"Tilkalles bare ved behov",0
+"Bnar",1,"Jordbruk og tjenester tilknyttet jordbruk, jakt og viltstell",0
+"Bnar",2,"Skogbruk og tjenester tilknyttet skogbruk",0
+"Bnar",3,"Fiske, fangst og akvakultur",0
+"Bnar",5,"Bryting av steinkull og brunkull",0
+"Bnar",6,"Utvinning av råolje og naturgass",0
+"Bnar",7,"Bryting av metallholdig malm",0
+"Bnar",8,"Bryting og bergverksdrift ellers",0
+"Bnar",9,"Tjenester tilknyttet bergverksdrift og utvinning",0
+"Bnar",10,"Produksjon av nærings- og nytelsesmidler",0
+"Bnar",11,"Produksjon av drikkevarer",0
+"Bnar",12,"Produksjon av tobakksvarer",0
+"Bnar",13,"Produksjon av tekstiler",0
+"Bnar",14,"Produksjon av klær",0
+"Bnar",15,"Produksjon av lær og lærvarer",0
+"Bnar",16,"Produksjon av trelast og varer av tre, kork, strå og flettem",0
+"Bnar",17,"Produksjon av papir og papirvarer",0
+"Bnar",18,"Trykking og reproduksjon av innspilte opptak",0
+"Bnar",19,"Produksjon av kull- og raffinerte petroleumsprodukter",0
+"Bnar",20,"Produksjon av kjemikalier og kjemiske produkter",0
+"Bnar",21,"Produksjon av farmasøytiske råvarer og preparater",0
+"Bnar",22,"Produksjon av gummi- og plastprodukter",0
+"Bnar",23,"Produksjon av andre ikke-metallholdige mineralprodukter",0
+"Bnar",24,"Produksjon av metaller",0
+"Bnar",25,"Produksjon av metallvarer, unntatt maskiner og utstyr",0
+"Bnar",26,"Produksjon av datamaskiner og elektroniske og optiske produk",0
+"Bnar",27,"Produksjon av elektrisk utstyr",0
+"Bnar",28,"Produksjon av maskiner og utstyr til generell bruk, ikke nev",0
+"Bnar",29,"Produksjon av motorvogner og tilhengere",0
+"Bnar",30,"Produksjon av andre transportmidler",0
+"Bnar",31,"Produksjon av møbler",0
+"Bnar",32,"Annen industriproduksjon",0
+"Bnar",33,"Reparasjon og installasjon av maskiner og utstyr",0
+"Bnar",35,"Elektrisitets-, gass-, damp-, og varmtvannsforsyning",0
+"Bnar",36,"Uttak fra kilde, rensing og distribusjon av vann",0
+"Bnar",37,"Oppsamling og behandling av avløpsvann",0
+"Bnar",38,"Innsamling, behandling, disponering og gjenvinning av avfall",0
+"Bnar",39,"Miljørydding, miljørensing og lignende virksomhet",0
+"Bnar",41,"Oppføring av bygninger",0
+"Bnar",42,"Anleggsvirksomhet",0
+"Bnar",43,"Spesialisert bygge- og anleggsvirksomhet",0
+"Bnar",45,"Handel med og reparasjon av motorvogner",0
+"Bnar",46,"Agentur- og engroshandel, unntatt med motorvogner",0
+"Bnar",47,"Detaljhandel, unntatt med motorvogner",0
+"Bnar",49,"Landtransport og rørtransport",0
+"Bnar",50,"Sjøfart",0
+"Bnar",51,"Lufttransport",0
+"Bnar",52,"Lagring og andre tjenester tilknyttet transport",0
+"Bnar",53,"Post og distribusjonsvirksomhet",0
+"Bnar",55,"Overnattingsvirksomhet",0
+"Bnar",56,"Serveringsvirksomhet",0
+"Bnar",58,"Forlagsvirksomhet",0
+"Bnar",59,"Film-, video-, og fjernsynsprogramproduksjon, utgivelse av m",0
+"Bnar",60,"Radio- og fjernsynskringkasting",0
+"Bnar",61,"Telekommunikasjon",0
+"Bnar",62,"Tjenester tilknyttet informasjonsteknologi",0
+"Bnar",63,"Informasjonstjenester",0
+"Bnar",64,"Finansieringsvirksomhet",0
+"Bnar",65,"Forsikringsvirksomhet og pensjonskasser, unntatt trygdeordni",0
+"Bnar",66,"Tjenester tilknyttet finansierings- og forsikringsvirksomhet",0
+"Bnar",68,"Omsetning og drift av fast eiendom",0
+"Bnar",69,"Juridisk og regnskapsmessig tjenesteyting",0
+"Bnar",70,"Hovedkontortjenester, administrativ rådgivning",0
+"Bnar",71,"Arkitektvirksomhet og teknisk konsulentvirksomhet, og teknis",0
+"Bnar",72,"Forskning og utviklingsarbeid",0
+"Bnar",73,"Annonse- og reklamevirksomhet og markedsundersøkelser",0
+"Bnar",74,"Annen faglig, vitenskapelig og teknisk virksomhet",0
+"Bnar",75,"Veterinærtjenester",0
+"Bnar",77,"Utleie- og leasingvirksomhet",0
+"Bnar",78,"Arbeidskrafttjenester",0
+"Bnar",79,"Reisebyrå- og reisearrangørvirksomhet og tilknyttede tjenest",0
+"Bnar",80,"Vakttjeneste og etterforskning",0
+"Bnar",81,"Tjenester tilknyttet eiendomsdrift",0
+"Bnar",82,"Annen forretningsmessig tjenesteyting",0
+"Bnar",84,"Offentlig administrasjon og forsvar, og trygdeordninger unde",0
+"Bnar",85,"Undervisning",0
+"Bnar",86,"Helsetjenester",0
+"Bnar",87,"Pleie- og omsorgstjenester i institusjon",0
+"Bnar",88,"Sosiale omsorgstjenester uten botilbud",0
+"Bnar",90,"Kunstnerisk virksomhet og underholdningsvirksomhet",0
+"Bnar",91,"Drift av biblioteker, arkiver, museer og annen kulturvirksom",0
+"Bnar",92,"Lotteri og totalisatorspill",0
+"Bnar",93,"Sports- og fritidsaktiviteter og drift av fornøyelsesetablis",0
+"Bnar",94,"Aktiviteter i medlemsorganisasjoner",0
+"Bnar",95,"Reparasjon av datamaskiner, husholdningsvarer og varer til p",0
+"Bnar",96,"Annen personlig tjenesteyting",0
+"Bnar",97,"Lønnet arbeid i private husholdninger",0
+"Bnar",99,"Internasjonale organisasjoner og organer",0
+"Bstat",101,"Vernepliktig",0
+"Bstat",111,"Sysselsatte, ansatte",0
+"Bstat",112,"Sysselsatte, selvstendige",0
+"Bstat",113,"Sysselsatte, familiearbeider",0
+"Bstat",119,"Sysselsatte, uoppgitt",0
+"Bstat",121,"Midl.Fravær, ansatte",0
+"Bstat",122,"Midl.Fravær, selvstendige",0
+"Bstat",123,"Midl.Fravær, familiearbeider",0
+"Bstat",129,"Midl.Fravær, uoppgitt",0
+"Bstat",232,"Arbeidssøkere, skoleelever",0
+"Bstat",233,"Arbeidssøkere, alderspensjonist",0
+"Bstat",234,"Arbeidssøkere, førtidspensjonist",0
+"Bstat",235,"Arbeidssøkere, arbeidsufør",0
+"Bstat",236,"Arbeidssøkere, hjemmearbeidende",0
+"Bstat",237,"Arbeidssøkere, arbeidsledig",0
+"Bstat",239,"Arbeidssøkere, annet",0
+"Bstat",249,"Arbeidssøkere, ufrivillig permitterte",0
+"Bstat",362,"Utenf.Arb.Styrke, skoleelever",0
+"Bstat",363,"Utenf.Arb.Styrke, alderspensjonist",0
+"Bstat",364,"Utenf.Arb.Styrke, førtidspensjonist",0
+"Bstat",365,"Utenf.Arb.Styrke, arbeidsufør",0
+"Bstat",366,"Utenf.Arb.Styrke, hjemmearbeidende",0
+"Bstat",367,"Utenf.Arb.Styrke, arbeidsledig",0
+"Bstat",369,"Utenf.Arb.Styrke, annet",0
+"Direkint",1,"Direkte",0
+"Direkint",2,"Indirekte",0
+"Eier",1,"Privat virksomhet",0
+"Eier",2,"Kommunal forvaltning",0
+"Eier",3,"Fylkeskommunal forvaltning",0
+"Eier",4,"Statlig forvaltning",0
+"Heldelt",1,"Heltid",0
+"Heldelt",2,"Lang deltid",0
+"Heldelt",3,"Kort deltid",0
+"Heldelt",9,"Uoppgitt",0
+"Hfravgr1",1,"Ferie",0
+"Hfravgr1",2,"Egen sykdom/skade",0
+"Hfravgr1",3,"Sykdom i hjemmet",0
+"Hfravgr1",4,"Fødsels-svangerskapspermisjon",0
+"Hfravgr1",5,"Permisjon barneomsorg",0
+"Hfravgr1",6,"Permisjon andre forhold",0
+"Hfravgr1",7,"Avspasering",0
+"Hfravgr1",8,"Arbeidstidsordning",0
+"Hfravgr1",9,"Utdanning/opplæring",0
+"Hfravgr1",10,"Helligdag, fridag",0
+"Hfravgr1",11,"Arbeidskonflikt",0
+"Hfravgr1",12,"Dårlig vær",0
+"Hfravgr1",13,"Arbeidsstans",0
+"Hfravgr1",14,"Ufrivillig permisjon",0
+"Hfravgr1",15,"Ny jobb",0
+"Hfravgr1",16,"Slutt jobb",0
+"Hfravgr1",17,"Hadde ikke oppdrag",0
+"Hfravgr1",18,"Annet",0
+"Hnar",1,"Jordbruk og tjenester tilknyttet jordbruk, jakt og viltstell",0
+"Hnar",2,"Skogbruk og tjenester tilknyttet skogbruk",0
+"Hnar",3,"Fiske, fangst og akvakultur",0
+"Hnar",5,"Bryting av steinkull og brunkull",0
+"Hnar",6,"Utvinning av råolje og naturgass",0
+"Hnar",7,"Bryting av metallholdig malm",0
+"Hnar",8,"Bryting og bergverksdrift ellers",0
+"Hnar",9,"Tjenester tilknyttet bergverksdrift og utvinning",0
+"Hnar",10,"Produksjon av nærings- og nytelsesmidler",0
+"Hnar",11,"Produksjon av drikkevarer",0
+"Hnar",12,"Produksjon av tobakksvarer",0
+"Hnar",13,"Produksjon av tekstiler",0
+"Hnar",14,"Produksjon av klær",0
+"Hnar",15,"Produksjon av lær og lærvarer",0
+"Hnar",16,"Produksjon av trelast og varer av tre, kork, strå og flettem",0
+"Hnar",17,"Produksjon av papir og papirvarer",0
+"Hnar",18,"Trykking og reproduksjon av innspilte opptak",0
+"Hnar",19,"Produksjon av kull- og raffinerte petroleumsprodukter",0
+"Hnar",20,"Produksjon av kjemikalier og kjemiske produkter",0
+"Hnar",21,"Produksjon av farmasøytiske råvarer og preparater",0
+"Hnar",22,"Produksjon av gummi- og plastprodukter",0
+"Hnar",23,"Produksjon av andre ikke-metallholdige mineralprodukter",0
+"Hnar",24,"Produksjon av metaller",0
+"Hnar",25,"Produksjon av metallvarer, unntatt maskiner og utstyr",0
+"Hnar",26,"Produksjon av datamaskiner og elektroniske og optiske produk",0
+"Hnar",27,"Produksjon av elektrisk utstyr",0
+"Hnar",28,"Produksjon av maskiner og utstyr til generell bruk, ikke nev",0
+"Hnar",29,"Produksjon av motorvogner og tilhengere",0
+"Hnar",30,"Produksjon av andre transportmidler",0
+"Hnar",31,"Produksjon av møbler",0
+"Hnar",32,"Annen industriproduksjon",0
+"Hnar",33,"Reparasjon og installasjon av maskiner og utstyr",0
+"Hnar",35,"Elektrisitets-, gass-, damp-, og varmtvannsforsyning",0
+"Hnar",36,"Uttak fra kilde, rensing og distribusjon av vann",0
+"Hnar",37,"Oppsamling og behandling av avløpsvann",0
+"Hnar",38,"Innsamling, behandling, disponering og gjenvinning av avfall",0
+"Hnar",39,"Miljørydding, miljørensing og lignende virksomhet",0
+"Hnar",41,"Oppføring av bygninger",0
+"Hnar",42,"Anleggsvirksomhet",0
+"Hnar",43,"Spesialisert bygge- og anleggsvirksomhet",0
+"Hnar",45,"Handel med og reparasjon av motorvogner",0
+"Hnar",46,"Agentur- og engroshandel, unntatt med motorvogner",0
+"Hnar",47,"Detaljhandel, unntatt med motorvogner",0
+"Hnar",49,"Landtransport og rørtransport",0
+"Hnar",50,"Sjøfart",0
+"Hnar",51,"Lufttransport",0
+"Hnar",52,"Lagring og andre tjenester tilknyttet transport",0
+"Hnar",53,"Post og distribusjonsvirksomhet",0
+"Hnar",55,"Overnattingsvirksomhet",0
+"Hnar",56,"Serveringsvirksomhet",0
+"Hnar",58,"Forlagsvirksomhet",0
+"Hnar",59,"Film-, video-, og fjernsynsprogramproduksjon, utgivelse av m",0
+"Hnar",60,"Radio- og fjernsynskringkasting",0
+"Hnar",61,"Telekommunikasjon",0
+"Hnar",62,"Tjenester tilknyttet informasjonsteknologi",0
+"Hnar",63,"Informasjonstjenester",0
+"Hnar",64,"Finansieringsvirksomhet",0
+"Hnar",65,"Forsikringsvirksomhet og pensjonskasser, unntatt trygdeordni",0
+"Hnar",66,"Tjenester tilknyttet finansierings- og forsikringsvirksomhet",0
+"Hnar",68,"Omsetning og drift av fast eiendom",0
+"Hnar",69,"Juridisk og regnskapsmessig tjenesteyting",0
+"Hnar",70,"Hovedkontortjenester, administrativ rådgivning",0
+"Hnar",71,"Arkitektvirksomhet og teknisk konsulentvirksomhet, og teknis",0
+"Hnar",72,"Forskning og utviklingsarbeid",0
+"Hnar",73,"Annonse- og reklamevirksomhet og markedsundersøkelser",0
+"Hnar",74,"Annen faglig, vitenskapelig og teknisk virksomhet",0
+"Hnar",75,"Veterinærtjenester",0
+"Hnar",77,"Utleie- og leasingvirksomhet",0
+"Hnar",78,"Arbeidskrafttjenester",0
+"Hnar",79,"Reisebyrå- og reisearrangørvirksomhet og tilknyttede tjenest",0
+"Hnar",80,"Vakttjeneste og etterforskning",0
+"Hnar",81,"Tjenester tilknyttet eiendomsdrift",0
+"Hnar",82,"Annen forretningsmessig tjenesteyting",0
+"Hnar",84,"Offentlig administrasjon og forsvar, og trygdeordninger unde",0
+"Hnar",85,"Undervisning",0
+"Hnar",86,"Helsetjenester",0
+"Hnar",87,"Pleie- og omsorgstjenester i institusjon",0
+"Hnar",88,"Sosiale omsorgstjenester uten botilbud",0
+"Hnar",90,"Kunstnerisk virksomhet og underholdningsvirksomhet",0
+"Hnar",91,"Drift av biblioteker, arkiver, museer og annen kulturvirksom",0
+"Hnar",92,"Lotteri og totalisatorspill",0
+"Hnar",93,"Sports- og fritidsaktiviteter og drift av fornøyelsesetablis",0
+"Hnar",94,"Aktiviteter i medlemsorganisasjoner",0
+"Hnar",95,"Reparasjon av datamaskiner, husholdningsvarer og varer til p",0
+"Hnar",96,"Annen personlig tjenesteyting",0
+"Hnar",97,"Lønnet arbeid i private husholdninger",0
+"Hnar",99,"Internasjonale organisasjoner og organer",0
+"Hstat",101,"Vernepliktig",0
+"Hstat",111,"Sysselsatte, ansatte",0
+"Hstat",112,"Sysselsatte, selvstendige",0
+"Hstat",113,"Sysselsatte, familiearbeider",0
+"Hstat",119,"Sysselsatte, uoppgitt",0
+"Hstat",121,"Midl.Fravær, ansatte",0
+"Hstat",122,"Midl.Fravær, selvstendige",0
+"Hstat",123,"Midl.Fravær, familiearbeider",0
+"Hstat",129,"Midl.Fravær, uoppgitt",0
+"Hstat",232,"Arbeidssøkere, skoleelever",0
+"Hstat",233,"Arbeidssøkere, alderspensjonist",0
+"Hstat",234,"Arbeidssøkere, førtidspensjonist",0
+"Hstat",235,"Arbeidssøkere, arbeidsufør",0
+"Hstat",236,"Arbeidssøkere, hjemmearbeidende",0
+"Hstat",237,"Arbeidssøkere, arbeidsledig",0
+"Hstat",239,"Arbeidssøkere, annet",0
+"Hstat",249,"Arbeidssøkere, ufrivillig permitterte",0
+"Hstat",362,"Utenf.Arb.Styrke, skoleelever",0
+"Hstat",363,"Utenf.Arb.Styrke, alderspensjonist",0
+"Hstat",364,"Utenf.Arb.Styrke, førtidspensjonist",0
+"Hstat",365,"Utenf.Arb.Styrke, arbeidsufør",0
+"Hstat",366,"Utenf.Arb.Styrke, hjemmearbeidende",0
+"Hstat",367,"Utenf.Arb.Styrke, arbeidsledig",0
+"Hstat",369,"Utenf.Arb.Styrke, annet",0
+"Kjonn",1,"Mann",0
+"Kjonn",2,"Kvinne",0
+"Nj58",1,"Ja",0
+"Nj58",2,"Nei",0
+"Nj59b",1,"Forsøkt i nåværende arbeidsforhold",0
+"Nj59b",2,"Kontaktet nav (arbeidskontoret) for å få jobb",0
+"Nj59b",3,"Kontaktet vikarbyrå/privat arbeidsformidling",0
+"Nj59b",4,"Kontaktet mulig arbeidsgiver",0
+"Nj59b",5,"Kontaktet venner, slektninger, fagforeninger osv.",0
+"Nj59b",6,"Svart på annonse, annonsert selv",0
+"Nj59b",7,"Lest annonser",0
+"Nj59b",8,"Gjennomførte en test, intervju eller lignende",0
+"Nj59b",9,"Venter på svar på søknad",0
+"Nj59b",10,"Venter på tilbud fra nav",0
+"Nj59b",11,"Har søkt etter bedriftslokaler, tomt, utstyr",0
+"Nj59b",12,"Har søkt om tillatelse, lisenser, lån, etableringsstøtte",0
+"Nj59b",13,"Andre måter",0
+"Nj59b",14,"Har ikke gjort noe (siste 4 uker)",0
+"Nj59d",1,"Ansatt",0
+"Nj59d",2,"Selvstendig",0
+"Nj59d",3,"Usikker/vet ikke",0
+"Nj59e",1,"Heltidsjobb",0
+"Nj59e",2,"Deltidsjobb",0
+"Nj59e",3,"Usikker",0
+"Nj59f",1,"Ja",0
+"Nj59f",2,"Nei",0
+"Nj59g",1,"Ja",0
+"Nj59g",2,"Nei",0
+"Spm120",1,"Ugift",0
+"Spm120",2,"Gift/registrert partner",0
+"Spm120",3,"Samboer",0
+"Spm120",4,"Før gift",0
+"Spm120",9,"Uoppgitt",0
+"Sstat",101,"Vernepliktig",0
+"Sstat",111,"Sysselsatte, ansatte",0
+"Sstat",112,"Sysselsatte, selvstendige",0
+"Sstat",113,"Sysselsatte, familiearbeider",0
+"Sstat",119,"Sysselsatte, uoppgitt",0
+"Sstat",121,"Midl.Fravær, ansatte",0
+"Sstat",122,"Midl.Fravær, selvstendige",0
+"Sstat",123,"Midl.Fravær, familiearbeider",0
+"Sstat",129,"Midl.Fravær, uoppgitt",0
+"Sstat",232,"Arbeidssøkere, skoleelever",0
+"Sstat",233,"Arbeidssøkere, alderspensjonist",0
+"Sstat",234,"Arbeidssøkere, førtidspensjonist",0
+"Sstat",235,"Arbeidssøkere, arbeidsufør",0
+"Sstat",236,"Arbeidssøkere, hjemmearbeidende",0
+"Sstat",237,"Arbeidssøkere, arbeidsledig",0
+"Sstat",239,"Arbeidssøkere, annet",0
+"Sstat",249,"Arbeidssøkere, ufrivillig permitterte",0
+"Sstat",362,"Utenf.Arb.Styrke, skoleelever",0
+"Sstat",363,"Utenf.Arb.Styrke, alderspensjonist",0
+"Sstat",364,"Utenf.Arb.Styrke, førtidspensjonist",0
+"Sstat",365,"Utenf.Arb.Styrke, arbeidsufør",0
+"Sstat",366,"Utenf.Arb.Styrke, hjemmearbeidende",0
+"Sstat",367,"Utenf.Arb.Styrke, arbeidsledig",0
+"Sstat",369,"Utenf.Arb.Styrke, annet",0
+"Sys11a",1,"Ja",0
+"Sys11a",2,"Nei",0
+"Sys13",1,"Ja",0
+"Sys13",2,"Nei",0
+"Sys14a",1,"På et arbeidsmarkedstiltak",0
+"Sys14a",2,"I et engasjement eller prosjektansatt",0
+"Sys14a",3,"Ekstrahjelp (timelønnet, sesongarbeider)",0
+"Sys14a",4,"Vikar",0
+"Sys14a",5,"Lærling eller praktikant (stipendiat)",0
+"Sys14a",6,"Eller noe annet",0
+"Sys14a",7,"Prøvetid",0
+"Sys14b",1,"Opplæringstiltak",0
+"Sys14b",2,"Arbeidspraksis",0
+"Sys14b",3,"Lønnstilskudd",0
+"Sys14b",4,"Vikarplass",0
+"Sys14b",5,"Jobbklubb",0
+"Sys14b",6,"Sysselsettingstiltak",0
+"Sys14b",7,"Annet",0
+"Sys14b",8,"Usikker, vet ikke",0
+"Sys14b",99,"Vet ikke",0
+"Sys14c",1,"Kvalifiseringstiltak",0
+"Sys14c",2,"Sysselsettingstiltak",0
+"Sys14c",3,"Usikker, vet ikke",0
+"Sys24a",1,"1-10",0
+"Sys24a",2,"11-19",0
+"Sys24a",3,"20-49",0
+"Sys24a",4,"50-99",0
+"Sys24a",5,"100-199",0
+"Sys24a",6,"200 eller flere",0
+"Sys24a",7,"Vet ikke",0
+"Sys24c",1,"Ja",0
+"Sys24c",2,"Nei",0
+"Sys26",1,"Fast arbeidstid",0
+"Sys26",2,"Varierende timetall fra uke til uke",0
+"Sys26",3,"Ingen avtale om arbeidstid",0
+"Sys26",4,"Tilfeldig arbeidsforhold",0
+"Sys26",5,"Tilkalles bare ved behov",0
+"Sys34a",1,"Ja",0
+"Sys34a",2,"Nei",0
+"Sys35a",1,"Ja",0
+"Sys35a",2,"Nei",0
+"Sys36a",1,"Ja",0
+"Sys36a",2,"Nei",0
+"Sys36c",1,"Om 3-4 uker",0
+"Sys36c",2,"Om 5-8 uker/1-2 måneder",0
+"Sys36c",3,"Om 3-4 måneder",0
+"Sys36c",4,"Om 5 måneder eller senere",0
+"Sys36c",5,"Vet ikke",0
+"Tu10a",1,"Fast",0
+"Tu10a",2,"Midlertidig",0
+"Tu10a",8,"Vil ikke svare",0
+"Tu10a",9,"Vet ikke",0
+"Tu10b",1,"Under et halvt år",0
+"Tu10b",2,"Mellom et halvt år og ett år",0
+"Tu10b",3,"Mellom ett og to år",0
+"Tu10b",4,"Mellom to og fire år",0
+"Tu10b",5,"Mer enn fire år",0
+"Tu10b",8,"Vil ikke svare",0
+"Tu10b",9,"Vet ikke",0
+"Tu10c",1,"Fast avtalt arbeidstid",0
+"Tu10c",2,"Foretrekker å jobbe som nå (være tilkallingsvikar)",0
+"Tu10c",3,"Kombinere fast arbeidstid med ekstravakter",0
+"Tu10ny",1,"Ja",0
+"Tu10ny",2,"Nei",0
+"Tu10ny",3,"Vet ikke",0
+"Tu10ny",8,"Vil ikke svare",0
+"Tu10ny",9,"Vet ikke",0
+"Tu11",1,"Annen jobb hos din nåværende arbeidsgiver",0
+"Tu11",2,"Ansatt hos en annen arbeidsgiver",0
+"Tu11",3,"Var selvstendig næringsdrivende",0
+"Tu11",4,"Skoleelev eller student",0
+"Tu11",5,"Arbeidssøker",0
+"Tu11",6,"Annet",0
+"Tu11",8,"Vil ikke svare",0
+"Tu11",9,"Vet ikke",0
+"Tu12",1,"Fast",0
+"Tu12",2,"Midlertidig",0
+"Tu12",8,"Vil ikke svare",0
+"Tu12",9,"Vet ikke",0
+"Tu12b",1,"Langvarig fravær",0
+"Tu12b",2,"Kortvarig fravær",0
+"Tu12b",3,"Usikkert",0
+"Tu12b",4,"Annet",0
+"Tu12b",5,"Vet ikke",0
+"Tu13",1,"Under et halvt år",0
+"Tu13",2,"Mellom et halvt år og ett år",0
+"Tu13",3,"Mellom ett og to år",0
+"Tu13",4,"Mellom to og fire år",0
+"Tu13",5,"Mer enn fire år",0
+"Tu13",8,"Vil ikke svare",0
+"Tu13",9,"Vet ikke",0
+"Tu14",1,"Ja",0
+"Tu14",2,"Nei",0
+"Tu14",3,"Ikke sikker",0
+"Tu14a",1,"Under et halvt år",0
+"Tu14a",2,"Mellom et halvt år og ett år",0
+"Tu14a",3,"Mellom ett og to år",0
+"Tu14a",4,"Mellom to og fire år",0
+"Tu14a",5,"Mer enn fire år",0
+"Tu14a",8,"Vil ikke svare",0
+"Tu14a",9,"Vet ikke",0
+"Tu14b",1,"Alderspensjonist",0
+"Tu14b",2,"Førtidspensjonist",0
+"Tu14b",3,"Arbeidsufør",0
+"Tu14b",4,"Hjemmearbeidende",0
+"Tu14b",5,"Vernepliktig",0
+"Tu14b",6,"Annet",0
+"Tu14b",8,"Vil ikke svare",0
+"Tu14b",9,"Vet ikke",0
+"Tu14c",1,"Ja",0
+"Tu14c",2,"Nei",0
+"Tu14c",8,"Vil ikke svare",0
+"Tu14c",9,"Vet ikke",0
+"Tu15",1,"Ja",0
+"Tu15",2,"Nei",0
+"Tu15",8,"Vil ikke svare",0
+"Tu15",9,"Vet ikke",0
+"Tu15a",1,"Ja",0
+"Tu15a",2,"Nei",0
+"Tu15a",3,"Vet ikke",0
+"Tu15a",8,"Vil ikke svare",0
+"Tu15a",9,"Vet ikke",0
+"Tu15aa",1,"Ja",0
+"Tu15aa",2,"Nei",0
+"Tu15aa",3,"Vet ikke",0
+"Tu15aa",8,"Vil ikke svare",0
+"Tu15aa",9,"Vet ikke",0
+"Tu16",1,"Langvarig fravær",0
+"Tu16",2,"Kortvarig fravær",0
+"Tu16",3,"Usikkert",0
+"Tu16",4,"Annet",0
+"Tu16",8,"Vil ikke svare",0
+"Tu16",9,"Vet ikke",0
+"Tu17",1,"Ja",0
+"Tu17",2,"Nei",0
+"Tu17",8,"Vil ikke svare",0
+"Tu17",9,"Vet ikke",0
+"Tu18",1,"Vanlige og daglige oppgaver",0
+"Tu18",2,"Skiller seg vesentlig ut",0
+"Tu18",3,"Blanding",0
+"Tu18",8,"Vil ikke svare",0
+"Tu18",9,"Vet ikke",0
+"Tu18b",1,"Under ett år",0
+"Tu18b",2,"Mellom ett og to år",0
+"Tu18b",3,"Mer enn to år",0
+"Tu18b",9,"Vet ikke",0
+"Tu19",1,"Ja",0
+"Tu19",2,"Nei",0
+"Tu19",8,"Vil ikke svare",0
+"Tu19",9,"Vet ikke",0
+"Tu1a",1,"Ja",0
+"Tu1a",2,"Nei",0
+"Tu1a",8,"Vil ikke svare",0
+"Tu1a",9,"Vet ikke",0
+"Tu1b",1,"Konsulent",0
+"Tu1b",2,"Utleid arbeidstaker",0
+"Tu1b",3,"Frilanser",0
+"Tu1b",4,"Jobber på oppdrag eller utfører tjenester for andre bedrifte",0
+"Tu1b",5,"Annet",0
+"Tu1b",8,"Vil ikke svare",0
+"Tu1b",9,"Vet ikke",0
+"Tu2",1,"En",0
+"Tu2",2,"Flere",0
+"Tu2",8,"Vil ikke svare",0
+"Tu2",9,"Vet ikke",0
+"Tu20",1,"Ja",0
+"Tu20",2,"Nei",0
+"Tu20",8,"Vil ikke svare",0
+"Tu20",9,"Vet ikke",0
+"Tu21",1,"Ja",0
+"Tu21",2,"Nei",0
+"Tu21",8,"Vil ikke svare",0
+"Tu21",9,"Vet ikke",0
+"Tu21b",1,"En eller flere av de allerede ansatte",0
+"Tu21b",2,"Ansettes noen nye",0
+"Tu21b",3,"Vet ikke",0
+"Tu21b",8,"Vil ikke svare",0
+"Tu21b",9,"Vet ikke",0
+"Tu22",1,"Ja",0
+"Tu22",2,"Nei",0
+"Tu22",8,"Vil ikke svare",0
+"Tu22",9,"Vet ikke",0
+"Tu23",1,"Ja",0
+"Tu23",2,"Nei",0
+"Tu23",8,"Vil ikke svare",0
+"Tu23",9,"Vet ikke",0
+"Tu24",1,"Ja",0
+"Tu24",2,"Nei",0
+"Tu24",8,"Vil ikke svare",0
+"Tu24",9,"Vet ikke",0
+"Tu25",1,"Ja",0
+"Tu25",2,"Nei",0
+"Tu25",8,"Vil ikke svare",0
+"Tu25",9,"Vet ikke",0
+"Tu26",1,"Mer enn et halvt år",0
+"Tu26",2,"Mindre enn et halvt år",0
+"Tu26",8,"Vil ikke svare",0
+"Tu26",9,"Vet ikke",0
+"Tu29",1,"Ja",0
+"Tu29",2,"Nei",0
+"Tu29",8,"Vil ikke svare",0
+"Tu29",9,"Vet ikke",0
+"Tu3",1,"Ja",0
+"Tu3",2,"Nei",0
+"Tu3",8,"Vil ikke svare",0
+"Tu3",9,"Vet ikke",0
+"Tu31",1,"Helt eller delvis regulert av tariffavtale eller overenskoms",0
+"Tu31",2,"Reguleres kun gjennom individuell avtale eller kontrakt",0
+"Tu31",3,"Kombinasjon av tariffavtale eller overenskomst og individuel",0
+"Tu31",4,"Har ingen avtale i det hele tatt",0
+"Tu31",5,"Annet",0
+"Tu31",8,"Vil ikke svare",0
+"Tu31",9,"Vet ikke",0
+"Tu32",1,"Ja",0
+"Tu32",2,"Nei",0
+"Tu32",8,"Vil ikke svare",0
+"Tu32",9,"Vet ikke",0
+"Tu4",1,"Ja",0
+"Tu4",2,"Nei",0
+"Tu4",8,"Vil ikke svare",0
+"Tu4",9,"Vet ikke",0
+"Tu5",1,"Representant for kundebedriften",0
+"Tu5",2,"Representant for din egen arbeidsgiver",0
+"Tu5",3,"Jeg leder arbeidet selv",0
+"Tu5",4,"Det varierer mye",0
+"Tu5",8,"Vil ikke svare",0
+"Tu5",9,"Vet ikke",0
+"Tu5a",1,"Ja",0
+"Tu5a",2,"Nei",0
+"Tu5a",9,"Vet ikke",0
+"Tu5b",1,"Ja",0
+"Tu5b",2,"Nei",0
+"Tu5b",9,"Vet ikke",0
+"Tu6",1,"Vikarbyrå/bemanningsselskap",0
+"Tu6",2,"Annen type virksomhet",0
+"Tu6",8,"Vil ikke svare",0
+"Tu6",9,"Vet ikke",0
+"Tu7",1,"Konsulent",0
+"Tu7",2,"Utleid arbeidstaker",0
+"Tu7",3,"Frilanser",0
+"Tu7",4,"Jobber p",0
+"Tu7",5,"Mitt arbeid inneb",0
+"Tu7",6,"Annet",0
+"Tu7a",1,"Ja",0
+"Tu7a",2,"Nei",0
+"Tu7a",8,"Vil ikke svare",0
+"Tu7a",9,"Vet ikke",0
+"Tu7b",1,"Konsulent",0
+"Tu7b",2,"Utleid arbeidstaker",0
+"Tu7b",3,"Frilanser",0
+"Tu7b",4,"Annet",0
+"Tu7b",5,"Det varierer mye",0
+"Tu7b",8,"Vil ikke svare",0
+"Tu7b",9,"Vet ikke",0
+"Tu7c",1,"Ukentlig eller oftere",0
+"Tu7c",2,"2-3 ganger i måneden",0
+"Tu7c",3,"Sjeldnere",0
+"Tu7c",4,"Aldri",0
+"Tu7c",5,"Kun tilfeldig arbeid",0
+"Tu7c",6,"Varierer mye",0
+"Tu8",1,"Representant for kundebedriften",0
+"Tu8",2,"Jeg leder arbeidet selv",0
+"Tu8",3,"Det varierer mye",0
+"Tu8",8,"Vil ikke svare",0
+"Tu8",9,"Vet ikke",0
+"Tu9a",1,"Annen jobb hos din nåværende arbeidsgiver",0
+"Tu9a",2,"Ansatt hos en annen arbeidsgiver",0
+"Tu9a",3,"Var selvstendig næringsdrivende",0
+"Tu9a",4,"Skoleelev eller student",0
+"Tu9a",5,"Arbeidssøker",0
+"Tu9a",6,"Annet",0
+"Tu9a",8,"Vil ikke svare",0
+"Tu9a",9,"Vet ikke",0
+"Tu9a1",1,"Ja",0
+"Tu9a1",2,"Nei",0
+"Tu9a1",3,"Vet ikke",0
+"Tu9a2",1,"Ja",0
+"Tu9a2",2,"Nei",0
+"Tu9a2",3,"Vet ikke",0
+"Tu9a3",1,"Ja",0
+"Tu9a3",2,"Nei",0
+"Tu9a3",3,"Vet ikke",0
+"Tu9a4",1,"Ja",0
+"Tu9a4",2,"Nei",0
+"Tu9a4",3,"Vet ikke",0
+"Tu9a5",1,"Ja",0
+"Tu9a5",2,"Nei",0
+"Tu9a5",3,"Vet ikke",0
+"Tu9b",1,"Alderspensjonist",0
+"Tu9b",2,"Førtidspensjonist",0
+"Tu9b",3,"Arbeidsufør",0
+"Tu9b",4,"Hjemmearbeidende",0
+"Tu9b",5,"Vernepliktig",0
+"Tu9b",6,"Annet",0
+"Tu9b",8,"Vil ikke svare",0
+"Tu9b",9,"Vet ikke",0
+"Tu9b1",1,"Ja",0
+"Tu9b1",2,"Nei",0
+"Tu9b1",3,"Vet ikke",0
+"Tu9b2",1,"Ja",0
+"Tu9b2",2,"Nei",0
+"Tu9b2",3,"Vet ikke",0
+"Tu9b3",1,"Ja",0
+"Tu9b3",2,"Nei",0
+"Tu9b3",3,"Vet ikke",0
+"Tu9b4",1,"Ja",0
+"Tu9b4",2,"Nei",0
+"Tu9b4",3,"Vet ikke",0
+"Tu9b5",1,"Ja",0
+"Tu9b5",2,"Nei",0
+"Tu9b5",3,"Vet ikke",0
+"Tu9c",1,"Ja",0
+"Tu9c",2,"Nei",0
+"Tu9c",8,"Vil ikke svare",0
+"Tu9c",9,"Vet ikke",0
+"Tux1",1,"Ja",0
+"Tux1",2,"Nei",0
+"Tux2",1,"Hovedjobb",0
+"Tux2",2,"Ekstrajobb",0
+"Tux3",1,"Enkeltpersonforetak",0
+"Tux3",2,"Aksjeselskap",0
+"Tux3",3,"Uten eget selskap",0
+"Tux3",4,"Kombinasjon av flere",0
+"Tux3",5,"Annet",0
+"Tux4a",1,"Ja",0
+"Tux4a",2,"Nei",0
+"Tux4b",1,"Ja",0
+"Tux4b",2,"Nei",0
+"Tux4c",1,"Ja",0
+"Tux4c",2,"Nei",0
+"Tux4d",1,"Ja",0
+"Tux4d",2,"Nei",0
+"Undersys",1,"Undersysselsatt",0
+"Undersys",2,"Ikke sysselsatt",0
+"Utd105",1,"Ja",0
+"Utd105",2,"Nei",0
+"Utd105a",1,"Ja",0
+"Utd105a",2,"Nei",0
+"Utd112",1,"Mest betydning for jobb",0
+"Utd112",2,"Mest personlige interesser",0
+"Utd115a",1,"Ja",0
+"Utd115a",2,"Nei",0
+"Utd115b",1,"Ja",0
+"Utd115b",2,"Nei",0
+"Utd115b",3,"Delvis",0
+"Utd_bu",0,"Uoppgitt",0
+"Utd_bu",1,"Barneskoleutdanning",0
+"Utd_bu",2,"Ungdomsskoleutdanning",0
+"Utd_bu",3,"Videregående skole, nivå i - grunnkurs +vk1",0
+"Utd_bu",4,"Videregående skole, nivå ii - vk2",0
+"Utd_bu",5,"Påbygging til videregående opplæring (teknisk fagskole)",0
+"Utd_bu",6,"Univ.-høyskoleutdanning, lavere nivå",0
+"Utd_bu",7,"Univ.-høyskoleutdanning, høyere nivå",0
+"Utd_bu",8,"Forskerutdanning",0
+"Utd_bu",9,"Uoppgitt",0
+"Utda8",1,"Full lønn",0
+"Utda8",2,"Redusert lønn",0
+"Utda8",3,"Ingen lønn",0
+"Utda8",4,"Vet ikke",0

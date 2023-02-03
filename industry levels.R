@@ -8,7 +8,7 @@ library(janitor)
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
 
-
+#getting norwegian industry codes and names
 nb_indus <- GetKlass(
   klass ="6", 
   date = NULL,
@@ -21,6 +21,7 @@ nb_indus <- GetKlass(
 
 nb_indus <- nb_indus %>% rename(nb_name = name)
 
+#getting english industry codes and names
 en_indus <- GetKlass(
   klass ="6", 
   date = NULL,
@@ -31,35 +32,222 @@ en_indus <- GetKlass(
   output_style = "normal",
   notes = FALSE)
 
-indus<- full_join(nb_indus, en_indus)
-indus_filter <- indus %>%
-  select(code, parentCode, level,name,nb_name)
+industable<- full_join(nb_indus, en_indus)
 
-list_hnar <- read_delim("csv/list hnar.txt", 
-                        delim = "\t", escape_double = FALSE, 
-                        col_names = FALSE, trim_ws = TRUE)
-list_hnar <- rename(list_hnar, navn=X1)
-list_hnar$code <- ""
-for (i in 1:NROW(list_hnar)) {
-  list_hnar$code[i]=str_extract(list_hnar[i,1],"^[0-9]+")
+
+labeltable <- read_csv("csv/labeltable.csv", 
+                       col_names = c("lname","code","navn","trunc",
+                                     col_types ="c"))
+labeltable <- labeltable %>%
+  select(-trunc)
+
+labeltable_hnar <- labeltable %>%
+  filter(lname=="Hnar") %>%
+  select(-lname)
+
+
+#adding a leading zero to be consistent with future tables
+for (i in 1:8) {
+  labeltable_hnar$code[i]<- str_c("0",labeltable_hnar$code[i])
 }
-for (i in 1:NROW(list_hnar)) {
-  list_hnar[i,1] <- str_remove_all(list_hnar[i,1],"^[0-9]+")
-}
-list_hnar$code<- as.character(list_hnar$code)
-for (i in 1:9) {
-  list_hnar$code[i]<- str_c("0",list_hnar$code[i])
-}
+#adding a zero for unspecified
+new_row <- c("00", "Uspesifisert eller uidentifiserbar næring")
+labeltable_hnar <- rbind(new_row, labeltable_hnar)
+
+#same but for industable, will be important when grouping together
+industable <- industable %>% select(code, parentCode, level, name, nb_name)
+new_row <- c("00","00.0","2","Unspecified or unidentifiable industry","Uspesifisert eller uidentifiserbar næring")
+industable <- rbind(new_row, industable)
 
 
-new_row <- c("00","0","2","Unspecified or unidentifiable industry","Uspesifisert eller uidentifiserbar næring")
-indus_filter <- rbind(new_row, indus_filter)
+new_row <- c("00.0","","1","Unspecified or unidentifiable industry","Uspesifisert eller uidentifiserbar næring")
+industable <- rbind(new_row, industable)
 
-indus <-full_join(indus_filter,list_hnar) 
-indus$navn <-  str_squish(indus$navn)
-indus$navn <- str_sub(indus$navn,1,45)
-mainindus<- indus %>%
-  filter(level==1)
-indus <- indus %>%
+industable <-full_join(industable,labeltable_hnar) 
+
+industable$navn <-  str_squish(industable$navn)
+industable$navn <- str_sub(industable$navn,1,45)
+
+industable <- industable %>%
+  mutate(parentcode=parentCode, .keep="unused")
+
+indus_level1<- industable %>%
+  filter(level==1) %>%
+  select(-parentcode)
+
+
+indus_level2 <- industable %>%
   filter(level==2)
-remove(list_hnar, nb_indus, en_indus, new_row, indus_filter)
+
+remove(nb_indus, en_indus, new_row, indus)
+
+
+
+##below is basically the extraction of wages, but from it it generates a short name
+##list of NACE2007 which I wasn't easily able to find, the code below merges the
+##shortlist together with the industry key table
+url <- "https://data.ssb.no/api/v0/en/table/12314/"
+# 
+data.tmp <- '
+{
+  "query": [
+    {
+      "code": "NACE2007",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "00-99",
+          "01",
+          "02",
+          "03",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31",
+          "32",
+          "33",
+          "35",
+          "36",
+          "37",
+          "38",
+          "39",
+          "41",
+          "42",
+          "43",
+          "45",
+          "46",
+          "47",
+          "49",
+          "50",
+          "51",
+          "52",
+          "53",
+          "55",
+          "56",
+          "58",
+          "59",
+          "60",
+          "61",
+          "62",
+          "63",
+          "64",
+          "65",
+          "66",
+          "68",
+          "69",
+          "70",
+          "71",
+          "72",
+          "73",
+          "74",
+          "75",
+          "77",
+          "78",
+          "79",
+          "80",
+          "81",
+          "82",
+          "84",
+          "85",
+          "86",
+          "87",
+          "88",
+          "90",
+          "91",
+          "92",
+          "93",
+          "94",
+          "95",
+          "96",
+          "97",
+          "99",
+          "00"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json-stat2"
+  }
+}
+'
+d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
+ssb.wages <- fromJSONstat(content(d.tmp, "text"))
+ssb.wages <- ssb.wages %>%
+  clean_names() %>%
+  mutate(shortname = industry_sic2007, .keep = "unused")
+shortname <- unique(ssb.wages$shortname)
+shortname <- tibble(shortname)
+shortname <- shortname %>% slice(2:88)
+new_row <- c("Unspecified")
+shortname <- rbind(new_row, shortname)
+
+
+
+code <- indus_level2$code
+code <- tibble(code)
+shortname <- tibble(code, shortname)
+industable <- right_join(shortname, industable)
+
+
+indus_level2 <- industable %>%
+  filter(level==2)
+
+indus_level1 <- industable %>%
+  filter(level==1)
+
+
+level2tolevel1indus <- right_join(indus_level1,indus_level2)
+
+
+##occupation
+
+nb_occu <- GetKlass(
+  klass ="7", 
+  date = NULL,
+  correspond = NULL,
+  variant = NULL,
+  output_level = NULL,
+  language = "nb",
+  output_style = "normal",
+  notes = FALSE)
+
+nb_occu <- nb_occu %>% rename(nb_name = name)
+
+en_occu <- GetKlass(
+  klass ="7", 
+  date = NULL,
+  correspond = NULL,
+  variant = NULL,
+  output_level = NULL,
+  language = "en",
+  output_style = "normal",
+  notes = FALSE)
+
+occu<- full_join(nb_occu, en_occu) %>%
+  filter(level==4)
+
+remove(nb_occu, en_occu, code)
