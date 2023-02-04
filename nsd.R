@@ -3,11 +3,8 @@
 
 # Getting the path of your current open file
 current_path = rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path ))
+setwd(dirname(current_path) )
 
-
-
-library(data.table) #for fast if else
 
 #Load csv by year
 x2013 <- read_csv("csv/2013.csv")
