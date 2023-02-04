@@ -1,8 +1,12 @@
 #run first
 options(encoding="UTF-8")
-library(tidyverse)
-library(klassR)
-library(janitor)
+library(httr) # API import
+library(rjstat) # For JSON text conversion/API import
+library(tidyverse) #dplyr, ggplot, you name it
+library(klassR) #Import of standardized industries, occupations
+library(janitor) # scrub, and clean the objects
+library(zoo) # for the conversion of a year and quarter to date/class
+library(rstudioapi) # for getting file path
 
 # Getting the path of your current open file
 current_path = rstudioapi::getActiveDocumentContext()$path 

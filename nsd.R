@@ -1,13 +1,5 @@
 #run after industry_levels.R
 
-library(rstudioapi)
-library(httr)
-library(rjstat) #For JSON
-library(tidyverse)
-library(janitor)
-library(dplyr)
-library(zoo)
-
 
 # Getting the path of your current open file
 current_path = rstudioapi::getActiveDocumentContext()$path 

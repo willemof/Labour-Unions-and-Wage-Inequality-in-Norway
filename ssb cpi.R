@@ -1,12 +1,5 @@
 #consumer price index
 
-options(encoding="UTF-8")
-library(httr)
-library(rjstat) #For JSON
-library(tidyverse)
-library(janitor)
-library(dplyr)
-library(zoo)
 url <- "https://data.ssb.no/api/v0/en/table/03013/"
 # 
 data.tmp <- '
