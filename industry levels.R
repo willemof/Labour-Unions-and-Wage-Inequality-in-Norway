@@ -223,8 +223,26 @@ indus_level2 <- industable %>%
 indus_level1 <- industable %>%
   filter(level==1)
 
+indus_level1 <- indus_level1 %>%
+  mutate(parentname=name, .keep ="unused")
 
 level2tolevel1indus <- right_join(indus_level1,indus_level2)
+
+
+x_loop <- level2tolevel1indus
+x_g <- c()
+x_t <- x_loop
+x_f <- x_loop
+x_f$parentname <- c()
+for (i in 1:NROW(indus_level1)) {
+  x_f <- x_t %>%
+    filter(x_t$parentcode==indus_level1$code[i])
+  x_t <- x_t %>%
+    filter(x_t$parentcode!=indus_level1$code[i])
+  x_f$parentname=indus_level1$parentname[i] #add in english industry-parent names
+  x_g <- rbind(x_g, x_f)
+}
+level2tolevel1indus <- x_g
 
 
 ##occupation

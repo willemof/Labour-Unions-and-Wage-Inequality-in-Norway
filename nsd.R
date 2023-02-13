@@ -33,7 +33,7 @@ x$number <- paste0(1:NROW(x))
 x <- x %>% select(number, hnar, everything())
 
 #setting up for loop to enter industry names codes, parent codes
-x.loop <- x
+x_loop <- x
 x_g <- c()
 x_t <- x
 x_f <- x
@@ -55,15 +55,15 @@ x_g <- x_g %>%
   select(-c(hnar)) %>%
   select(c(number, code_indus, everything()))
 
-x <- x_g
+x <- x_g 
 
 remove(x_f,x_t, x_g, x_loop)
 
 # adding parentcode/industry main categories
 x_loop <- x
 x_g <- c()
-x_t <- x.loop
-x_f <- x.loop
+x_t <- x_loop
+x_f <- x_loop
 x_f$industryparentname <- c()
 for (i in 1:NROW(level2tolevel1indus)) {
   if(level2tolevel1indus$name[i] %in% unique(x_t$industry)==FALSE) {next}
@@ -74,6 +74,8 @@ for (i in 1:NROW(level2tolevel1indus)) {
   x_f$industryparentname=level2tolevel1indus$parentname[i] #add in english industry-parent names
   x_g <- rbind(x_g, x_f)
 }
+x <- x_g %>%
+  select(industryparentname, everything())
 remove(x_f,x_t, x_g, x_loop)
 
 ##adding occupation names
@@ -99,6 +101,23 @@ remove(x_f,x_t, x_g, x_loop)
 x<- x%>%
   mutate(is.male = fifelse(kjonn == "Mann", 1,0)) %>%
   mutate(is.union = fifelse(tu29 == "Ja" , 1, 0, na = 0))
+
+
+x <- x %>%
+  select(alder_aar, everything())
+
+x_alder_agg <- aggregate(x, by = list(x$parentcode_indus,
+                                      x$year), FUN = mean)
+
+
+x_alder_agg <- x_alder_agg %>%     select(-c(parentcode_indus, 
+                                 year)) 
+
+
+
+x_alder_agg <- x_alder_agg %>% 
+  rename(parentcode_indus=       colnames(x_alder_agg[1]))%>% 
+  rename(year=  colnames(x_alder_agg[2]))
 
 
 
