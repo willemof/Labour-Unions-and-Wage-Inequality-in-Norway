@@ -28,3 +28,5 @@ library(lmtest)
 library(lfe)
 library(sandwich)
 
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path) )

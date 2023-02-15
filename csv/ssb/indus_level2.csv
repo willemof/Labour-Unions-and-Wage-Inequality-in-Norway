@@ -1,0 +1,89 @@
+code,shortname,level,name,nb_name,navn,parentcode
+00,Unspecified,2,Unspecified or unidentifiable industry,Uspesifisert eller uidentifiserbar næring,Uspesifisert eller uidentifiserbar næring,00.0
+01,"Crop and animal production, hunting",2,"Crop and animal production, hunting and related service activities","Jordbruk og tjenester tilknyttet jordbruk, jakt og viltstell","Jordbruk og tjenester tilknyttet jordbruk, ja",A
+02,Forestry and logging,2,Forestry and logging,Skogbruk og tjenester tilknyttet skogbruk,Skogbruk og tjenester tilknyttet skogbruk,A
+03,Fishing and aquaculture,2,Fishing and aquaculture,"Fiske, fangst og akvakultur","Fiske, fangst og akvakultur",A
+05,Mining of coal and lignite,2,Mining of coal and lignite,Bryting av steinkull og brunkull,Bryting av steinkull og brunkull,B
+06,Extraction of oil and natural gas,2,Extraction of crude petroleum and natural gas,Utvinning av råolje og naturgass,Utvinning av råolje og naturgass,B
+07,Mining of metal ores,2,Mining of metal ores,Bryting av metallholdig malm,Bryting av metallholdig malm,B
+08,Other mining and quarrying,2,Other mining and quarrying,Bryting og bergverksdrift ellers,Bryting og bergverksdrift ellers,B
+09,Mining support service activities,2,Mining support service activities,Tjenester tilknyttet bergverksdrift og utvinning,Tjenester tilknyttet bergverksdrift og utvinn,B
+10,Food products,2,Manufacture of food products,Produksjon av nærings- og nytelsesmidler,Produksjon av nærings- og nytelsesmidler,C
+11,Beverages,2,Manufacture of beverages,Produksjon av drikkevarer,Produksjon av drikkevarer,C
+12,Tobacco products,2,Manufacture of tobacco products,Produksjon av tobakksvarer,Produksjon av tobakksvarer,C
+13,Textiles,2,Manufacture of textiles,Produksjon av tekstiler,Produksjon av tekstiler,C
+14,Wearing apparel,2,Manufacture of wearing apparel,Produksjon av klær,Produksjon av klær,C
+15,Leather and leather products,2,Manufacture of leather and related products,Produksjon av lær og lærvarer,Produksjon av lær og lærvarer,C
+16,Wood and wood products,2,"Manufacture of wood and products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials, except furniture","Produksjon av trelast og varer av tre, kork, strå og flettematerialer, unntatt møbler","Produksjon av trelast og varer av tre, kork, ",C
+17,Paper and paper products,2,Manufacture of paper and paper products,Produksjon av papir og papirvarer,Produksjon av papir og papirvarer,C
+18,Printing and reproduction,2,Printing and reproduction of recorded media,Trykking og reproduksjon av innspilte opptak,Trykking og reproduksjon av innspilte opptak,C
+19,Refined petroleum products,2,Manufacture of coke and refined petroleum products,Produksjon av kull- og raffinerte petroleumsprodukter,Produksjon av kull- og raffinerte petroleumsp,C
+20,"Chemicals, chemical products",2,Manufacture of chemicals and chemical products,Produksjon av kjemikalier og kjemiske produkter,Produksjon av kjemikalier og kjemiske produkt,C
+21,Pharmaceuticals,2,Manufacture of basic pharmaceutical products and pharmaceutical preparations,Produksjon av farmasøytiske råvarer og preparater,Produksjon av farmasøytiske råvarer og prepar,C
+22,Rubber and plastic products,2,Manufacture of rubber and plastic products,Produksjon av gummi- og plastprodukter,Produksjon av gummi- og plastprodukter,C
+23,Other non-metal mineral products,2,Manufacture of non-metallic mineral products,Produksjon av andre ikke-metallholdige mineralprodukter,Produksjon av andre ikke-metallholdige minera,C
+24,Basic metals,2,Manufacture of basic metals,Produksjon av metaller,Produksjon av metaller,C
+25,Fabricated metal prod.,2,"Manufacture of fabricated metal products, except machinery and equipment","Produksjon av metallvarer, unntatt maskiner og utstyr","Produksjon av metallvarer, unntatt maskiner o",C
+26,Electronic and optical products,2,"Manufacture of computer, electronic and optical products",Produksjon av datamaskiner og elektroniske og optiske produkter,Produksjon av datamaskiner og elektroniske og,C
+27,Electrical equipment,2,Manufacture of electrical equipment,Produksjon av elektrisk utstyr,Produksjon av elektrisk utstyr,C
+28,Machinery and equipment,2,Manufacture of machinery and equipment n.e.c.,"Produksjon av maskiner og utstyr til generell bruk, ikke nevnt annet sted",Produksjon av maskiner og utstyr til generell,C
+29,Motor vehicles etc.,2,"Manufacture of motor vehicles, trailers and semi-trailers",Produksjon av motorvogner og tilhengere,Produksjon av motorvogner og tilhengere,C
+30,Other transport equipment,2,Manufacture of other transport equipment,Produksjon av andre transportmidler,Produksjon av andre transportmidler,C
+31,Furniture,2,Manufacture of furniture,Produksjon av møbler,Produksjon av møbler,C
+32,Other manufacturing,2,Other manufacturing,Annen industriproduksjon,Annen industriproduksjon,C
+33,"Repair, installation of machinery",2,Repair and installation of machinery and equipment,Reparasjon og installasjon av maskiner og utstyr,Reparasjon og installasjon av maskiner og uts,C
+35,"Electricity, gas and steam",2,"Electricity, gas, steam and air conditioning supply","Elektrisitets-, gass-, damp- og varmtvannsforsyning","Elektrisitets-, gass-, damp-, og varmtvannsfo",D
+36,Water supply,2,"Water collection, treatment and supply","Uttak fra kilde, rensing og distribusjon av vann","Uttak fra kilde, rensing og distribusjon av v",E
+37,Sewerage,2,Sewerage,Oppsamling og behandling av avløpsvann,Oppsamling og behandling av avløpsvann,E
+38,"Waste activities, materials recovery",2,"Waste collection, treatment and disposal activities, materials recovery","Innsamling, behandling, disponering og gjenvinning av avfall","Innsamling, behandling, disponering og gjenvi",E
+39,"Remediation, other waste managem.",2,Remediation activities and other waste management services,"Miljørydding, miljørensing og lignende virksomhet","Miljørydding, miljørensing og lignende virkso",E
+41,Construction of buildings,2,Construction of buildings,Oppføring av bygninger,Oppføring av bygninger,F
+42,Civil engineering,2,Civil engineering,Anleggsvirksomhet,Anleggsvirksomhet,F
+43,Specialised construction activities,2,Specialised construction activities,Spesialisert bygge- og anleggsvirksomhet,Spesialisert bygge- og anleggsvirksomhet,F
+45,Wholesale and retail trade and repair of motor vehicles and motorcycles,2,Wholesale and retail trade and repair of motor vehicles and motorcycles,Handel med og reparasjon av motorvogner,Handel med og reparasjon av motorvogner,G
+46,"Wholesale trade, except of motor vehicles and motorcycles",2,"Wholesale trade, except of motor vehicles and motorcycles","Agentur- og engroshandel, unntatt med motorvogner","Agentur- og engroshandel, unntatt med motorvo",G
+47,"Retail trade, except of motor vehicles and motorcycles",2,"Retail trade, except of motor vehicles and motorcycles","Detaljhandel, unntatt med motorvogner","Detaljhandel, unntatt med motorvogner",G
+49,"Land transport, pipeline transport",2,Land transport and transport via pipelines,Landtransport og rørtransport,Landtransport og rørtransport,H
+50,Water transport,2,Water transport,Sjøfart,Sjøfart,H
+51,Air transport,2,Air transport,Lufttransport,Lufttransport,H
+52,Support activities for transportation,2,Warehousing and support activities for transportation,Lagring og andre tjenester tilknyttet transport,Lagring og andre tjenester tilknyttet transpo,H
+53,Postal and courier activities,2,Postal and courier activities,Post og distribusjonsvirksomhet,Post og distribusjonsvirksomhet,H
+55,Accommodation,2,Accommodation,Overnattingsvirksomhet,Overnattingsvirksomhet,I
+56,Food and beverage service activities,2,Food and beverage service activities,Serveringsvirksomhet,Serveringsvirksomhet,I
+58,Publishing activities,2,Publishing activities,Forlagsvirksomhet,Forlagsvirksomhet,J
+59,"Motion picture, TV, music prod.",2,"Motion picture, video and television programme production, sound recording and music publishing activities","Film-, video- og fjernsynsprogramproduksjon, utgivelse av musikk- og lydopptak","Film-, video-, og fjernsynsprogramproduksjon,",J
+60,"Programming, broadcasting activities",2,Programming and broadcasting activities,Radio- og fjernsynskringkasting,Radio- og fjernsynskringkasting,J
+61,Telecommunications,2,Telecommunications,Telekommunikasjon,Telekommunikasjon,J
+62,"Computer programming, consultancy",2,Computer programming; consultancy and related activities,Tjenester tilknyttet informasjonsteknologi,Tjenester tilknyttet informasjonsteknologi,J
+63,Information service activities,2,Information service activities,Informasjonstjenester,Informasjonstjenester,J
+64,Financial service activities,2,"Financial service activities, except insurance and pension funding",Finansieringsvirksomhet,Finansieringsvirksomhet,K
+65,"Insurance, pension funding",2,"Insurance, reinsurance and pension funding, except compulsory social security","Forsikringsvirksomhet og pensjonskasser, unntatt trygdeordninger underlagt offentlig forvaltning","Forsikringsvirksomhet og pensjonskasser, unnt",K
+66,Auxiliary financial activities,2,Activities auxiliary to financial services and insurance activities,Tjenester tilknyttet finansierings- og forsikringsvirksomhet,Tjenester tilknyttet finansierings- og forsik,K
+68,Real estate activities,2,Real estate activities,Omsetning og drift av fast eiendom,Omsetning og drift av fast eiendom,L
+69,Legal and accounting activities,2,Legal and accounting activities,Juridisk og regnskapsmessig tjenesteyting,Juridisk og regnskapsmessig tjenesteyting,M
+70,"Head offices, management consult.",2,Activities of head offices; management consultancy activities,"Hovedkontortjenester, administrativ rådgivning","Hovedkontortjenester, administrativ rådgivnin",M
+71,"Architecture, engineering activities",2,Architectural and engineering activities; technical testing and analysis,"Arkitektvirksomhet og teknisk konsulentvirksomhet, og teknisk prøving og analyse",Arkitektvirksomhet og teknisk konsulentvirkso,M
+72,Scientific research and development,2,Scientific research and development,Forskning og utviklingsarbeid,Forskning og utviklingsarbeid,M
+73,Advertising and market research,2,Advertising and market research,Annonse- og reklamevirksomhet og markedsundersøkelser,Annonse- og reklamevirksomhet og markedsunder,M
+74,"Other professional, scientific and technical activities",2,"Other professional, scientific and technical activities","Annen faglig, vitenskapelig og teknisk virksomhet","Annen faglig, vitenskapelig og teknisk virkso",M
+75,Veterinary activities,2,Veterinary activities,Veterinærtjenester,Veterinærtjenester,M
+77,Rental and leasing activities,2,Rental and leasing activities,Utleie- og leasingvirksomhet,Utleie- og leasingvirksomhet,N
+78,Employment activities,2,Employment activities,Arbeidskrafttjenester,Arbeidskrafttjenester,N
+79,"Travel agency, tour operators",2,"Travel agency, tour operator and other reservation service and related activities",Reisebyrå- og reisearrangørvirksomhet og tilknyttede tjenester,Reisebyrå- og reisearrangørvirksomhet og tilk,N
+80,"Security, investigation activities",2,Security and investigation activities,Vakttjeneste og etterforsking,Vakttjeneste og etterforskning,N
+81,"Buildings, landscape service activities",2,Services to buildings and landscape activities,Tjenester tilknyttet eiendomsdrift,Tjenester tilknyttet eiendomsdrift,N
+82,Business support activities,2,"Office administrative, office support and other business support activities",Annen forretningsmessig tjenesteyting,Annen forretningsmessig tjenesteyting,N
+84,"Public adm., defence, soc. security",2,Public administration and defence; compulsory social security,"Offentlig administrasjon og forsvar, og trygdeordninger underlagt offentlig forvaltning","Offentlig administrasjon og forsvar, og trygd",O
+85,Education,2,Education,Undervisning,Undervisning,P
+86,Human health activities,2,Human health activities,Helsetjenester,Helsetjenester,Q
+87,Residential care activities,2,Residential care activities,Pleie- og omsorgstjenester i institusjon,Pleie- og omsorgstjenester i institusjon,Q
+88,Social work without accommodation,2,Social work activities without accommodation,Sosiale omsorgstjenester uten botilbud,Sosiale omsorgstjenester uten botilbud,Q
+90,Arts and entertainment activities,2,"Creative, arts and entertainment activities",Kunstnerisk virksomhet og underholdningsvirksomhet,Kunstnerisk virksomhet og underholdningsvirks,R
+91,"Libraries, museums, other culture",2,"Libraries, archives, museums and other cultural activities","Drift av biblioteker, arkiver, museer og annen kulturvirksomhet","Drift av biblioteker, arkiver, museer og anne",R
+92,Gambling and betting activities,2,Gambling and betting activities,Lotteri og totalisatorspill,Lotteri og totalisatorspill,R
+93,"Sports, amusement, recreation",2,Sports activities and amusement and recreation activities,Sports- og fritidsaktiviteter og drift av fornøyelsesetablissementer,Sports- og fritidsaktiviteter og drift av for,R
+94,Membership organisations,2,Activities of membership organisations,Aktiviteter i medlemsorganisasjoner,Aktiviteter i medlemsorganisasjoner,S
+95,"Repair, personal, household goods",2,Repair of computers and personal and household goods,"Reparasjon av datamaskiner, husholdningsvarer og varer til personlig bruk","Reparasjon av datamaskiner, husholdningsvarer",S
+96,Other personal service activities,2,Other personal service activities,Annen personlig tjenesteyting,Annen personlig tjenesteyting,S
+97,Households as employers activities,2,Activities of households as employers of domestic personnel,Lønnet arbeid i private husholdninger,Lønnet arbeid i private husholdninger,T
+99,Extraterritorial organisations and bodies,2,Activities of extraterritorial organisations and bodies,Internasjonale organisasjoner og organer,Internasjonale organisasjoner og organer,U

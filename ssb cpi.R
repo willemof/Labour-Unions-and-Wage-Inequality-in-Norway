@@ -21,24 +21,27 @@ data.tmp <- '
 }
 '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
-ssb.cpi <- fromJSONstat(content(d.tmp, "text"))
-ssb.cpi <- clean_names(ssb.cpi)
+ssb_cpi <- fromJSONstat(content(d.tmp, "text"))
+ssb_cpi <- clean_names(ssb_cpi)
 
 
-ssb.cpi <- tibble(ssb.cpi) 
+ssb_cpi <- tibble(ssb_cpi) 
 
-ssb.cpi<- separate(ssb.cpi, month, into = c("year", "month"), sep = "M")
-ssb.cpi$date  <- paste0(ssb.cpi$year,"-", ssb.cpi$month) 
+ssb_cpi<- separate(ssb_cpi, month, into = c("year", "month"), sep = "M")
+ssb_cpi$date  <- paste0(ssb_cpi$year,"-", ssb_cpi$month) 
 
-ssb.cpi$date <- as.Date(as.yearmon(ssb.cpi$date), frac = 1)
+ssb_cpi$date <- as.Date(as.yearmon(ssb_cpi$date), frac = 1)
 
-ssb.cpi <- ssb.cpi %>%
+ssb_cpi <- ssb_cpi %>%
   select(date, everything())
-ssb.cpi.expand <- pivot_wider(ssb.cpi, 
+ssb_cpi_expand <- pivot_wider(ssb_cpi, 
                                 id_expand = FALSE,
                                 names_from = contents,
                                 values_from = c("value"))
-ssb.cpi.expand <- ssb.cpi.expand %>%
+ssb_cpi_expand <- ssb_cpi_expand %>%
   clean_names()
+
+write_csv(ssb_cpi_expand, file = (paste0("csv/ssb/", objects(pattern="ssb_cpi_expand") , ".csv")))
+remove(ssb_cpi, d.tmp)
 
 remove(d.tmp)

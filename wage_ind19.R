@@ -113,7 +113,7 @@ cypher <- cypher %>%
   mutate(name = cypher$`unique(level2tolevel1indus$parentname)`, .keep = "unused")%>%
   select(name19, name)
 cypher$parentcode <- c("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","00.0","T","U")
-test <- full_join(level2tolevel1indus, cypher)
+
 
 x_loop <- level2tolevel1indus #This is the big ds to 'translate'
 x_g <- c()
@@ -149,63 +149,4 @@ for (i in 1:NROW(level2tolevel1indus)) { #this is the cypher
 
 ind19wage_ds_expand <- x_g
 
-
-
-ind19wage_ds_filter <- ind19wage_ds_expand %>%
-  filter(year==2014) %>%
-  filter(industry_sic2007 != "Total")
-
-agemedianwage <- left_join(ind19wage_ds_filter, x_alder_agg)
-
-
-
-g <- agemedianwage
-g <- g %>%
-  select(parentname, median_nok, sex, alder_aar, date) 
-
-
-
-g <- pivot_wider(g, 
-                                   id_expand = FALSE,
-                                   names_from = sex,
-                                   values_from = median_nok)
-g <- g %>% clean_names()
-
-  
-
-
-
-g
-
-gg <- ggplot(data = g,
-             mapping = aes(x=g$alder_aar,y=g$males)+geom_point()
-
-gg
-
-
-fig <- ggplotly(gg) 
-fig <- style(fig,                 
-             hovertext = paste0(g$industry_sic2007,"", g$kjonn, formatC(g$median_nok, format="f", big.mark =" ",digits=0)," NOK)."),
-             hoverinfo = "text")
-fig
-
-
-
-h <- ind19wage_ds_filter_gender
-
-
-gg <- ggplot(data = h,
-             mapping = aes(x=g$alder_aar,y=g$mean_nok))+geom_point()
-
-gg
-
-
-fig <- ggplotly(gg) 
-fig <- style(fig,                 
-             hovertext = paste0(g$industry_sic2007,"",  formatC(g$median_nok, format="f", big.mark =" ",digits=0)," NOK)."),
-             hoverinfo = "text")
-fig
-
-
-
-
+#write_csv(ind19wage_ds_expand, file = "csv/ssb/ind19wage_ds_expand.csv")

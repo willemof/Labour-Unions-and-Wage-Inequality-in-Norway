@@ -104,23 +104,25 @@ data.tmp <- '
 }
 '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
-ssb.prod <- fromJSONstat(content(d.tmp, "text"))
-ssb.prod <- clean_names(ssb.prod)
+ssb_prod <- fromJSONstat(content(d.tmp, "text"))
+ssb_prod <- clean_names(ssb_prod)
 ## adding date class
-ssb.prod <- tibble(ssb.prod) 
+ssb_prod <- tibble(ssb_prod) 
 
-ssb.prod$date  <- paste0(ssb.prod$year," Q4") 
-ssb.prod$date= as.Date(as.yearqtr(gsub("(\\d)(Q)(\\d{1,})","\\3 Q\\1",ssb.prod$date)),frac = 1)
+ssb_prod$date  <- paste0(ssb_prod$year," Q4") 
+ssb_prod$date= as.Date(as.yearqtr(gsub("(\\d)(Q)(\\d{1,})","\\3 Q\\1",ssb_prod$date)),frac = 1)
 
 
-ssb.prod <- ssb.prod %>%
+ssb_prod <- ssb_prod %>%
   select(date, everything())
-ssb.prod.wide <- pivot_wider(ssb.prod, 
+ssb_prod_wide <- pivot_wider(ssb_prod, 
                               id_expand = FALSE,
                               names_from = contents,
                               values_from = c("value"))
-ssb.prod.wide <- ssb.prod.wide %>%
+ssb_prod_wide <- ssb_prod_wide %>%
   clean_names()%>%
   mutate(name=industry, .keep = "unused")
 
 ### 
+write_csv(ssb_prod_wide, file = (paste0("csv/ssb/", objects(pattern="ssb_prod_wide") , ".csv")))
+remove(ssb_prod, d.tmp)

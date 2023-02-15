@@ -1,0 +1,408 @@
+code,parentCode,level,nb_name,name
+0000,000,4,Uoppgitt / yrker som ikke kan identifiseres,Unspecified or unidentifiable occupations
+0110,011,4,Offiserer fra fenrik og høyere grad,Commissioned armed forces officers
+0210,021,4,Befal med sersjant grad,Non-commissioned armed forces officers
+0310,031,4,Menige,"Armed forces occupations, other ranks"
+1111,111,4,Politikere,Legislators
+1112,111,4,Toppledere i offentlig administrasjon,Senior government officials
+1114,111,4,Toppledere i interesseorganisasjoner,Senior officials of special-interest organisations
+1120,112,4,Administrerende direktører,Managing directors and chief executives
+1211,121,4,Finans- og økonomisjefer,Finance managers
+1212,121,4,Personalsjefer,Human resource managers
+1213,121,4,Strategi- og planleggingssjefer,Policy and planning managers
+1219,121,4,Andre administrative ledere,Business services and administration managers not elsewhere classified
+1221,122,4,Salgs- og markedssjefer,Sales and marketing managers
+1222,122,4,PR- og informasjonssjefer,Advertising and public relations managers
+1223,122,4,Forsknings- og utviklingsledere,Research and development managers
+1311,131,4,"Ledere i skogbruk, gartnerier mv.",Agricultural and forestry production managers
+1312,131,4,Ledere innen akvakultur mv.,Aquaculture and fisheries production managers
+1321,132,4,Ledere av industriproduksjon mv.,Manufacturing managers
+1322,132,4,Ledere av olje- og gassutvinning mv.,Mining managers
+1323,132,4,Ledere av bygge- og anleggsvirksomhet,Construction managers
+1324,132,4,Ledere av logistikk og transport mv.,"Supply, distribution and related managers"
+1330,133,4,Ledere av IKT-enheter,Information and communications technology service managers
+1341,134,4,Ledere av omsorgstjenester for barn,Child care services managers
+1342,134,4,Ledere av helsetjenester,Health services managers
+1343,134,4,Ledere av eldreomsorg,Aged care services managers
+1344,134,4,Ledere av sosialomsorg,Social welfare managers
+1345,134,4,Ledere av utdanning og undervisning,Education managers
+1346,134,4,Ledere av forsikring og finansvirksomhet,Financial and insurance services branch managers
+1349,134,4,Andre ledere av produksjon og tjenesteyting,Professional services managers not elsewhere classified
+1411,141,4,Hotellsjefer,Hotel managers
+1412,141,4,Restaurantsjefer,Restaurant managers
+1420,142,4,Varehandelssjefer,Retail and wholesale trade managers
+1431,143,4,"Sports-, rekreasjons- og kultursenterledere","Sports, recreation and cultural centre managers"
+1439,143,4,Andre daglige ledere i tjenesteytende virksomheter,Services managers not elsewhere classified
+2111,211,4,Fysikere og astronomer,Physicists and astronomers
+2112,211,4,Meteorologer,Meteorologists
+2113,211,4,Kjemikere,Chemists
+2114,211,4,Geologer og geofysikere,Geologists and geophysicists
+2120,212,4,"Matematikere, statistikere mv.","Mathematicians, actuaries and statisticians"
+2131,213,4,"Biologer, botanikere, zoologer mv.","Biologists, botanists, zoologists and related professionals"
+2132,213,4,Sivilagronomer mv.,"Farming, forestry and fisheries advisers"
+2133,213,4,Miljøvernrådgivere,Environmental protection professionals
+2141,214,4,Sivilingeniører (industri og produksjon),Industrial and production engineers
+2142,214,4,Sivilingeniører (bygg og anlegg),Civil engineers
+2143,214,4,Sivilingeniører (miljøteknikk),Environmental engineers
+2144,214,4,Sivilingeniører (maskin- og marin-teknikk),Mechanical engineers
+2145,214,4,Sivilingeniører (kjemi),Chemical engineers
+2146,214,4,"Sivilingeniører (geofag, petro-leumsteknologi, metallurgi mv.)","Mining engineers, metallurgists and related professionals"
+2149,214,4,Andre sivilingeniører (unntatt elektroteknologi),Engineering professionals not elsewhere classified
+2151,215,4,Sivilingeniører (elkraftteknikk),Electrical engineers
+2152,215,4,Sivilingeniører (elektronikk),Electronics engineers
+2153,215,4,Sivilingeniører (telekommunikasjon),Telecommunications engineers
+2161,216,4,Sivilarkitekter,Building architects
+2162,216,4,Landskapsarkitekter,Landscape architects
+2163,216,4,Produkt- og klesdesignere,Product and garment designers
+2164,216,4,Arealplanleggere,Town and traffic planners
+2165,216,4,"Landmålere, kartografer mv.",Cartographers and surveyors
+2166,216,4,Grafiske- og multimediadesignere,Graphic and multimedia designers
+2211,221,4,Allmennpraktiserende leger,Generalist medical practitioners
+2212,221,4,Legespesialister,Specialist medical practitioners
+2221,222,4,Spesialsykepleiere,Nursing professionals
+2222,222,4,Jordmødre,Midwifery professionals
+2223,222,4,Sykepleiere,Nurses
+2224,222,4,Vernepleiere,Registered Nurses for the Mentally subnormal (RNMS)
+2250,225,4,Veterinærer,Veterinarians
+2261,226,4,Tannleger,Dentists
+2262,226,4,Farmasøyter,Pharmacists
+2263,226,4,Helse- og miljørådgivere,Environmental and occupational health and hygiene professionals
+2264,226,4,Fysioterapeuter,Physiotherapists
+2265,226,4,Ernæringsfysiologer,Dieticians and nutritionists
+2266,226,4,Audiografer og logopeder,Audiologists and speech therapists
+2267,226,4,Ergoterapeuter,Ergotherapists
+2269,226,4,Kiropraktorer mv.,Chiropractors and other related professionals
+2310,231,4,Universitets- og høyskolelektorer/-lærere,University and higher education teachers
+2320,232,4,Yrkesfaglærere,Vocational education teachers
+2330,233,4,Lektorer mv. (videregående skole),Secondary education teachers
+2341,234,4,Grunnskolelærere,Primary school teachers
+2342,234,4,Førskole-/barnehagelærere,Early childhood teachers
+2351,235,4,Spesialister i pedagogikk,Education methods specialists
+2352,235,4,Spesiallærere / spesialpedagoger,Special needs teachers
+2353,235,4,Andre språklærere,Other language teachers
+2354,235,4,Andre musikklærere,Other music teachers
+2355,235,4,Andre lærere i estetiske fag,Other arts teachers
+2356,235,4,Andre IKT-lærere,Information technology trainers
+2359,235,4,Andre lærere,Teaching professionals not elsewhere classified
+2411,241,4,"Revisorer, regnskapsrådgivere",Accountants
+2412,241,4,Finans- og investeringsrådgivere,Financial and investment advisers
+2413,241,4,Finansanalytikere,Financial analysts
+2421,242,4,Organisasjonsrådgivere mv.,Management and organisation analysts
+2422,242,4,Høyere saksbehandlere i offentlig og privat virksomhet,Policy administration professionals
+2423,242,4,Personal- og karriererådgivere,Personnel and careers professionals
+2424,242,4,Rådgivere innen kompetanseutvikling,Training and staff development professionals
+2431,243,4,Reklame- og markedsføringsrådgivere,Advertising and marketing professionals
+2432,243,4,Informasjonsrådgivere,Public relations professionals
+2433,243,4,Salgskonsulenter innen tekniske og medisinske produkter,Technical and medical sales professionals (excluding ICT)
+2434,243,4,Salgskonsulenter innen IKT-produkter,Information and communications technology sales professionals
+2511,251,4,Systemanalytikere/-arkitekter,Systems analysts
+2512,251,4,Programvareutviklere,Software developers
+2513,251,4,Nett- og multimediautviklere,Web and multimedia developers
+2514,251,4,Applikasjonsprogrammerere,Applications programmers
+2519,251,4,Andre programvare- og applikasjonsutviklere,Software and applications developers and analysts not elsewhere classified
+2521,252,4,Databasedesignere og -administratorer,Database designers and administrators
+2522,252,4,Systemadministratorer,Systems administrators
+2523,252,4,Nettverksansvarlige,Computer network professionals
+2529,252,4,Sikkerhetsanalytikere mv.,Database and network professionals not elsewhere classified
+2611,261,4,Jurister og advokater,Lawyers
+2612,261,4,Dommere,Judges
+2619,261,4,Andre juridiske yrker,Legal professionals not elsewhere classified
+2621,262,4,Arkivarer og kuratorer,Archivists and curators
+2622,262,4,Bibliotekarer og andre informasjonsarbeidere,Librarians and related information professionals
+2631,263,4,"Rådgivere/forskere, samfunnsøkonomi",Economics
+2632,263,4,"Rådgivere/forskere, samfunnsvitenskap","Sociologists, anthropologists and related professionals"
+2633,263,4,"Rådgivere/forskere, humanistiske fag","Philosophers, historians and political scientists"
+2634,263,4,Psykologer,Psychologists
+2635,263,4,Rådgivere innen sosiale fagfelt,Social work and counselling professionals
+2636,263,4,Geistlige yrker,Religious professionals
+2641,264,4,Forfattere mv.,Authors and related writers
+2642,264,4,Journalister,Journalists
+2643,264,4,"Oversettere, tolker mv.","Translators, interpreters and other linguists"
+2651,265,4,"Skulptører, kunstmalere og andre billedkunstnere",Visual artists
+2652,265,4,"Dirigenter, komponister, musikere og sangere","Musicians, singers and composers"
+2653,265,4,Koreografer og dansere,Dancers and choreographers
+2654,265,4,Regissører,"Film, stage and related directors and producers"
+2655,265,4,Skuespillere,Actors
+2656,265,4,Programledere i TV og radio,"Announcers on radio, television and other media"
+2659,265,4,Andre utøvende kunstneriske yrker,Creative and performing artists not elsewhere classified
+3112,311,4,Bygningsingeniører,Civil engineering technicians
+3113,311,4,Elkraftingeniører,Electrical engineering technicians
+3114,311,4,Elektronikkingeniører,Electronics engineering technicians
+3115,311,4,Maskiningeniører,Mechanical engineering technicians
+3116,311,4,Kjemiingeniører,Chemical engineering technicians
+3117,311,4,"Ingeniører innen petroleum, bergverk og metallurgi",Mining and metallurgical technicians
+3118,311,4,Tekniske tegnere,Draughtspersons
+3119,311,4,Andre ingeniører,Physical and engineering science technicians not elsewhere classified
+3121,312,4,"Arbeidsleder, bergfag",Mining supervisors
+3122,312,4,"Arbeidsleder, industri",Manufacturing supervisors
+3123,312,4,"Arbeidsleder, bygg og anlegg",Construction supervisors
+3131,313,4,Energikontrolloperatører,Power production plant operators
+3132,313,4,Kontrolloperatører ved forbrennings- kjøle- og vannrenseanlegg mv.,Incinerator and water treatment plant operators
+3133,313,4,Kontrolloperatører innen kjemisk prosessindustri,Chemical processing plant controllers
+3134,313,4,Kontrolloperatører ved olje- og naturgassraffineringsanlegg,Petroleum and natural gas refining plant operators
+3135,313,4,Kontrolloperatører innen metallproduksjon,Metal production process controllers
+3139,313,4,Andre prosesskontrolloperatører,Process control technicians not elsewhere classified
+3141,314,4,Bioteknikere (ikke-medisinske laboratorier),Life science technicians (excluding medical)
+3142,314,4,Agroteknikere,Agricultural technicians
+3143,314,4,Skogteknikere,Forestry technicians
+3151,315,4,Skipsmaskinister,Ships¿ engineers
+3152,315,4,Dekksoffiserer og loser,Ships¿ deck officers and pilots
+3153,315,4,Flygere,Aircraft pilots and related associate professionals
+3154,315,4,Flygeledere,Air traffic controllers
+3155,315,4,Teknikere innen luftfartssikkerhet,Air traffic safety electronics technicians
+3211,321,4,Radiografer mv.,Medical imaging and therapeutic equipment technicians
+3212,321,4,Bioingeniører,Medical and pathology laboratory technicians
+3213,321,4,Reseptarer,Pharmaceutical technicians and assistants
+3214,321,4,Protese- og tannteknikere,Medical and dental prosthesis technicians
+3230,323,4,Yrker innen alternativ medisin,Traditional and complementary medicine associate professionals
+3240,324,4,Dyrepleiere,Veterinary technicians and assistants
+3251,325,4,Tannpleiere,Dental assistants and therapists
+3254,325,4,Optikere,Dispensing opticians
+3256,325,4,Helsesekretærer,Medical assistants
+3257,325,4,Helse- og miljøkontrollører,Environmental and occupational health inspectors and associates
+3258,325,4,Ambulansepersonell,Ambulance workers
+3259,325,4,Andre helseyrker,Health associate professionals not elsewhere classified
+3311,331,4,Finansmeglere,Securities and finance dealers and brokers
+3312,331,4,Kundebehandlere lån og kreditt,Credit and loans officers
+3313,331,4,Regnskapsførere,Accounting associate professionals
+3315,331,4,Takstmenn,Valuers and loss assessors
+3321,332,4,Forsikringsagenter,Insurance representatives
+3322,332,4,Selgere (engros),Commercial sales representatives
+3323,332,4,Innkjøpere,Buyers
+3324,332,4,Handels- og skipsmeglere,Trade brokers
+3331,333,4,Speditører og befraktere,Clearing and forwarding agents
+3332,333,4,Konferanse- og arrangementsplanleggere mv.,Conference and event planners
+3333,333,4,Arbeidsformidlere,Employment agents and contractors
+3334,333,4,Eiendomsmeglere og - forvaltere,Real estate agents and property mangers
+3339,333,4,Andre yrker innen forretningstjenester,Business services agents not elsewhere classified
+3341,334,4,Arbeidsledere for kontorpersonell,Office supervisors
+3342,334,4,Advokatsekretær,Legal secretaries
+3343,334,4,Sjefssekretærer,Administrative and executive secretaries
+3351,335,4,Tollere,Customs and border inspectors
+3352,335,4,Skattefunksjonærer,Government tax and excise officials
+3353,335,4,Saksbehandlere innen sosiale ytelser,Government social benefits officials
+3354,335,4,"Saksbehandlere for førerkort, importlisenser mv.",Government licensing officials
+3355,335,4,Politibetjenter mv.,Police inspectors and detectives
+3359,335,4,Andre yrker innen offentlig forvaltning,Regulatory government associate professionals not elsewhere classified
+3411,341,4,Privatetterforskere mv.,Legal and related associate professionals
+3412,341,4,Miljøarbeidere innen sosiale fagfelt,Social work associate professionals
+3413,341,4,Religiøse yrker,Religious associate professionals
+3421,342,4,Idrettsutøvere,Athletes and sports players
+3422,342,4,Trenere og idrettsdommere,"Sport coaches, instructors and officials"
+3423,342,4,Sports- og aktivitetsinstruktører,Fitness and recreation instructors and program leaders
+3431,343,4,Fotografer og filmfotografer,Photographers
+3432,343,4,Interiørdesignere og dekoratører,Interior designers and decorators
+3433,343,4,Tekniske konservatorer,"Gallery, museum and library technicians"
+3434,343,4,Sjefskokker,Chefs
+3439,343,4,Andre yrker innen estetiske fag,Other artistic and cultural associate professionals
+3511,351,4,"Driftsteknikere, IKT",Information and communication technology operations technicians
+3512,351,4,"Brukerstøtte, IKT",Information and communication technology user support technicians
+3513,351,4,"Nettverks- og systemteknikere, IKT",Computer network and systems technicians
+3514,351,4,Internett-teknikere,Web technicians
+3521,352,4,Teknikere innen radio og tv,Broadcasting and audio-visual technicians
+3522,352,4,Teknikere innen telekom,Telecommunications engineering technicians
+4110,411,4,Kontormedarbeidere,General office clerks
+4131,413,4,Stenografer mv.,Typists and word processing operators
+4132,413,4,Dataregistrere,Data entry clerks
+4211,421,4,"Kundebehandlere, bank og postkontor",Bank tellers and related clerks
+4212,421,4,"Bingoverter, bookmakere mv.","Bookmakers, croupiers and related gaming workers"
+4213,421,4,Pantelånere mv.,Pawnbrokers and money-lenders
+4214,421,4,Inkassomedarbeidere mv.,Debt collectors and related clerks
+4221,422,4,Reisebyråmedarbeidere mv.,Travel consultants and clerks
+4222,422,4,Kundesentermedarbeidere,Contact centre information clerks
+4223,422,4,Sentralbordoperatører,Telephone switchboard operators
+4224,422,4,Hotellresepsjonister,Hotel receptionists
+4225,422,4,Informasjonsskrankemedarbeidere,Enquiry clerks
+4226,422,4,Resepsjonister (ekskl. hotell),Receptionists (general)
+4227,422,4,Intervjuere,Survey and market research interviewers
+4229,422,4,Andre opplysningsmedarbeidere,Client information workers not elsewhere classified
+4311,431,4,Regnskapsmedarbeidere,Accounting and bookkeeping clerks
+4312,431,4,Forsikrings- og finansmedarbeidere,"Statistical, finance and insurance clerks"
+4313,431,4,Lønningsmedarbeidere,Payroll clerks
+4321,432,4,Lagermedarbeidere og material-forvaltere,Stock clerks
+4322,432,4,Logistikkmedarbeidere,Production clerks
+4323,432,4,Transportfunksjonærer,Transport clerks
+4411,441,4,Bibliotekassistenter,Library clerks
+4412,441,4,Postbud og postsorterere,Mail carriers and sorting clerks
+4413,441,4,Kodere mv.,"Coding, proof-reading and related clerks"
+4415,441,4,Arkivassistenter,Filing and copying clerks
+4416,441,4,Personalkontormedarbeidere,Personnel clerks
+5111,511,4,"Flyverter, båtverter mv.",Travel attendants and travel stewards
+5112,511,4,Konduktører,Transport conductors
+5113,511,4,Reiseledere og guider,Travel guides
+5120,512,4,Kokker,Cooks
+5131,513,4,Servitører,Waiters
+5132,513,4,Bartendere,Bartenders
+5141,514,4,Frisører,Hairdressers
+5142,514,4,Kosmetologer mv.,Beauticians and related workers
+5151,515,4,Renholdsledere i virksomheter,"Cleaning and housekeeping supervisors in offices, hotels and other local kinds of activity units"
+5152,515,4,Husholdere,Domestic housekeepers
+5153,515,4,Vaktmestre,Building caretakers
+5161,516,4,Astrologer mv.,"Astrologers, fortune-tellers and related workers"
+5163,516,4,Begravelsesbyrå- og krematoriearbeidere,Undertakers and embalmers
+5164,516,4,Dyrepassere og - trenere mv.,Pet groomers and animal care workers
+5165,516,4,Kjøreskolelærere,Driving instructors
+5169,516,4,Andre personlige tjenesteytere,Personal services workers not elsewhere classified
+5211,521,4,Torghandlere,Stall and market salespersons
+5212,521,4,"Gateselgere, mat",Street food salespersons
+5221,522,4,Innehavere av kiosk/liten butikk,Shopkeepers
+5222,522,4,Butikkavdelingssjefer,Shop supervisors
+5223,522,4,Butikkmedarbeidere,Shop sales assistants
+5230,523,4,Billettselgere,Cashiers and ticket clerks
+5241,524,4,Mannekenger og modeller,Fashion and other models
+5242,524,4,Demonstrasjonsselgere,Sales demonstrators
+5243,524,4,Dørselgere,Door to door salespersons
+5244,524,4,Telefon- og nettselgere,Contact centre salespersons
+5245,524,4,Servicemedarbeidere (bensinstasjon),Service station attendants
+5246,524,4,Gatekjøkken- og kafémedarbeidere mv.,Food service counter attendants
+5249,524,4,Andre salgsmedarbeidere,Sales workers not elsewhere classified
+5311,531,4,Barnehage- og skolefritidsassistenter mv.,Child care workers
+5312,531,4,Skoleassistenter,Teachers¿ aides
+5321,532,4,Helsefagarbeidere,Health care assistants
+5322,532,4,Hjemmehjelper,Home-based personal care workers
+5329,532,4,Andre pleiemedarbeidere,Personal care workers in health services not elsewhere classified
+5411,541,4,Brannkonstabler,Fire-fighters
+5413,541,4,Fengselsbetjenter,Prison guards
+5414,541,4,Vektere,Security guards
+5419,541,4,Andre sikkerhetsarbeidere,Protective services workers not elsewhere classified
+6111,611,4,Korn- og grønnsaksprodusenter,Field crop and vegetable growers
+6112,611,4,Frukt- og bærprodusenter,Tree and shrub crop growers
+6113,611,4,Gartnere,"Gardeners, horticultural and nursery growers"
+6114,611,4,"Kombinasjonsbrukere, nyttevekster",Mixed crop growers
+6121,612,4,Melke- og husdyrprodusenter,Livestock and dairy producers
+6122,612,4,Egg- og fjærfeprodusenter,Poultry producers
+6123,612,4,Birøktere mv.,Apiarists and sericulturists
+6129,612,4,Andre dyreoppdrettere og røktere,Animal producers not elsewhere classified
+6130,613,4,Plante- og husdyrprodusenter (kombinasjonsbruk),Mixed crop and animal producers
+6210,621,4,Skogbrukere,Forestry and related workers
+6221,622,4,Havbruksarbeidere,Aquaculture workers
+6222,622,4,Fiskere,Fishery workers
+6224,622,4,Fangstfolk,Hunters and trappers
+7112,711,4,Murere,Bricklayers and related workers
+7113,711,4,Steinhoggere mv.,"Stonemasons, stone cutters, splitters and carvers"
+7114,711,4,Betongarbeidere,"Concrete placers, concrete finishers and related workers"
+7115,711,4,Tømrere og snekkere,Carpenters and joiners
+7119,711,4,Andre bygningsarbeidere,Building frame and related trades workers not elsewhere classified
+7121,712,4,Taktekkere,Roofers
+7122,712,4,Gulv- og flisleggere,Floor layers and tile setters
+7123,712,4,Gips- og sparklingsarbeidere,Plasterers
+7124,712,4,Isolatører mv.,Insulation workers
+7125,712,4,Glassarbeidere,Glaziers
+7126,712,4,Rørleggere og VVS-montører,Plumbers and pipe fitters
+7127,712,4,Kuldemontører mv.,Air conditioning and refrigeration mechanics
+7131,713,4,Malere og byggtapetserere,Painters and related workers
+7132,713,4,Overflatebehandlere og lakkerere,Spray painters and varnishers
+7133,713,4,"Feiere, fasaderenholdere mv.",Building structure cleaners
+7211,721,4,Støpere,Metal moulders and coremakers
+7212,721,4,Sveisere,Welders and flame cutters
+7213,721,4,Kopper- og blikkenslagere,Sheet metal workers
+7214,721,4,Platearbeidere,Structural metal preparers and erectors
+7215,721,4,Riggere og spleisere,Riggers and cable splicers
+7221,722,4,Smeder,"Blacksmiths, hammersmiths and forging press workers"
+7222,722,4,"Verktøymaker, låsesmeder mv.",Toolmakers and related workers
+7223,722,4,Metalldreiere mv.,Metal working machine tool setters and operators
+7224,722,4,Metallslipere,"Metal polishers, wheel grinders and tool sharpeners"
+7231,723,4,Bilmekanikere,Motor vehicle mechanics and repairers
+7232,723,4,Mekanikere innen flytekniske fag,Aircraft engine mechanics and repairers
+7233,723,4,Anleggsmaskin- og industrimekanikere,Agricultural and industrial machinery mechanics and repairers
+7234,723,4,Sykkelreparatører mv.,Bicycle and related repairers
+7311,731,4,Presisjonsinstrumentmakere og -reparatører,Precision-instrument makers and repairers
+7312,731,4,Musikkinstrumentmakere og -stemmere,Musical instrument makers and tuners
+7313,731,4,"Gull- og sølvsmeder, gravører mv.",Jewellery and precious metal workers
+7314,731,4,Keramikere mv.,Potters and related workers
+7315,731,4,Glasshåndverkere,"Glass makers, cutters, grinders and finishers"
+7316,731,4,Dekormalere mv.,"Sign writers, decorative painters, engravers and etchers"
+7317,731,4,Kunsthåndverkere i tre mv.,"Handicraft workers in wood, basketry and related materials"
+7318,731,4,"Vevere, strikkere mv. (innen husflidsproduksjon)","Handicraft workers in textile, leather and related materials"
+7319,731,4,Andre kunsthåndverkere,Handicraft workers not elsewhere classified
+7321,732,4,Førtrykkere,Pre-press technicians
+7322,732,4,Trykkere,Printers
+7323,732,4,Innbindere mv.,Print finishing and binding workers
+7411,741,4,Elektrikere,Building and related electricians
+7412,741,4,Automatikere,Electrical mechanics and fitters
+7413,741,4,Energimontører,Electrical line installers and repairers
+7421,742,4,Serviceelektronikere,Electronics mechanics and servicers
+7422,742,4,Tele- og IKT-installatører,Information and communications technology installers and servicers
+7511,751,4,"Slaktere, fiskehandlere mv.","Butchers, fishmongers and related food preparers"
+7512,751,4,"Bakere, konditorer mv.","Bakers, pastry-cooks and confectionery makers"
+7513,751,4,Ystere mv. (gårdsproduksjon),Dairy product makers
+7514,751,4,"Saftere, syltere mv. (gårdsproduksjon)","Fruit, vegetables and related preservers"
+7515,751,4,Prøvesmakere og kvalitetsbedømmere av mat og drikke,Food and beverage tasters and graders
+7522,752,4,Møbelsnekkere,Cabinet makers and related workers
+7531,753,4,"Skreddere, buntmakere mv.","Tailors, dressmakers, furriers and hatters"
+7532,753,4,Gradører,Garment and related patternmakers and cutters
+7534,753,4,Møbeltapetserere mv.,Upholsterers and related workers
+7535,753,4,Skinnberedere og garvere,"Pelt dressers, tanners and fellmongers"
+7536,753,4,Skomakere,Shoemakers and related workers
+7541,754,4,Yrkesdykkere,Underwater divers
+7542,754,4,Skytebaser og sprengningsarbeidere,Shotfirers and blasters
+7543,754,4,Produkttestere (ikke matprodukter),Product graders and testers (excluding food and beverages)
+7544,754,4,Desinfeksjonsarbeidere og skadedyrbekjempere,Fumigators and other pest and weed controllers
+7549,754,4,Andre håndverkere,Craft and related workers not elsewhere classified
+8111,811,4,Bergfagarbeidere,Miners and quarriers
+8112,811,4,Prosessoperatører (oppredning),Mineral and stone processing plant operators
+8113,811,4,Operatører innen boring mv.,Well drillers and borers and related workers
+8114,811,4,Operatører innen produksjon av betong mv.,"Cement, stone and other mineral products machine operators"
+8121,812,4,Operatører innen metallurgiske prosessfag,Metal processing plant operators
+8122,812,4,Operatører innen metallflatebehandling,"Metal finishing, plating and coating machine operators"
+8131,813,4,Operatører innen kjemisk industri,Chemical products plant and machine operators
+8132,813,4,Operatører innen produksjon av fotofilm og -papir mv.,Photographic products machine operators
+8141,814,4,Operatører innen produksjon av gummiprodukter,Rubber products machine operators
+8142,814,4,Operatører innen plastprodukter,Plastic products machine operators
+8143,814,4,Operatører innen papirprodukter,Paper products machine operators
+8151,815,4,Spinne- og nøstemaskinoperatører,"Fibre preparing, spinning and winding machine operators"
+8152,815,4,Operatører innen tekstilproduksjon mv.,Weaving and knitting machine operators
+8153,815,4,Industrisyere,Sewing machine operators
+8154,815,4,Operatører innen tekstilbearbeiding,"Bleaching, dyeing and fabric cleaning machine operators"
+8155,815,4,"Operatører innen pels, skinn- og lærbearbeiding",Fur and leather preparing machine operators
+8156,815,4,Operatører innen skinn og lærprodukter,Shoemaking and related machine operators
+8157,815,4,Renseri- og vaskerimaskinoperatører,Laundry machine operators
+8159,815,4,"Andre operatører innen produksjon av tekstiler, pels, skinn og lær","Textile, fur and leather products machine operators not elsewhere classified"
+8160,816,4,Operatører innen næringsmiddelproduksjon,Food and related products machine operators
+8171,817,4,Operatører innen treforedling,Pulp and papermaking plant operators
+8172,817,4,Operatører innen trelastproduksjon,Wood processing plant operators
+8181,818,4,Operatører innen glass- og keramisk produksjon,Glass and ceramics plant operators
+8182,818,4,Fyrkjele- og turbinoperatører,Steam engine and boiler operators
+8183,818,4,"Pakke-, tappe- og etikettmaskinoperatører","Packing, bottling and labelling machine operators"
+8189,818,4,Andre stasjonære maskinoperatører,Stationary plant and machine operators not elsewhere classified
+8211,821,4,Montører av mekaniske produkter,Mechanical machinery assemblers
+8212,821,4,Montører av elektriske og elektroniske produkter,Electrical and electronic equipment assemblers
+8219,821,4,Andre montører,Assemblers not elsewhere classified
+8311,831,4,Lokomotiv og T-baneførere,Locomotive engine drivers
+8312,831,4,Skiftekonduktører mv,"Railway brake, signal and switch operators"
+8322,832,4,"Bil-, drosje- og varebilførere","Car, taxi, van and motorcycle drivers"
+8331,833,4,Bussjåfører og trikkeførere,Bus and tram drivers
+8332,833,4,Lastebil- og trailersjåfører,Heavy truck and lorry drivers
+8341,834,4,Jordbruks- og skogbruksmaskinførere,Mobile farm and forestry plant operators
+8342,834,4,Anleggsmaskinførere,Earthmoving and related plant operators
+8343,834,4,Kran- og heisførere mv.,"Crane, hoist and related plant operators"
+8344,834,4,Truckførere,Lifting truck operators
+8350,835,4,Dekks- og maskinmannskap (skip),Ships¿ deck crew and related workers
+9111,911,4,Renholdere i private hjem,Domestic cleaners and helpers
+9112,911,4,Renholdere i virksomheter,"Cleaners and helpers in offices, hotels and other local kinds of activity units"
+9122,912,4,Bilvaskere,Vehicle cleaners
+9123,912,4,Vinduspussere,Window cleaners
+9129,912,4,Andre rengjørere,Other cleaning workers
+9211,921,4,Hjelpearbeidere i nyttevekstproduksjon,Crop farm labourers
+9212,921,4,Hjelpearbeidere i husdyrproduksjon,Livestock farm labourers
+9213,921,4,Hjelpearbeidere i kombinasjonsbruk,Mixed crop and livestock farm labourers
+9214,921,4,Hjelpearbeidere i gartneri mv.,Garden and horticultural labourers
+9215,921,4,Hjelpearbeidere i skogbruk,Forestry labourers
+9216,921,4,Hjelpearbeidere innen havbruk,Fishery and aquaculture labourers
+9311,931,4,Hjelpearbeidere i bergverk,Mining and quarrying labourers
+9312,931,4,Hjelpearbeidere i anlegg,Civil engineering labourers
+9313,931,4,Hjelpearbeidere i bygg,Building construction labourers
+9321,932,4,Håndpakkere mv.,Hand packers
+9329,932,4,Andre hjelpearbeidere i industri,Manufacturing labourers not elsewhere classified
+9331,933,4,Førere av ikke-motorisert kjøretøy,Hand and pedal vehicle drivers
+9333,933,4,Laste- og lossearbeidere,Freight handlers
+9334,933,4,Varepåfyllere,Shelf fillers
+9412,941,4,Kjøkkenassistenter,Kitchen helpers
+9510,951,4,Reklamedistributører mv.,Street and related service workers
+9611,961,4,Renovasjonsarbeidere,Garbage and recycling collectors
+9612,961,4,Gjenvinningsarbeidere,Refuse sorters
+9613,961,4,Gatefeiere mv.,Sweepers and related labourers
+9621,962,4,Bud mv.,"Messengers, package deliverers and luggage porters"
+9622,962,4,Altmuligmann,Odd job persons
+9623,962,4,Måleravlesere mv.,Meter readers and vending-machine collectors
+9629,962,4,Andre hjelpearbeidere,Elementary workers not elsewhere classified

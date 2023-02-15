@@ -5,6 +5,12 @@
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
 
+#loading industry codec
+level2tolevel1indus <- read_csv("csv/ssb/level2tolevel1indus.csv")
+indus_level2 <- read_csv("csv/ssb/indus_level2.csv")
+occu <- read_csv("csv/ssb/indus_level2.csv")
+
+
 
 #Load csv by year
 x2013 <- read_csv("csv/2013.csv")
@@ -79,48 +85,78 @@ x <- x_g %>%
 remove(x_f,x_t, x_g, x_loop)
 
 ##adding occupation names
-x_loop <- x 
-x_g <- c()
-x_t <- x_loop
-x_f <- x_loop
-x_f$occupation <- c("")
-for (i in 1:NROW(occu)) {
-  if(occu$code[i] %in% unique(x_t$y_kode1_styrk08==FALSE)) {next}
-  x_f <- x_t %>%
-    filter(x_t$y_kode1_styrk08==occu$code[i])
-  x_t <- x_t %>%
-    filter(x_t$y_kode1_styrk08!=occu$code[i])
-  x_f$occupation=occu$name[i] #add in english occupation names
-  x_g <- rbind(x_g, x_f)
-}
-x <- x_g %>%
-  select(occupation, everything())
+#x_g <- c()
+#x_t <- x #dataset to "mutate"
+#x_f <- x#dataset to "mutate"
+#codec <- occu
+#for (i in 1:NROW(codec)) {
+#  x_f <- x_t %>%
+#    filter(x_t$y_kode1_styrk08==occu$code[i])
+#  x_t <- x_t %>%
+#    filter(x_t$y_kode1_styrk08!=occu$code[i])
+#  x_f$occupation=occu$name[i] #add in english occupation names
+#  x_g <- rbind(x_g, x_f)
+#  if(i == NROW(codec)){
+#    ssb_wages_expand <- x_g
+#    remove(x_f, x_g, x_t, codec)
+#  }
+#}
+
+
+#x <- x_g %>%
+#  select(occupation, everything())
 
 remove(x_f,x_t, x_g, x_loop)
 
-x<- x%>%
-  mutate(is.male = fifelse(kjonn == "Mann", 1,0)) %>%
-  mutate(is.union = fifelse(tu29 == "Ja" , 1, 0, na = 0))
+x_m<- x%>%
+  mutate(is.male = fifelse(kjonn == "Mann", 1,0), .keep = "unused") %>%
+  mutate(is.union = fifelse(tu29 == "Ja" , 1, 0, na = 0), .keep = "unused")
 
+#dummy variable for education from least educated to most educated
+x_m<- x_m %>%
+  mutate(has.education.primary = fifelse(x_m$utd_bu == "Barneskoleutdanning", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.juniorhigh = fifelse(x_m$utd_bu == "Ungdomsskoleutdanning", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.some.hs = fifelse(x_m$utd_bu == "Videregående skole, nivå i - grunnkurs +vk1", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.finished.hs = fifelse(x_m$utd_bu == "Videregående skole, nivå ii - vk2", 1,0, na = 0)) %>%
+  mutate(has.education.trade.school = fifelse(x_m$utd_bu == "Påbygging til videregående opplæring (teknisk fagskole)", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.bachelor = fifelse(x_m$utd_bu == "Univ.-høyskoleutdanning, lavere nivå", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.master = fifelse(x_m$utd_bu == "Univ.-høyskoleutdanning, høyere nivå", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.doctor = fifelse(x_m$utd_bu == "Forskerutdanning", 1,0, na = 0), .keep = "unused") %>%
+  mutate(has.education.ungiven = fifelse(x_m$utd_bu == "Uoppgitt", 1,0, na = 0), .keep = "unused") 
+  
+x_m<- x_m %>%
+  mutate(lessthantwenty = fifelse(x_m$alder_aar <= 20, 1,0, na = 0), .keep = "unused") %>%
+  mutate(twenty = fifelse(x_m$alder_aar >20 & x_m$alder_aar <= 30, 1,0, na = 0), .keep = "unused") %>%
+  mutate(thirty = fifelse(x_m$alder_aar >30 & x_m$alder_aar <= 40, 1,0, na = 0), .keep = "unused") %>%
+  mutate(fourty = fifelse(x_m$alder_aar >40 & x_m$alder_aar <= 50, 1,0, na = 0), .keep = "unused") %>%
+  mutate(fifty = fifelse(x_m$alder_aar >50 & x_m$alder_aar <= 60, 1,0, na = 0), .keep = "unused") %>%
+  mutate(sixty = fifelse(x_m$alder_aar >60 & x_m$alder_aar <= 70, 1,0, na = 0), .keep = "unused") %>%
+  mutate(seventyplus = fifelse(x_m$alder_aar >70, 1,0, na = 0), .keep = "unused") 
+  
 
 x <- x %>%
   select(alder_aar, everything())
 
-x_alder_agg <- aggregate(x, by = list(x$parentcode_indus,
+
+#
+x_agg_vis <- aggregate(x_m, by = list(x$parentcode_indus,
+                                    x$industryparentname,
                                       x$year), FUN = mean)
 
 
-x_alder_agg <- x_alder_agg %>%     select(-c(parentcode_indus, 
+x_agg_vis <- x_agg_vis %>%     select(-c(parentcode_indus, 
+                                             industryparentname,
                                  year)) 
 
 
 
-x_alder_agg <- x_alder_agg %>% 
-  rename(parentcode_indus=       colnames(x_alder_agg[1]))%>% 
-  rename(year=  colnames(x_alder_agg[2]))
+x_agg_vis <- x_agg_vis %>% 
+  rename(parentcode_indus=       colnames(x_agg_vis[1]))%>% 
+  rename(industryparentname=  colnames(x_agg_vis[2])) %>%
+  rename(year=  colnames(x_agg_vis[3]))
 
 
-
+write_csv(x_agg_vis, file="csv/ssb/x_agg_vis.csv")
 
 x_agg <- aggregate(x, by = list(x$occupation,
                                 x$y_kode1_styrk08,
@@ -165,5 +201,5 @@ x_agg$parentcode_indus <- as.character(x_agg$parentcode)
 
 
 #NSD data is ready to be merged! x for total set, x_agg for aggregated set
-write.csv(x, file = ("csv/x.csv"))
-write.csv(x_agg, file = ("csv/x_agg.csv"))
+write_csv(x, file = ("csv/x.csv"))
+write_csv(x_agg, file = ("csv/x_agg.csv"))

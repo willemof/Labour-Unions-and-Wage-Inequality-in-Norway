@@ -1,0 +1,23 @@
+code,shortname,level,nb_name,navn,parentcode,parentname
+00.0,NA,1,Uspesifisert eller uidentifiserbar næring,NA,,Unspecified or unidentifiable industry
+A,NA,1,"Jordbruk, skogbruk og fiske",NA,NA,"Agriculture, forestry and fishing"
+B,NA,1,Bergverksdrift og utvinning,NA,NA,Mining and quarrying
+C,NA,1,Industri,NA,NA,Manufacturing
+D,NA,1,"Elektrisitets-, gass-, damp- og varmtvannsforsyning",NA,NA,"Electricity, gas, steam and air conditioning supply"
+E,NA,1,"Vannforsyning, avløps- og renovasjonsvirksomhet",NA,NA,"Water supply; sewerage, waste management and remediation activities"
+F,NA,1,Bygge- og anleggsvirksomhet,NA,NA,Construction
+G,NA,1,"Varehandel, reparasjon av motorvogner",NA,NA,Wholesale and retail trade; repair of motor vehicles and motorcycles
+H,NA,1,Transport og lagring,NA,NA,Transportation and storage
+I,NA,1,Overnattings- og serveringsvirksomhet,NA,NA,Accommodation and food service activities
+J,NA,1,Informasjon og kommunikasjon,NA,NA,Information and communication
+K,NA,1,Finansierings- og forsikringsvirksomhet,NA,NA,Financial and insurance activities
+L,NA,1,Omsetning og drift av fast eiendom,NA,NA,Real estate activities
+M,NA,1,"Faglig, vitenskapelig og teknisk tjenesteyting",NA,NA,"Professional, scientific and technical activities"
+N,NA,1,Forretningsmessig tjenesteyting,NA,NA,Administrative and support service activities
+O,NA,1,"Offentlig administrasjon og forsvar, og trygdeordninger underlagt offentlig forvaltning",NA,NA,Public administration and defence; compulsory social security
+P,NA,1,Undervisning,NA,NA,Education
+Q,NA,1,Helse- og sosialtjenester,NA,NA,Human health and social work activities
+R,NA,1,"Kulturell virksomhet, underholdning og fritidsaktiviteter",NA,NA,"Arts, entertainment and recreation"
+S,NA,1,Annen tjenesteyting,NA,NA,Other service activities
+T,NA,1,Lønnet arbeid i private husholdninger,NA,NA,Activities of household as employers; undifferentiated goods- and services-producing activities of households for own account
+U,NA,1,Internasjonale organisasjoner og organer,NA,NA,Activities of extraterritorial organisations and bodies

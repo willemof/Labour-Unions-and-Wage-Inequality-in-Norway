@@ -39,3 +39,26 @@ zg <- gg + theme(
            plot.title = element_text(hjust = 0.5)
 )
   zg
+  
+  hg <- gg + ggtitle("Hump-Shaped Curve") + 
+    xlab("Power of Labour Union") + ylab("Unemployment") + 
+    coord_cartesian(xlim=c(0.3,5.7), ylim=c(1.3,3.3))
+  
+  
+  bg <- hg + theme(
+    
+    #axis.line=element_blank(),
+    axis.text.x=element_blank(),
+    axis.text.y=element_blank(),
+    axis.ticks=element_blank(),
+    ###axis.title.x=element_blank(),
+    #axis.title.y=element_blank(),
+    legend.position="none",
+    #panel.background=element_blank(),
+    #panel.border=element_blank(),
+    #panel.grid.major=element_blank(),
+    #panel.grid.minor=element_blank(),
+    #plot.background=element_blank(),
+    plot.title = element_text(hjust = 0.5)
+  )
+  bg
