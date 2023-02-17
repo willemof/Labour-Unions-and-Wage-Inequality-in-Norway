@@ -199,11 +199,11 @@ data.tmp <- '
 }
 '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
-ssb.wages <- fromJSONstat(content(d.tmp, "text"))
-ssb.wages <- ssb.wages %>%
+ssb_wages <- fromJSONstat(content(d.tmp, "text"))
+ssb_wages <- ssb_wages %>%
   clean_names() %>%
   mutate(shortname = industry_sic2007, .keep = "unused")
-shortname <- unique(ssb.wages$shortname)
+shortname <- unique(ssb_wages$shortname)
 shortname <- tibble(shortname)
 shortname <- shortname %>% slice(2:88)
 new_row <- c("Unspecified")
@@ -273,3 +273,10 @@ occu<- full_join(nb_occu, en_occu) %>%
   filter(level==4)
 
 remove(nb_occu, en_occu, code)
+
+write_csv(level2tolevel1indus, file = ("csv/ssb/level2tolevel1indus.csv"))
+write_csv(ssb_wages, file = ("csv/ssb/ssb_wages.csv"))
+write_csv(indus_level1, file = ("csv/ssb/indus_level1.csv"))
+write_csv(indus_level2, file = ("csv/ssb/indus_level2.csv"))
+write_csv(occu, file = ("csv/ssb/occu.csv"))
+
