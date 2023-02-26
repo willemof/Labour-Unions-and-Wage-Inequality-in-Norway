@@ -270,6 +270,6 @@ en_occu <- GetKlass(
   notes = FALSE)
 
 occu<- full_join(nb_occu, en_occu) %>%
-  filter(level==4)
+  filter(level==4 | level ==2)
 
 remove(nb_occu, en_occu, code)

@@ -85,22 +85,28 @@ x <- x_g %>%
 remove(x_f,x_t, x_g, x_loop)
 
 ##adding occupation names
-#x_g <- c()
-#x_t <- x #dataset to "mutate"
-#x_f <- x#dataset to "mutate"
-#codec <- occu
-#for (i in 1:NROW(codec)) {
-#  x_f <- x_t %>%
-#    filter(x_t$y_kode1_styrk08==occu$code[i])
-#  x_t <- x_t %>%
-#    filter(x_t$y_kode1_styrk08!=occu$code[i])
-#  x_f$occupation=occu$name[i] #add in english occupation names
-#  x_g <- rbind(x_g, x_f)
-#  if(i == NROW(codec)){
-#    ssb_wages_expand <- x_g
-#    remove(x_f, x_g, x_t, codec)
-#  }
-#}
+x_g <- c()
+x_t <- x #dataset to "mutate"
+x_f <- x#dataset to "mutate"
+x_f$occupation <- c()
+codec <- occu %>%
+  filter(level==2)
+x_t <- x_t %>%
+  mutate(y_kode1_styrk08 = as.character(y_kode1_styrk08),
+         two_digit_code = ifelse(y_kode1_styrk08 == "0", "00", ifelse(nchar(y_kode1_styrk08) == 3, str_pad(y_kode1_styrk08, width = 4, pad = "0"), substr(y_kode1_styrk08, 1, 2)))) %>%
+  mutate(two_digit_code = substr(two_digit_code, 1, 2))
+
+for (i in 1:NROW(codec)) {
+  x_f <- x_t %>%
+    filter(x_t$two_digit_code==codec$code[i])
+  x_t <- x_t %>%
+    filter(x_t$two_digit_code!=codec$code[i])
+  x_f$occupation=codec$name[i] #add in english occupation names
+  x_g <- rbind(x_g, x_f)
+  if(i == NROW(codec)){
+    x_m <- x_g
+  }
+}
 
 
 #x <- x_g %>%
@@ -108,7 +114,7 @@ remove(x_f,x_t, x_g, x_loop)
 
 remove(x_f,x_t, x_g, x_loop)
 
-x_m<- x%>%
+x_m<- x_m%>%
   mutate(is.male = fifelse(kjonn == "Mann", 1,0), .keep = "unused") %>%
   mutate(is.union = fifelse(tu29 == "Ja" , 1, 0, na = 0), .keep = "unused")
 
@@ -124,6 +130,7 @@ x_m<- x_m %>%
   mutate(has.education.doctor = fifelse(x_m$utd_bu == "Forskerutdanning", 1,0, na = 0), .keep = "unused") %>%
   mutate(has.education.ungiven = fifelse(x_m$utd_bu == "Uoppgitt", 1,0, na = 0), .keep = "unused") 
   
+#dummy variable for age
 x_m<- x_m %>%
   mutate(lessthantwenty = fifelse(x_m$alder_aar <= 20, 1,0, na = 0), .keep = "unused") %>%
   mutate(twenty = fifelse(x_m$alder_aar >20 & x_m$alder_aar <= 30, 1,0, na = 0), .keep = "unused") %>%
@@ -134,14 +141,84 @@ x_m<- x_m %>%
   mutate(seventyplus = fifelse(x_m$alder_aar >70, 1,0, na = 0), .keep = "unused") 
   
 
-x <- x %>%
-  select(alder_aar, everything())
+#dummy variable for sector
+x_m<- x_m %>%
+  mutate(sector.private = fifelse(x_m$eier == "Privat virksomhet", 1,0, na = 0), .keep = "unused") %>%
+  mutate(sector.municipal = fifelse(x_m$eier == "Kommunal forvaltning", 1,0, na = 0), .keep = "unused") %>%
+  mutate(sector.county = fifelse(x_m$eier == "Fylkeskommunal forvaltning", 1,0, na = 0), .keep = "unused") %>%
+  mutate(sector.centralgov = fifelse(x_m$eier == "Statlig forvaltning", 1,0, na = 0), .keep = "unused")
+
+#dummy variable for employment status
+x_m<- x_m %>%
+  mutate(employment.onleave.employee = fifelse(x_m$eier == "Midl.Fravær, ansatte", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.employee = fifelse(x_m$eier == "Sysselsatte, ansatte", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.selfemployed = fifelse(x_m$eier == "Sysselsatte, selvstendige", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.onleave.selfemployed = fifelse(x_m$eier == "Midl.Fravær, selvstendige"  , 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.onleave.familyemploy = fifelse(x_m$eier == "Midl.Fravær, familiearbeider", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.familyemploy = fifelse(x_m$eier == "Sysselsatte, familiearbeider" , 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.employee.ungiven = fifelse(x_m$eier == "Sysselsatte, uoppgitt", 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.military = fifelse(x_m$eier == "Vernepliktig" , 1,0, na = 0), .keep = "unused")
 
 
-#
-x_agg_vis <- aggregate(x_m, by = list(x$parentcode_indus,
-                                    x$industryparentname,
-                                      x$year), FUN = mean)
+#dummy variable for employment.duration
+
+x_m<- x_m %>%
+  mutate(collective.agreement.yes = fifelse(x_m$eier == "Helt eller delvis regulert av tariffavtale/overenskomst" |
+                                          x_m$eier == "Helt eller delvis regulert av tariffavtale eller overenskoms"
+                                            , 1,0, na = 0), .keep = "unused") %>%
+  mutate(collective.agreement.combination = fifelse(x_m$eier == "Kombinasjon av tariffavtale eller overenskomst og individuel" |
+                                            x_m$eier == "Kombinasjon av tariffavtale eller overenskomst og individuel"
+                                            , 1,0, na = 0), .keep = "unused") %>%
+  mutate(collective.agreement.no = fifelse(x_m$eier == "Reguleres kun gjennom individuell avtale eller kontrakt" |
+                                                      x_m$eier == "Reguleres kun gjennom individuell avtale / kontrakt"
+                                                    , 1,0, na = 0), .keep = "unused")
+  
+
+# workplace regulated by collective agreement
+x_m<- x_m %>%
+  mutate(fulltime = fifelse(x_m$eier == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
+  mutate(parttime = fifelse(x_m$eier == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
+
+
+# Create a vector of all possible 2-digit occupation codes
+all_codes <- sprintf("%02d", 0:99)
+
+# Create a vector of occupation names corresponding to each code
+name_vector <- character(length(all_codes))
+for (i in 1:length(all_codes)) {
+  code <- all_codes[i]
+  name_vector[i] <- ifelse(code %in% codec$code, codec$name[codec$code == code], "")
+}
+
+# Remove any columns with empty column names
+dummy_matrix <- dummy_matrix[, name_vector != ""]
+
+# Add the dummy variables to the x_m data frame
+x_m <- cbind(x_m, dummy_matrix)
+
+
+x_a <- x_m %>%
+  select(tuvekt, parentcode_indus, industryparentname, year, colnames(x_m)[144:161])
+x_agg_vis <- aggregate(x_a, by = list(x_a$parentcode_indus,
+                                      x_a$industryparentname,
+                                      x_a$year), FUN = mean)
+
+x_agg_vis_length <- x_a %>%
+  select(industryparentname, year, parentcode_indus) 
+x_agg_vis_length<-   aggregate(x_agg_vis_length, by = list(x_agg_vis_length$parentcode_indus,
+                                                           x_agg_vis_length$industryparentname,
+                                                           x_agg_vis_length$year), FUN = length)
+x_agg_vis_length <- x_agg_vis_length %>%
+  mutate(nfreq = parentcode_indus, .keep = "unused")
+
+x_agg_vis_length <- x_agg_vis_length %>%     select(-c( industryparentname,
+                                         year)) 
+
+x_agg_vis_length <- x_agg_vis_length %>% 
+  rename(parentcode_indus=       colnames(x_agg_vis_length[1]))%>% 
+  rename(industryparentname=  colnames(x_agg_vis_length[2])) %>%
+  rename(year=  colnames(x_agg_vis_length[3]))
+
 
 
 x_agg_vis <- x_agg_vis %>%     select(-c(parentcode_indus, 
@@ -154,6 +231,8 @@ x_agg_vis <- x_agg_vis %>%
   rename(parentcode_indus=       colnames(x_agg_vis[1]))%>% 
   rename(industryparentname=  colnames(x_agg_vis[2])) %>%
   rename(year=  colnames(x_agg_vis[3]))
+
+x_agg_vis <- full_join(x_agg_vis, x_agg_vis_length)
 
 
 write_csv(x_agg_vis, file="csv/ssb/x_agg_vis.csv")

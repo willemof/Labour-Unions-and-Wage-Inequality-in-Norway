@@ -12,6 +12,9 @@ install.packages("lmtest")
 install.packages("lfe")
 install.packages("sandwich")
 
+install.packages("AER")
+install.packages("plm")
+
 
 options(encoding="UTF-8")
 library(httr) # API import
@@ -23,10 +26,14 @@ library(zoo) # for the conversion of a year and quarter to date/class
 library(rstudioapi) # for getting file path
 library(data.table) #for fast if else
 library(rvest) # for HTML-webscraping
+library(plotly)
 
 library(lmtest)
 library(lfe)
 library(sandwich)
+library(AER)
+library(plm)
+
 
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
