@@ -1,3 +1,5 @@
+#Load data
+
 ind19wage_ds_expand<- read_csv(file = "csv/ssb/ind19wage_ds_expand.csv")
 x_agg_vis <- read_csv(file="csv/ssb/x_agg_vis.csv")
 
