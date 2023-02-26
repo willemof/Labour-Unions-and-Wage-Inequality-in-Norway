@@ -1,4 +1,4 @@
-## Library List
+## Installs List
 install.packages("tidyverse")
 install.packages("janitor")
 install.packages("expss")
@@ -15,6 +15,7 @@ install.packages("sandwich")
 install.packages("AER")
 install.packages("plm")
 
+#library and presettings
 
 options(encoding="UTF-8")
 library(httr) # API import
