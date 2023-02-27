@@ -39,14 +39,22 @@ x$number <- paste0(1:NROW(x))
 x <- x %>% select(number, hnar, everything())
 
 #setting up for loop to enter industry names codes, parent codes
-x_loop <- x
+
+
+
+x$hnar[x$hnar == "0"] <- "Uspesifisert eller uidentifiserbar næring"
+x$hnar <- str_trim(x$hnar)
+x$industry <- c("")
+x$code_indus <- c("")
+x$parentcode_indus <- c("")
 x_g <- c()
 x_t <- x
 x_f <- x
 
+
 #forloop
 for (i in 1:NROW(indus_level2)) {
-  if(indus_level2$navn[i] %in% unique(x_t$hnar)==FALSE) {next}
+ if(indus_level2$navn[i] %in% unique(x_t$hnar)==FALSE) {next}
 x_f <- x_t %>%
   filter(x_t$hnar==indus_level2$navn[i])
 x_t <- x_t %>%
@@ -55,6 +63,12 @@ x_t <- x_t %>%
   x_f$code_indus=indus_level2$code[i] #add in level 2 industrial codes
   x_f$parentcode_indus=indus_level2$parentcode[i] # add in parentcode
 x_g <- rbind(x_g, x_f)
+if(i==NROW(indus_level2)) {
+  x_t$industry=indus_level2$name[i] #add in english industry names
+  x_t$code_indus=indus_level2$code[i] #add in level 2 industrial codes
+  x_t$parentcode_indus=indus_level2$parentcode[i] # add in parentcode
+  x_g <- rbind(x_g, x_t)
+}
 }
 
 x_g <- x_g %>%
