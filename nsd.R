@@ -170,34 +170,35 @@ x_m<- x_m %>%
 
 #dummy variable for employment status
 x_m<- x_m %>%
-  mutate(employment.onleave.employee = fifelse(x_m$eier == "Midl.Fravær, ansatte", 1,0, na = 0), .keep = "unused") %>%
-  mutate(employment.employee = fifelse(x_m$eier == "Sysselsatte, ansatte", 1,0, na = 0), .keep = "unused") %>%
-  mutate(employment.selfemployed = fifelse(x_m$eier == "Sysselsatte, selvstendige", 1,0, na = 0), .keep = "unused") %>%
-  mutate(employment.onleave.selfemployed = fifelse(x_m$eier == "Midl.Fravær, selvstendige"  , 1,0, na = 0), .keep = "unused")%>%
-  mutate(employment.onleave.familyemploy = fifelse(x_m$eier == "Midl.Fravær, familiearbeider", 1,0, na = 0), .keep = "unused") %>%
-  mutate(employment.familyemploy = fifelse(x_m$eier == "Sysselsatte, familiearbeider" , 1,0, na = 0), .keep = "unused")%>%
-  mutate(employment.employee.ungiven = fifelse(x_m$eier == "Sysselsatte, uoppgitt", 1,0, na = 0), .keep = "unused")%>%
-  mutate(employment.military = fifelse(x_m$eier == "Vernepliktig" , 1,0, na = 0), .keep = "unused")
+  mutate(employment.onleave.employee = fifelse(x_m$sstat == "Midl.Fravær, ansatte", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.employee = fifelse(x_m$sstat == "Sysselsatte, ansatte", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.selfemployed = fifelse(x_m$sstat == "Sysselsatte, selvstendige", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.onleave.selfemployed = fifelse(x_m$sstat == "Midl.Fravær, selvstendige"  , 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.onleave.familyemploy = fifelse(x_m$sstat == "Midl.Fravær, familiearbeider", 1,0, na = 0), .keep = "unused") %>%
+  mutate(employment.familyemploy = fifelse(x_m$sstat == "Sysselsatte, familiearbeider" , 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.employee.ungiven = fifelse(x_m$sstat == "Sysselsatte, uoppgitt", 1,0, na = 0), .keep = "unused")%>%
+  mutate(employment.military = fifelse(x_m$sstat == "Vernepliktig" , 1,0, na = 0), .keep = "unused")
 
 
-#dummy variable for employment.duration
+#dummy variable for employment agreement / collective agreement
 
 x_m<- x_m %>%
-  mutate(collective.agreement.yes = fifelse(x_m$eier == "Helt eller delvis regulert av tariffavtale/overenskomst" |
-                                          x_m$eier == "Helt eller delvis regulert av tariffavtale eller overenskoms"
+  mutate(collective.agreement.yes = fifelse(x_m$tu31 == "Helt eller delvis regulert av tariffavtale/overenskomst" |
+                                          x_m$tu31 == "Helt eller delvis regulert av tariffavtale eller overenskoms"
                                             , 1,0, na = 0), .keep = "unused") %>%
-  mutate(collective.agreement.combination = fifelse(x_m$eier == "Kombinasjon av tariffavtale eller overenskomst og individuel" |
-                                            x_m$eier == "Kombinasjon av tariffavtale eller overenskomst og individuel"
+  mutate(collective.agreement.combination = fifelse(x_m$tu31 == "Kombinasjon av tariffavtale eller overenskomst og individuel" |
+                                            x_m$tu31 == "Kombinasjon av tariffavtale eller overenskomst og individuel"
                                             , 1,0, na = 0), .keep = "unused") %>%
-  mutate(collective.agreement.no = fifelse(x_m$eier == "Reguleres kun gjennom individuell avtale eller kontrakt" |
-                                                      x_m$eier == "Reguleres kun gjennom individuell avtale / kontrakt"
+  mutate(collective.agreement.no = fifelse(x_m$tu31 == "Reguleres kun gjennom individuell avtale eller kontrakt" |
+                                                      x_m$tu31 == "Reguleres kun gjennom individuell avtale / kontrakt"
                                                     , 1,0, na = 0), .keep = "unused")
   
 
-# workplace regulated by collective agreement
+# full time or part time
 x_m<- x_m %>%
-  mutate(fulltime = fifelse(x_m$eier == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
-  mutate(parttime = fifelse(x_m$eier == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
+  mutate(fulltime = fifelse(x_m$ans == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
+  mutate(parttime = fifelse(x_m$ans == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
+
 
 ### dataset variables without occupation dummies
 x_a <- x_m %>%
