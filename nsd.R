@@ -84,6 +84,8 @@ x <- x_g %>%
   select(industryparentname, everything())
 remove(x_f,x_t, x_g, x_loop)
 
+
+
 ##adding occupation names
 x_g <- c()
 x_t <- x #dataset to "mutate"
@@ -96,6 +98,9 @@ x_t <- x_t %>%
          two_digit_code = ifelse(y_kode1_styrk08 == "0", "00", ifelse(nchar(y_kode1_styrk08) == 3, str_pad(y_kode1_styrk08, width = 4, pad = "0"), substr(y_kode1_styrk08, 1, 2)))) %>%
   mutate(two_digit_code = substr(two_digit_code, 1, 2))
 
+x_2013 <- x %>% filter(year==2013)
+x_2013$two_digit_code <- c("")
+x_2013$occupation <- c("")
 for (i in 1:NROW(codec)) {
   x_f <- x_t %>%
     filter(x_t$two_digit_code==codec$code[i])
@@ -104,13 +109,14 @@ for (i in 1:NROW(codec)) {
   x_f$occupation=codec$name[i] #add in english occupation names
   x_g <- rbind(x_g, x_f)
   if(i == NROW(codec)){
-    x_m <- x_g
+    x_t <- x_t %>% mutate(occupation = c(""))
+    x_g <- rbind(x_g, x_t)
+    x_m <- rbind(x_g, x_2013)
+    x_m$number<- as.numeric(x_m$number)
   }
 }
 
 
-#x <- x_g %>%
-#  select(occupation, everything())
 
 remove(x_f,x_t, x_g, x_loop)
 
@@ -179,9 +185,56 @@ x_m<- x_m %>%
   mutate(fulltime = fifelse(x_m$eier == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
   mutate(parttime = fifelse(x_m$eier == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
 
+### dataset variables without occupation dummies
+x_a <- x_m %>%
+  select(industryparentname,year, 
+         parentcode_indus,alder_aar, tu31, tuvekt,  colnames(x_m)[146:NCOL(x_m)]) #tu31? tuvekt
+x_agg_vis <- aggregate(x_a, by = list(x_a$parentcode_indus,
+                                      x_a$industryparentname,
+                                      x_a$year), FUN = mean)
+
+x_agg_vis_length <- x_a %>%
+  select(industryparentname, year, parentcode_indus) 
+x_agg_vis_length<-   aggregate(x_agg_vis_length, by = list(x_agg_vis_length$parentcode_indus,
+                                                           x_agg_vis_length$industryparentname,
+                                                           x_agg_vis_length$year), FUN = length)
+x_agg_vis_length <- x_agg_vis_length %>%
+  mutate(nfreq = parentcode_indus, .keep = "unused")
+
+x_agg_vis_length <- x_agg_vis_length %>%     select(-c( industryparentname,
+                                                        year)) 
+
+x_agg_vis_length <- x_agg_vis_length %>% 
+  rename(parentcode_indus=       colnames(x_agg_vis_length[1]))%>% 
+  rename(industryparentname=  colnames(x_agg_vis_length[2])) %>%
+  rename(year=  colnames(x_agg_vis_length[3]))
+
+
+
+x_agg_vis <- x_agg_vis %>%     select(-c(parentcode_indus, 
+                                         industryparentname,
+                                         year)) 
+
+
+
+x_agg_vis <- x_agg_vis %>% 
+  rename(parentcode_indus=       colnames(x_agg_vis[1]))%>% 
+  rename(industryparentname=  colnames(x_agg_vis[2])) %>%
+  rename(year=  colnames(x_agg_vis[3]))
+
+x_agg_vis <- full_join(x_agg_vis, x_agg_vis_length)
+
+
+write_csv(x_agg_vis, file="csv/ssb/x_agg_vis.csv")
+
+
+###
+
 
 # Create a vector of all possible 2-digit occupation codes
 all_codes <- sprintf("%02d", 0:99)
+all_codes <- all_codes[all_codes != ""]
+
 
 # Create a vector of occupation names corresponding to each code
 name_vector <- character(length(all_codes))
@@ -190,15 +243,29 @@ for (i in 1:length(all_codes)) {
   name_vector[i] <- ifelse(code %in% codec$code, codec$name[codec$code == code], "")
 }
 
+# Initialize a matrix to store the dummy variables
+dummy_matrix <- matrix(0, nrow = nrow(x_m), ncol = length(all_codes),
+                       dimnames = list(NULL, name_vector))
+
+# Loop through each occupation code and create a dummy variable for it
+for (i in 1:length(all_codes)) {
+  code <- all_codes[i]
+  if (code %in% x_m$two_digit_code) {
+    colname <- name_vector[i]
+    dummy_matrix[, colname] <- as.integer(x_m$two_digit_code == code)
+  }
+}
+NCOL(x_m)
+
 # Remove any columns with empty column names
 dummy_matrix <- dummy_matrix[, name_vector != ""]
-
 # Add the dummy variables to the x_m data frame
 x_m <- cbind(x_m, dummy_matrix)
 
-
+num <- 146:286
 x_a <- x_m %>%
-  select(tuvekt, parentcode_indus, industryparentname, year, colnames(x_m)[144:161])
+  select(industryparentname,year, 
+         parentcode_indus,alder_aar, tu31, tuvekt,  colnames(x_m)[146:NCOL(x_m)]) #tu31? tuvekt
 x_agg_vis <- aggregate(x_a, by = list(x_a$parentcode_indus,
                                       x_a$industryparentname,
                                       x_a$year), FUN = mean)

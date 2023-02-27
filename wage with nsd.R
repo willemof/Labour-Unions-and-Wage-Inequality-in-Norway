@@ -27,6 +27,8 @@ df <- df %>% clean_names() %>%
   select(-industry_sic2007, -sex) %>%
   select(nfreq, date, year, parentcode_indus, industryparentname, everything())
 
+write_csv(df, file = "csv/ssb/aggregated2013_2014.csv")
+
 library(AER)
 reg_model_mean <- lm(mean_nok ~is_union, data = df)
 reg_model_median <- lm(median_nok ~is_union + is_male + df$has_education_doctor + df$has_education_master +
