@@ -238,6 +238,9 @@ x_agg_vis <- x_agg_vis %>%
 
 x_agg_vis <- full_join(x_agg_vis, x_agg_vis_length)
 
+x_agg_vis <- x_agg_vis %>%
+  filter(parentcode_indus != "U") %>%
+  filter(parentcode_indus != "T") 
 
 write_csv(x_agg_vis, file="csv/ssb/x_agg_vis.csv")
 
