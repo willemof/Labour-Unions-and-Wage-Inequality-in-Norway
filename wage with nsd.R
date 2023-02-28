@@ -9,7 +9,8 @@ ind19wage_ds_filter <- ind19wage_ds_expand %>%
   filter(sex == "Both sexes")
 
 x_agg_vis <- x_agg_vis %>%
-  filter(year == 2013 | year == 2014) 
+  filter(year == 2013 | year == 2014) %>%
+  filter(!(parentcode_indus %in% c("00.0")))  #note the ! that makes it opposite in
 
 ind19wage_ds_filter <- ind19wage_ds_filter %>%
   mutate(industryparentname = parentname, .keep = "unused")
