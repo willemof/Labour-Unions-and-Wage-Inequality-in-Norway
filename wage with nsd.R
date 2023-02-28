@@ -10,8 +10,8 @@ ind19wage_ds_filter <- ind19wage_ds_expand %>%
 
 x_agg_vis <- x_agg_vis %>%
   filter(year == 2013 | year == 2014) %>%
-  filter(!(parentcode_indus %in% c("00.0")))  #note the ! that makes it opposite in
-
+  filter(!(parentcode_indus %in% c("00.0"))) %>% #note the ! that makes it opposite in
+  mutate(weights = tuvekt, .keep = "unused")
 ind19wage_ds_filter <- ind19wage_ds_filter %>%
   mutate(industryparentname = parentname, .keep = "unused")
 
@@ -24,7 +24,7 @@ agemedianwage <- inner_join(ind19wage_ds_filter, x_agg_vis)
 df <- agemedianwage
 df <- df %>% clean_names() %>%
   select(-industry_sic2007, -sex) %>%
-  select(nfreq, date, year, parentcode_indus, industryparentname, everything())
+  select(nfreq, weights, date, year, parentcode_indus, industryparentname, everything())
 
 write_csv(df, file = "csv/ssb/aggregated2013_2014.csv")
 
