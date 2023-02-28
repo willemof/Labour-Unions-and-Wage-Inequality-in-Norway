@@ -67,6 +67,7 @@ wage_data_wide <- wage_data_wide %>%
 
 x_merge <- full_join(agg_data, wage_data_wide)
 
+write_csv(x_merge, file=("csv/sds.csv"))
 cols_to_keep <- complete.cases(t(wage_data_wide))
 wage_data_clean_wide <- wage_data_wide[, cols_to_keep]
 
