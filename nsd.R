@@ -8,7 +8,7 @@ setwd(dirname(current_path) )
 #loading industry codec
 level2tolevel1indus <- read_csv("csv/ssb/level2tolevel1indus.csv")
 indus_level2 <- read_csv("csv/ssb/indus_level2.csv")
-occu <- read_csv("csv/ssb/indus_level2.csv")
+occu <- read_csv("csv/ssb/occu.csv")
 
 
 
@@ -320,7 +320,10 @@ x_agg_vis <- x_agg_vis %>%
 x_agg_vis <- full_join(x_agg_vis, x_agg_vis_length)
 
 
-write_csv(x_agg_vis, file="csv/ssb/x_agg_vis.csv")
+write_csv(x_agg_vis, file="csv/ssb/x_agg_vis2016.csv")
+
+
+
 
 x_agg <- aggregate(x, by = list(x$occupation,
                                 x$y_kode1_styrk08,
