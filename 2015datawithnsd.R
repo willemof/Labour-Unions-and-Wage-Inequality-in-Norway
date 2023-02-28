@@ -65,6 +65,8 @@ wage_data_wide <- wage_data_wide %>%
 wage_data_wide <- wage_data_wide %>%
   select(parentnameindustry, everything())
 
+x_merge <- full_join(agg_data, wage_data_wide)
+
 cols_to_keep <- complete.cases(t(wage_data_wide))
 wage_data_clean_wide <- wage_data_wide[, cols_to_keep]
 
