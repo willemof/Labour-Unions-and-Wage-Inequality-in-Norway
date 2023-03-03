@@ -15,6 +15,9 @@ install.packages("sandwich")
 install.packages("AER")
 install.packages("plm")
 
+install.packages("caret", dependencies = c("Depends", "Suggests"))
+
+
 #library and presettings
 
 options(encoding="UTF-8")
@@ -35,6 +38,7 @@ library(sandwich)
 library(AER)
 library(plm)
 
+library(caret)
 
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
