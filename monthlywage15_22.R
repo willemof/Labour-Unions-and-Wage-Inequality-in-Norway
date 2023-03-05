@@ -906,9 +906,19 @@ monthlywage15_22 <- full_join(monthlyewage15_22_2, monthlyewage15_22_4)
 
 write_csv(monthlyewage15_22, file = ("csv/monthlywage15_22.csv"))
 
-monthlywage15_22_expand <- pivot_wider(monthlywage15_22, 
+filter_monthlywage <- monthlyewage15_22 %>%
+  filter(year %in% c("2016", "2017"))
+
+monthlywage15_22_expand <- pivot_wider(filter_monthlywage, 
                                       id_expand = FALSE,
                                       names_from = contents,
                                       values_from = c("value"))
+
+
+monthlywage15_22_expand <- pivot_wider(monthlywage15_22_expand, 
+                                       id_expand = FALSE,
+                                       names_from = measuring_method,
+                                       values_from = colnames(monthlywage15_22_expand[8:14]))
+
 
 write_csv(monthlywage15_22_expand, file = ("csv/monthlywage15_22_expand.csv"))

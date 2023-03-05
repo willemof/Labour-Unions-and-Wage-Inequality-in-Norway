@@ -7,6 +7,7 @@ install.packages("zoo")
 install.packages("plotly")
 install.packages("klassR")
 install.packages("rvest")
+install.packages("ggplot2")
 
 install.packages("lmtest")
 install.packages("lfe")
@@ -17,6 +18,12 @@ install.packages("plm")
 
 install.packages("caret", dependencies = c("Depends", "Suggests"))
 
+install.packages("gower")
+install.packages("hardhat")
+install.packages("ModelMetrics")
+
+
+#To update R, get package installR and run updateR()
 
 #library and presettings
 
