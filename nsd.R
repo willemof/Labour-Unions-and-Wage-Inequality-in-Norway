@@ -131,6 +131,7 @@ for (i in 1:NROW(codec)) {
 }
 
 
+write_csv(x_m, file = ("csv/microdata.csv"))
 
 remove(x_f,x_t, x_g, x_loop)
 
