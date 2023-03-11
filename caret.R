@@ -2,6 +2,14 @@ caret
 
 sds <- read_csv("csv/sds.csv")
 
+#Visualise
+
+ggplot(sds, aes(x=sds$))
+
+#OLS regression
+
+glm
+
 iris <- iris
 
 featurePlot(x = iris[, 1:4], 

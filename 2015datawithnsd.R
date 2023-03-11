@@ -2,7 +2,7 @@
 
 #Load data
 
-monthly_earnings15_22 <- read_csv("csv/monthly_earnings15_22.csv")
+monthly_earnings15_22 <- read_csv("csv/monthlywage15_22_wide.csv")
 x_agg_vis <- read_csv(file="csv/ssb/x_agg_vis2016.csv")
 
 monthly_earnings15_22 <- monthly_earnings15_22 %>%
@@ -16,8 +16,10 @@ x_agg_vis <- x_agg_vis %>%
   filter(parentcode_indus != "T") 
 
 codec <- read_csv("csv/ssb/indus_level1.csv")
-industrynames <- tibble(wage_industry_names = unique(monthly_earnings15_22$industry_sic2007), code =c(LETTERS[1:19], "00.0"))
-codec <- inner_join(codec, industrynames)
+industrynames <- tibble(wage_industry_names = unique(monthly_earnings15_22$industry_sic2007), code =c("All industries", LETTERS[1:19], "00.0"))
+codec <- full_join(codec, industrynames)
+
+codec$parentname[23] <- "All industries"
 
 x <- monthly_earnings15_22
 
@@ -30,6 +32,7 @@ x_f <- x#dataset to "mutate"
 codec <- codec
 
 for (i in 1:NROW(codec)) {
+  if(is.na(codec$wage_industry_names[i])) {next}
   x_f <- x_t %>%
     filter(x_t$industry_sic2007==codec$wage_industry_names[i])
   x_t <- x_t %>%
@@ -45,7 +48,8 @@ remove(x_f, x_t, x)
 
 
 wage_data <- x_g %>%
-  select(-industry_sic2007)
+  select(-industry_sic2007) %>%
+  select(industryparentname, everything())
 agg_data <- x_agg_vis %>%
   select(-tu31)
 
@@ -54,20 +58,102 @@ remove(x_agg_vis, monthly_earnings15_22)
 
 
 
-
-# Pivot the wage data from long to wide format
-wage_data_wide <- wage_data %>%
-  pivot_wider(names_from = c(measuring_method, sector, age, sex, contractual_working_hours, contents), values_from = value)
-
-wage_data_wide <- wage_data_wide %>%
-  mutate(parentnameindustry = industry_sic2007, .keep = "unused")
-
-wage_data_wide <- wage_data_wide %>%
-  select(parentnameindustry, everything())
-
-x_merge <- full_join(agg_data, wage_data_wide)
+wage_data_wide_filter <- wage_data %>%
+  filter(!(parentcode_indus %in% c("All industries"))) %>%
+  filter(occupation %in% unique(occupation)[1]) %>%
+  filter(sector %in% unique(sector)[1]) %>%
+  filter(sex %in% unique(sex)[1]) %>%
+  filter(contractual_usual_working_hours_per_week %in% unique(contractual_usual_working_hours_per_week)[1])
+x_merge <- full_join(agg_data, wage_data_wide_filter)
 
 write_csv(x_merge, file=("csv/sds.csv"))
+
+
+#visualise
+sds <- read_csv(file=("csv/sds.csv"))
+
+unionvearningsbyindustry <- ggplot(data=sds,
+                                   aes(x= is.union,
+                                       y= `Monthly earnings (NOK)_Median`,
+                                       colour=year
+                                   ))+
+  geom_point()    +theme(legend.position="none")
+unionvearningsbyindustry <- unionvearningsbyindustry +
+  ggtitle("Labour Union Density and Monthly Wages Across Main Industries in 2016 and 2017")+
+  xlab("Labour Union Density")+
+  ylab("Median Monthly Wage (NOK)")
+
+fig <- ggplotly(unionvearningsbyindustry) 
+fig <- style(fig,                 
+             hovertext = paste0("is.union: ", formatC(sds$is.union, digits = 3),"\n",
+                               "Median Monthly Earnings ", formatC(sds$`Monthly earnings (NOK)_Median`, format ="f", digits = 0), "\n",
+                               sds$industryparentname, "\n",
+                               sds$year))
+fig
+
+library(stargazer)
+
+model1 <- lm(`Monthly earnings (NOK)_Median` ~ is.union, data = sds)
+model2 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male, data = sds)
+model3 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes, data = sds)
+model_list <- list(model1, model2,model3)
+
+# use sapply to extract the R-squared values from each model
+#rsq_values <- sapply(model_list, function(x) summary(x)$r.squared)
+
+
+regression_table <- stargazer(model_list,
+          title = "Regression Results",
+          align = TRUE,
+          type = "text",
+          model.names = TRUE,
+          dep.var.labels.include = TRUE,
+          append = TRUE)
+
+
+
+# Load packages
+library(plotly)
+library(dplyr)
+
+# Fit linear regression model
+model1 <- lm(`Monthly earnings (NOK)_Median` ~ is.union, data = sds)
+
+# Create scatterplot with linear regression line
+unionvearningsbyindustry <- plot_ly(data = sds,
+                                    x = ~is.union,
+                                    y = ~`Monthly earnings (NOK)_Median`,
+                                    color = ~year,
+                                    type = "scatter",
+                                    mode = "markers",
+                                    marker = list(size = 6)) %>%
+  add_markers() %>%
+  add_lines(x = ~is.union,
+            y = ~predict(model1, newdata = data.frame(is.union = sds$is.union)),
+            line = list(color = 'black')) %>%
+  layout(xaxis = list(title = "Union membership"),
+         yaxis = list(title = "Monthly earnings (NOK)"),
+         title = "Scatterplot of earnings by union membership",
+         showlegend = TRUE) %>%
+  add_annotations(x = 0.5, y = 50000,
+                  text = paste0("y = ",
+                                round(coef(model1)[1], 2),
+                                " + ",
+                                round(coef(model1)[2], 2),
+                                "x"),
+                  showarrow = FALSE,
+                  font = list(size = 14))
+
+# Print plot
+unionvearningsbyindustry
+
+
+
+
+
+
+writeLines(regression_table, "regression_table.txt")
+
 cols_to_keep <- complete.cases(t(wage_data_wide))
 wage_data_clean_wide <- wage_data_wide[, cols_to_keep]
 

@@ -120,7 +120,8 @@ d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 monthlyewage15_22 <- fromJSONstat(content(d.tmp, "text"))
 monthlyewage15_22 <- clean_names(monthlyewage15_22)
 monthlyewage15_22 <- tibble(monthlyewage15_22) 
-
+monthlyewage2022 <- monthlyewage15_22
+write_csv(monthlyewage2022, file = ("csv/monthlyewage2022.csv"))
 data.tmp <- '
 {
   "query": [
@@ -226,11 +227,13 @@ data.tmp <- '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 
 monthlyewage15_22_M <- fromJSONstat(content(d.tmp, "text"))
-monthlyewage15_22_M <- clean_names(monthlyewage15_22)
-monthlyewage15_22_M <- tibble(monthlyewage15_22) 
-monthlyewage15_22<- full_join(monthlyewage15_22, monthlyewage15_22_M)
-write_csv(monthlyewage15_22, file = ("csv/monthlyewage15_22_1.csv"))
-remove(monthlyewage15_22_M)
+monthlyewage15_22_M <- clean_names(monthlyewage15_22_M)
+monthlyewage15_22_M <- tibble(monthlyewage15_22_M) 
+
+monthlyewage2021 <- monthlyewage15_22_M
+write_csv(monthlyewage2021, file = ("csv/monthlyewage2021.csv"))
+
+
 data.tmp <- '
 {
   "query": [
@@ -338,6 +341,8 @@ d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 monthlyewage15_22 <- fromJSONstat(content(d.tmp, "text"))
 monthlyewage15_22 <- clean_names(monthlyewage15_22)
 monthlyewage15_22 <- tibble(monthlyewage15_22) 
+monthlyewage2020 <- monthlyewage15_22
+write_csv(monthlyewage2020, file = ("csv/monthlyewage2020.csv"))
 
 data.tmp <- '
 {
@@ -444,11 +449,12 @@ data.tmp <- '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 
 monthlyewage15_22_M <- fromJSONstat(content(d.tmp, "text"))
-monthlyewage15_22_M <- clean_names(monthlyewage15_22)
-monthlyewage15_22_M <- tibble(monthlyewage15_22) 
-monthlyewage15_22<- full_join(monthlyewage15_22, monthlyewage15_22_M)
-write_csv(monthlyewage15_22, file = ("csv/monthlyewage15_22_2.csv"))
-remove(monthlyewage15_22_M)
+monthlyewage15_22_M <- clean_names(monthlyewage15_22_M)
+monthlyewage15_22_M <- tibble(monthlyewage15_22_M) 
+
+monthlyewage2019 <- monthlyewage15_22_M
+write_csv(monthlyewage2019, file = ("csv/monthlyewage2019.csv"))
+
 
 data.tmp <- '
 {
@@ -558,6 +564,9 @@ monthlyewage15_22 <- fromJSONstat(content(d.tmp, "text"))
 monthlyewage15_22 <- clean_names(monthlyewage15_22)
 monthlyewage15_22 <- tibble(monthlyewage15_22) 
 
+monthlyewage2018 <- monthlyewage15_22
+write_csv(monthlyewage2018, file = ("csv/monthlyewage2018.csv"))
+
 data.tmp <- '
 {
   "query": [
@@ -663,11 +672,12 @@ data.tmp <- '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 
 monthlyewage15_22_M <- fromJSONstat(content(d.tmp, "text"))
-monthlyewage15_22_M <- clean_names(monthlyewage15_22)
-monthlyewage15_22_M <- tibble(monthlyewage15_22) 
-monthlyewage15_22<- full_join(monthlyewage15_22, monthlyewage15_22_M)
-write_csv(monthlyewage15_22, file = ("csv/monthlyewage15_22_3.csv"))
-remove(monthlyewage15_22_M)
+monthlyewage15_22_M <- clean_names(monthlyewage15_22_M)
+monthlyewage15_22_M <- tibble(monthlyewage15_22_M) 
+
+monthlyewage2017 <- monthlyewage15_22_M
+write_csv(monthlyewage2017, file = ("csv/monthlyewage2017.csv"))
+
 
 
 data.tmp <- '
@@ -778,6 +788,10 @@ monthlyewage15_22 <- fromJSONstat(content(d.tmp, "text"))
 monthlyewage15_22 <- clean_names(monthlyewage15_22)
 monthlyewage15_22 <- tibble(monthlyewage15_22) 
 
+monthlyewage2016 <- monthlyewage15_22
+write_csv(monthlyewage2016, file = ("csv/monthlyewage2016.csv"))
+
+
 data.tmp <- '
 {
   "query": [
@@ -883,33 +897,48 @@ data.tmp <- '
 d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 
 monthlyewage15_22_M <- fromJSONstat(content(d.tmp, "text"))
-monthlyewage15_22_M <- clean_names(monthlyewage15_22)
+monthlyewage15_22_M <- clean_names(monthlyewage15_22_M)
 monthlyewage15_22_M <- tibble(monthlyewage15_22) 
-monthlyewage15_22<- full_join(monthlyewage15_22, monthlyewage15_22_M)
-write_csv(monthlyewage15_22, file = ("csv/monthlyewage15_22_4.csv"))
-remove(monthlyewage15_22_M)
+
+monthlyewage2015 <- monthlyewage15_22_M
+write_csv(monthlyewage2015, file = ("csv/monthlyewage2015.csv"))
 
 
 
+monthlyewage2015 <- read_csv(file = ("csv/monthlyewage2015.csv"))
+monthlyewage2016 <- read_csv(file = ("csv/monthlyewage2016.csv"))
+monthlyewage2017 <- read_csv(file = ("csv/monthlyewage2017.csv"))
+monthlyewage2018 <- read_csv(file = ("csv/monthlyewage2018.csv"))
+monthlyewage2019 <- read_csv(file = ("csv/monthlyewage2019.csv"))
+monthlyewage2020 <- read_csv(file = ("csv/monthlyewage2020.csv"))
+monthlyewage2021 <- read_csv(file = ("csv/monthlyewage2021.csv"))
+monthlyewage2022 <- read_csv(file = ("csv/monthlyewage2022.csv"))
 
-monthlyewage15_22_4 <- read_csv(file = ("csv/monthlyewage15_22_4.csv"))
-monthlyewage15_22_3 <- read_csv(file = ("csv/monthlyewage15_22_3.csv"))
+monthlyewage2015_22 <- full_join(monthlyewage2015,
+                              monthlyewage2016)
+monthlyewage2015_22M <- monthlyewage2017
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
+monthlyewage2015_22M <- monthlyewage2018
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
+monthlyewage2015_22M <- monthlyewage2019
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
+monthlyewage2015_22M <- monthlyewage2020
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
+monthlyewage2015_22M <- monthlyewage2021
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
+monthlyewage2015_22M <- monthlyewage2022
+monthlyewage2015_22 <- full_join(monthlyewage2015_22,
+                                 monthlyewage2015_22M)
 
-monthlyewage15_22_4 <- full_join(monthlyewage15_22_4, monthlyewage15_22_3)
+write_csv(monthlyewage2015_22, file = ("csv/monthlywage15_22_long.csv"))
 
-monthlyewage15_22_2 <- read_csv(file = ("csv/monthlyewage15_22_2.csv"))
-monthlyewage15_22_1 <- read_csv(file = ("csv/monthlyewage15_22_1.csv"))
 
-monthlyewage15_22_2 <- full_join(monthlyewage15_22_2, monthlyewage15_22_1)
-
-monthlywage15_22 <- full_join(monthlyewage15_22_2, monthlyewage15_22_4)
-
-write_csv(monthlyewage15_22, file = ("csv/monthlywage15_22.csv"))
-
-filter_monthlywage <- monthlyewage15_22 %>%
-  filter(year %in% c("2016", "2017"))
-
-monthlywage15_22_expand <- pivot_wider(filter_monthlywage, 
+monthlywage15_22_expand <- pivot_wider(monthlyewage2015_22, 
                                       id_expand = FALSE,
                                       names_from = contents,
                                       values_from = c("value"))
@@ -921,4 +950,4 @@ monthlywage15_22_expand <- pivot_wider(monthlywage15_22_expand,
                                        values_from = colnames(monthlywage15_22_expand[8:14]))
 
 
-write_csv(monthlywage15_22_expand, file = ("csv/monthlywage15_22_expand.csv"))
+write_csv(monthlywage15_22_expand, file = ("csv/monthlywage15_22_wide.csv"))
