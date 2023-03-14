@@ -85,18 +85,28 @@ unionvearningsbyindustry <- unionvearningsbyindustry +
 
 fig <- ggplotly(unionvearningsbyindustry) 
 fig <- style(fig,                 
-             hovertext = paste0("is.union: ", formatC(sds$is.union, digits = 3),"\n",
-                               "Median Monthly Earnings ", formatC(sds$`Monthly earnings (NOK)_Median`, format ="f", digits = 0), "\n",
+             hovertext = paste0("Union Density: ", formatC(sds$is.union, digits = 3),"\n",
+                               "Median Monthly Earnings: ", formatC(sds$`Monthly earnings (NOK)_Median`, format ="f", digits = 0), "\n",
                                sds$industryparentname, "\n",
                                sds$year))
 fig
 
-library(stargazer)
 
 model1 <- lm(`Monthly earnings (NOK)_Median` ~ is.union, data = sds)
 model2 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male, data = sds)
 model3 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes, data = sds)
-model_list <- list(model1, model2,model3)
+model4 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes +
+               has.education.primary + has.education.juniorhigh + has.education.finished.hs +
+               has.education.bachelor + has.education.master + has.education.doctor, data = sds)
+model5 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes +
+               twenty + thirty + fourty + fifty + sixty + seventy, data = sds)
+model6 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes +
+               sector.private + sector.municipal + sector.county + sector.centralgov, data = sds)
+model7 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes +
+               sds$`Contractual working hours per week (hours)_Median`, data = sds)
+model8 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes, data = sds)
+
+model_list <- list(model1, model2,model3, model4, model5, model6, model7)
 
 # use sapply to extract the R-squared values from each model
 #rsq_values <- sapply(model_list, function(x) summary(x)$r.squared)
@@ -111,10 +121,6 @@ regression_table <- stargazer(model_list,
           append = TRUE)
 
 
-
-# Load packages
-library(plotly)
-library(dplyr)
 
 # Fit linear regression model
 model1 <- lm(`Monthly earnings (NOK)_Median` ~ is.union, data = sds)

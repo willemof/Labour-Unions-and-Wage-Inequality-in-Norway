@@ -47,5 +47,8 @@ library(plm)
 
 library(caret)
 
+library(stargazer)
+
+
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
