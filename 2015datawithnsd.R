@@ -90,8 +90,11 @@ fig <- style(fig,
                                sds$industryparentname, "\n",
                                sds$year))
 fig
+log()
+pdata <- pdata.frame(sds,index = c("industryparentname", "year"))
 
-
+model <- plm(log(sds$`Monthly earnings (NOK)_Average`) ~ is.union, data = pdata, model = "within")
+summary(model)
 model1 <- lm(`Monthly earnings (NOK)_Median` ~ is.union, data = sds)
 model2 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male, data = sds)
 model3 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes, data = sds)
@@ -105,6 +108,7 @@ model6 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.a
 model7 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes +
                sds$`Contractual working hours per week (hours)_Median`, data = sds)
 model8 <- lm(`Monthly earnings (NOK)_Median` ~ is.union + is.male + collective.agreement.yes, data = sds)
+
 
 model_list <- list(model1, model2,model3, model4, model5, model6, model7)
 
