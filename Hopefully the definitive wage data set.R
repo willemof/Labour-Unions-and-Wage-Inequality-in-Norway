@@ -1,7 +1,7 @@
 #wage table with union rates for sector, industry, occupation, part-time, full-time
 
 monthlywage15_22 <- read_csv(file = ("csv/monthlywage15_22.csv"))
-
+production13_17 <- read_csv(file = ("csv/production13_17.csv"))
 
 filter_monthlywage <- monthlywage15_22 %>%
   filter(year %in% c("2016", "2017"))
@@ -35,8 +35,9 @@ pivot_table <- microdata %>%
          union_rate = `TRUE` / total)
 
 
-
-
+x_m <- microdata
+x_m <- x_m %>%
+  filter(!(parentcode_indus %in% c("U", "T","00.0")))
 
 #dummy variable for education from least educated to most educated
 x_m<- x_m %>%
@@ -98,4 +99,116 @@ x_m<- x_m %>%
 x_m<- x_m %>%
   mutate(fulltime = fifelse(x_m$ans == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
   mutate(parttime = fifelse(x_m$ans == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
+
+
+
+weighted_data <- x_m %>%
+  as_survey_design(weights = tuvekt)
+
+
+results <- weighted_data %>%
+  group_by(year, industryparentname) %>%
+  summarize(
+    union_density = survey_mean(is.union, na.rm = TRUE),
+    male_ratio = survey_mean(is.male, na.rm = TRUE),
+    population_count = survey_total (na.rm = TRUE),
+    sample_size = n()
+    ) %>%
+  tibble()
+  
+  
+
+## visualizing distribution of industries
+micro_data <- x_m
+
+
+# Sampled proportions by year
+sampled_proportions <- microdata %>%
+  count(year, industryparentname, parentcode_indus) %>%
+  group_by(year) %>%
+  mutate(proportion = n / sum(n)) %>%
+  ungroup() %>%
+  mutate(data_type = "Sampled") %>%
+  rename(weighted_n = n)
+
+# Weighted proportions by year
+weighted_proportions <- microdata %>%
+  group_by(year, industryparentname, parentcode_indus) %>%
+  summarize(weighted_n = sum(tuvekt)) %>%
+  group_by(year) %>%
+  mutate(proportion = weighted_n / sum(weighted_n)) %>%
+  ungroup() %>%
+  mutate(data_type = "Weighted")
+
+
+
+# Combine the two data sets
+combined_proportions <- rbind(sampled_proportions, weighted_proportions)
+
+library(viridis)
+
+# Filter the data to include only the year 2017
+data_2017 <- combined_proportions %>%
+  filter(year == 2017) %>%
+  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
+
+# Filter the weighted_proportions data to include only the year 2017
+weighted_proportions_2017 <- weighted_proportions %>%
+  filter(year == 2017) %>%
+  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
+
+# Custom color palette
+custom_palette <- c(
+  "#000000", "#FF0000", "#00FF00", "#0000FF",
+  "#FFFF00", "#FF00FF", "#00FFFF", "#F99999",
+  "#008000", "#000080", "#808000", "#800080",
+  "#008080", "#8F6999", "#808080", "#FFA500",
+  "#A52A2A", "#C0C0C0", "#2E8B57"
+)
+
+
+# Create the bar plot
+bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = proportion, fill = industry_label)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = custom_palette) +
+  scale_y_continuous(
+    breaks = primary_breaks,
+    sec.axis = sec_axis(
+      trans = ~. * sum(year_data_filtered$weighted_n) / 1000,
+      name = "Number of Employees (1 000)",
+      labels = scales::number_format(accuracy = 1, scale = 1, big.mark = ",", label.padding = 0.5),
+      breaks = secondary_breaks
+    )
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", y = "Proportion of Labor Force", title = "Proportion of Labor Force by Industry in 2017") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
+
+# Print the plot
+print(bar_plot)
+
+
+# Create the pie chart
+pie_chart <- ggplot(year_data_filtered, aes(x = "", y = proportion, fill = industry_label)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = custom_palette) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  ) +
+  labs(fill = "Industry", title = "Proportion of Labor Force by Industry in 2017")
+
+# Print the pie chart
+print(pie_chart)
+
 

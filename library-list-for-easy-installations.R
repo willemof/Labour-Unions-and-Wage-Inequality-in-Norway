@@ -37,17 +37,16 @@ library(zoo) # for the conversion of a year and quarter to date/class
 library(rstudioapi) # for getting file path
 library(data.table) #for fast if else
 library(rvest) # for HTML-webscraping
-library(plotly)
-
-library(lmtest)
-library(lfe)
-library(sandwich)
-library(AER)
-library(plm)
-
-library(caret)
-
-library(stargazer)
+library(plotly) # interactive data visualisation
+library(lmtest) # regression package
+library(lfe)    # regression packaage
+library(sandwich)# regression packaage
+library(AER)# regression packaage
+library(plm)# regression packaage
+library(caret)# machine-learning packaage
+library(stargazer) #Data-visulization / regression tables
+library(srvyr)     # Survey-handler - for weighting
+library(viridis)   # custom colours for data visualization
 
 
 current_path = rstudioapi::getActiveDocumentContext()$path 

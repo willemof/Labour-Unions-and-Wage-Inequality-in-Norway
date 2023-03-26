@@ -5,6 +5,10 @@ library(srvyr)
 
 microdata <- read_csv(file = ("csv/microdata.csv"))
 
+weighted_data <- microdata %>%
+  as_survey_design(weights = tuvekt)
+
+
 my_design <- svydesign(ids = ~1, data = microdata, weights = microdata$tuvekt)
 
 

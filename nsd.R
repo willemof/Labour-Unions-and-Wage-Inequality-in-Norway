@@ -132,7 +132,7 @@ for (i in 1:NROW(codec)) {
 
 
 write_csv(x_m, file = ("csv/microdata.csv"))
-
+x_m <- read_csv(file=("csv/microdata.csv"))
 remove(x_f,x_t, x_g, x_loop)
 
 x_m<- x_m%>%
@@ -205,6 +205,8 @@ x_m<- x_m %>%
 x_a <- x_m %>%
   select(industryparentname,year, 
          parentcode_indus,alder_aar, tu31, tuvekt,  colnames(x_m)[146:NCOL(x_m)]) #tu31? tuvekt
+
+##apply weights
 x_agg_vis <- aggregate(x_a, by = list(x_a$parentcode_indus,
                                       x_a$industryparentname,
                                       x_a$year), FUN = mean)
