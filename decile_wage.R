@@ -19,6 +19,7 @@ https://data.ssb.no/api/v0/en/table/13860/
       "selection": {
         "filter": "item",
         "values": [
+          "0",
           "1",
           "2"
         ]
@@ -99,7 +100,7 @@ https://data.ssb.no/api/v0/en/table/13860/
   x$date= as.Date(as.yearqtr(gsub("(\\d)(Q)(\\d{1,})","\\3 Q\\1",x$date)),frac = 1)
   }
   }
-  unite()
+
   write_csv(decilewage16_22, file = ("csv/decilewage16_22.csv"))
   
   decilewage16_22 <- read_csv(file = ("csv/decilewage16_22.csv"))

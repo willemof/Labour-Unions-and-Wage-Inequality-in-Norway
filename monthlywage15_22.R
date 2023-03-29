@@ -898,7 +898,7 @@ d.tmp <- POST(url , body = data.tmp, encode = "json", verbose())
 
 monthlyewage15_22_M <- fromJSONstat(content(d.tmp, "text"))
 monthlyewage15_22_M <- clean_names(monthlyewage15_22_M)
-monthlyewage15_22_M <- tibble(monthlyewage15_22) 
+monthlyewage15_22_M <- tibble(monthlyewage15_22_M) 
 
 monthlyewage2015 <- monthlyewage15_22_M
 write_csv(monthlyewage2015, file = ("csv/monthlyewage2015.csv"))
@@ -914,31 +914,19 @@ monthlyewage2020 <- read_csv(file = ("csv/monthlyewage2020.csv"))
 monthlyewage2021 <- read_csv(file = ("csv/monthlyewage2021.csv"))
 monthlyewage2022 <- read_csv(file = ("csv/monthlyewage2022.csv"))
 
-monthlyewage2015_22 <- full_join(monthlyewage2015,
-                              monthlyewage2016)
-monthlyewage2015_22M <- monthlyewage2017
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
-monthlyewage2015_22M <- monthlyewage2018
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
-monthlyewage2015_22M <- monthlyewage2019
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
-monthlyewage2015_22M <- monthlyewage2020
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
-monthlyewage2015_22M <- monthlyewage2021
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
-monthlyewage2015_22M <- monthlyewage2022
-monthlyewage2015_22 <- full_join(monthlyewage2015_22,
-                                 monthlyewage2015_22M)
+monthlywage15_22 <- rbind(monthlyewage2015, 
+                          monthlyewage2016,
+                          monthlyewage2017,
+                          monthlyewage2018,
+                          monthlyewage2019,
+                          monthlyewage2020,
+                          monthlyewage2021,
+                          monthlyewage2022)
 
-write_csv(monthlyewage2015_22, file = ("csv/monthlywage15_22_long.csv"))
+write_csv(monthlywage15_22, file = ("csv/monthlywage15_22_long.csv"))
 
 
-monthlywage15_22_expand <- pivot_wider(monthlyewage2015_22, 
+monthlywage15_22_expand <- pivot_wider(monthlywage15_22, 
                                       id_expand = FALSE,
                                       names_from = contents,
                                       values_from = c("value"))

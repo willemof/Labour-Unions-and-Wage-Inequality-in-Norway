@@ -1,23 +1,56 @@
 #wage table with union rates for sector, industry, occupation, part-time, full-time
 
-monthlywage15_22 <- read_csv(file = ("csv/monthlywage15_22.csv"))
+monthlywage15_22 <- read_csv(file = ("csv/monthlywage15_22_long.csv"))
 production13_17 <- read_csv(file = ("csv/production13_17.csv"))
+wage13 <- read_csv(file=("csv/ssb/earningsindustry1314.csv"))
+decilewage16 <- read_csv(file=("csv/decilewage16_22.csv"))
+percentilewage16 <- read_csv(file=("csv/percentilewage16_22.csv"))
 
+
+filter_wage13 <- wage13 %>%
+  filter(year %in% c("2013", "2014")) %>%
+  filter((sex %in% c("Both sexes"))) 
+
+wage13_expand <- pivot_wider(filter_wage13, 
+                                       id_expand = FALSE,
+                                       names_from = contents,
+                                       values_from = c("value"))
+
+
+wage13 <- pivot_wider(monthlywage15_22_expand,
+                             id_expand = FALSE,
+                             names_from = measuring_method,
+                             values_from = colnames(monthlywage15_22_expand[8:14]))
+
+
+
+
+#######Monthly wage from 15
 filter_monthlywage <- monthlywage15_22 %>%
-  filter(year %in% c("2016", "2017"))
-
+  filter(year %in% c("2015", "2016", "2017")) %>%
+  filter(occupation %in% c("All occupations")) %>%
+  filter(sector %in% c("Sum all sectors")) %>%
+  filter(!(industry_sic2007 %in% c("All industries",
+                                   "Activities of household as employers",
+                                   "Activities of extraterritorial organisations and bodies",
+                                   "Unspecified"))) %>%
+  filter((sex %in% c("Both sexes"))) %>%
+  filter((sector %in% c("Sum all sectors"))) %>%
+  filter((contractual_usual_working_hours_per_week %in% c("All employees")))
+  
 monthlywage15_22_expand <- pivot_wider(filter_monthlywage, 
                                        id_expand = FALSE,
                                        names_from = contents,
                                        values_from = c("value"))
 
 
-monthlywage15_22_expand <- pivot_wider(monthlywage15_22_expand, 
+monthlywage16 <- pivot_wider(monthlywage15_22_expand,
                                        id_expand = FALSE,
                                        names_from = measuring_method,
                                        values_from = colnames(monthlywage15_22_expand[8:14]))
 
-monthlywage16_17 <- write_csv(monthlywage15_22_expand, file = ("csv/monthlywage16_17.csv"))
+remove(monthlywage15_22_expand, filter_monthlywage, monthlywage15_22)
+
 
 
 microdata <- read_csv(file = ("csv/microdata.csv"))
@@ -165,6 +198,20 @@ custom_palette <- c(
   "#008080", "#8F6999", "#808080", "#FFA500",
   "#A52A2A", "#C0C0C0", "#2E8B57"
 )
+
+# Filter the data for the desired year
+year_data <- weighted_proportions %>%
+  filter(year == 2017) %>%
+  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - ")) %>%
+  arrange(desc(proportion))
+year_data_filtered <- year_data %>%
+  filter(!parentcode_indus %in% c("00.0", "U", "T"))
+
+# Calculate breaks for the primary y-axis
+primary_breaks <- scales::pretty_breaks()(year_data_filtered$proportion)
+
+# Calculate breaks for the secondary y-axis
+secondary_breaks <- primary_breaks * sum(year_data_filtered$weighted_n) / 1000
 
 
 # Create the bar plot

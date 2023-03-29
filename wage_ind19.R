@@ -149,4 +149,4 @@ for (i in 1:NROW(level2tolevel1indus)) { #this is the cypher
 
 ind19wage_ds_expand <- x_g
 
-#write_csv(ind19wage_ds_expand, file = "csv/ssb/ind19wage_ds_expand.csv")
+write_csv(ind19wage_ds_expand, file = "csv/ssb/earningsindustry1314.csv")

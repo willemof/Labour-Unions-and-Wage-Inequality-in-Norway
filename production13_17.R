@@ -207,8 +207,9 @@ for (i in 1:NROW(test2)) {
 
 level2tolevel1indus <- test2 %>%
   select(code, everything())
-
-
+# head_indusclass <- head(level2tolevel1indus)
+# library(writexl)
+# write_xlsx(head_indusclass, "head_indusclass.xlsx")
 # adding parentcode/industry main categories
 x <- production13_17_expand
 x_loop <- x
@@ -238,5 +239,8 @@ remove(x_f,x_t, x_g, x_loop)
 aggregated_data <- x %>%
   group_by(parentcode_indus, industryparentname, date, year) %>%
   summarize(across(where(is.numeric), sum, na.rm = TRUE))
+
+production13_17_expand <- aggregated_data %>%
+  select(year, industryparentname, `Wages and salaries (NOK million)`, `Compensation of employees (NOK million)`, `Employed persons. Employees (1000 persons)`, `Total hours worked for employees (million workhours)`, everything())
 
 write_csv(production13_17_expand, file = ("csv/production13_17.csv"))
