@@ -5,26 +5,30 @@ production13_17 <- read_csv(file = ("csv/production13_17.csv"))
 wage13 <- read_csv(file=("csv/ssb/earningsindustry1314.csv"))
 decilewage16 <- read_csv(file=("csv/decilewage16_22.csv"))
 percentilewage16 <- read_csv(file=("csv/percentilewage16_22.csv"))
+level2tolevel1indus <- read_csv("csv/ssb/level2tolevel1indus.csv")
+
+bad_names <- c("Electricity, gas and steam",
+               "Water supply, sewerage, waste",
+               "Wholesale and retail trade: repair of motor vehicles and motorcycles",
+               "Public administration and defence")
+good_names <- c("Electricity, gas, steam and air conditioning supply",
+                "Water supply; sewerage, waste management and remediation activities",
+                "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+                "Public administration and defence; compulsory social security")
+text_changer <- tibble(bad_names, good_names)
+
+
+#continuing the filtering
 
 
 filter_wage13 <- wage13 %>%
   filter(year %in% c("2013", "2014")) %>%
   filter((sex %in% c("Both sexes"))) 
 
-wage13_expand <- pivot_wider(filter_wage13, 
-                                       id_expand = FALSE,
-                                       names_from = contents,
-                                       values_from = c("value"))
+wage13_filtered <- filter_wage13 %>%
+  select(-c(sex))
 
-
-wage13 <- pivot_wider(monthlywage15_22_expand,
-                             id_expand = FALSE,
-                             names_from = measuring_method,
-                             values_from = colnames(monthlywage15_22_expand[8:14]))
-
-
-
-
+remove(wage13, filter_wage13)
 #######Monthly wage from 15
 filter_monthlywage <- monthlywage15_22 %>%
   filter(year %in% c("2015", "2016", "2017")) %>%
@@ -44,28 +48,82 @@ monthlywage15_22_expand <- pivot_wider(filter_monthlywage,
                                        values_from = c("value"))
 
 
-monthlywage16 <- pivot_wider(monthlywage15_22_expand,
+monthlywage15_filtered <- pivot_wider(monthlywage15_22_expand,
                                        id_expand = FALSE,
                                        names_from = measuring_method,
                                        values_from = colnames(monthlywage15_22_expand[8:14]))
 
-remove(monthlywage15_22_expand, filter_monthlywage, monthlywage15_22)
+monthlywage15_filtered <- monthlywage15_filtered %>%
+  select(-c(occupation, sector, sex, contractual_usual_working_hours_per_week))
+
+x<- monthlywage15_filtered
+#This series of if statements converts years, quarters and months into dates using zoo
+if("month" %in% colnames(x)) {
+  x<- separate(x, month, into = c("year", "month"), sep = "M")
+  x$date  <- paste0(x$year,"-", x$month) 
+  x$date <- as.Date(as.yearmon(x$date), frac = 1)
+}else{ if("quarter" %in% colnames(x)) {
+  x<- separate(x, quarter, into = c("year", "quarter"), sep = "K")
+  x$date  <- paste0(x$year," Q", x$quarter) 
+  x$date= as.Date(as.yearqtr(gsub("(\\d)(Q)(\\d{1,})","\\3 Q\\1",x$date)),frac = 1)
+}else{ x$date  <- paste0(x$year," Q4") 
+x$date= as.Date(as.yearqtr(gsub("(\\d)(Q)(\\d{1,})","\\3 Q\\1",x$date)),frac = 1)
+}
+}
+monthlywage15_filtered <- x
+remove(x, monthlywage15_22_expand, filter_monthlywage, monthlywage15_22)
+
+
+x <- monthlywage15_filtered
+x_loop <- x
+x_g <- c()
+x_t <- x_loop
+x_f <- x_loop
+codec <- text_changer 
+
+
+for (i in 1:NROW(codec)) {
+  x_f <- x_t %>%
+    filter(x_t$industry_sic2007==codec$bad_names[i])
+  x_t <- x_t %>%
+    filter(x_t$industry_sic2007!=codec$bad_names[i])
+  x_f$industry_sic2007=codec$good_names[i] #change bad names to good names
+  
+  x_g <- rbind(x_g, x_f)
+}
+x_g <- rbind(x_g, x_t)
+x <- x_g %>%
+  select(industry_sic2007, everything())
+
+monthlywage15_filtered <- x
+remove(x_f,x_t, x_g, x_loop)
 
 
 
+#For merging 13-14, with 15,16- we need to get columns together
+merging_wage15 <- monthlywage15_filtered
+colnames(wage13_filtered)
+merging_wage15 <- monthlywage15_filtered %>%
+  select(c(date, industryparentname = industry_sic2007, year, 
+           lower_quartile_nok = `Monthly earnings (NOK)_Lower quartile`,
+           median_nok = `Monthly earnings (NOK)_Median`,
+           mean_nok = `Monthly earnings (NOK)_Average`,
+           upper_quartile_nok = `Monthly earnings (NOK)_Upper quartile`))
+merging_wage13 <- wage13_filtered %>%
+  select(c(industryparentname = parentname, everything()), 
+         -c(industry_sic2007, employees_covered_by_the_survey))
+wages13_17 <- rbind(merging_wage13, merging_wage15)
+
+
+remove(merging_wage13, merging_wage15)
+
+#Survey data
 microdata <- read_csv(file = ("csv/microdata.csv"))
 
 microdata <- microdata %>%
   mutate(is.male = fifelse(kjonn == "Mann", 1,0), .keep = "unused") %>%
   mutate(is.union = fifelse(tu29 == "Ja" , 1, 0, na = 0), .keep = "all") %>%
   mutate(not.union = fifelse(tu29 == "Ja" , 0, 1, na = 1), .keep = "unused")
-
-pivot_table <- microdata %>%
-  group_by(year, industryparentname, occupation, eier, heldelt, is.male, is.union) %>%
-  summarize(num_employees = n()) %>%
-  pivot_wider(names_from = is.union, values_from = num_employees, values_fill = 0)%>%
-  mutate(total = `TRUE` + `FALSE`,
-         union_rate = `TRUE` / total)
 
 
 x_m <- microdata
@@ -259,3 +317,206 @@ pie_chart <- ggplot(year_data_filtered, aes(x = "", y = proportion, fill = indus
 print(pie_chart)
 
 
+
+
+
+
+full_merged_ds <- full_join(results, wages13_17)
+# there add parentcodes where missing
+x <- full_merged_ds
+x_loop <- x
+x_g <- c()
+x_t <- x_loop
+x_f <- x_loop
+codec <- level2tolevel1indus %>%
+  select(c(parentcode, parentname))
+codec <- codec %>%
+  group_by(parentcode, parentname) %>%
+  summarize()
+
+for (i in 1:NROW(codec)) {
+  if(codec$parentname[i] %in% unique(x_t$industryparentname)==FALSE) {print(paste0("Something's wrong, I can feel it i = ", i, " codec <- ", codec$name[i]))
+    next}
+  x_f <- x_t %>%
+    filter(x_t$industryparentname==codec$parentname[i])
+  x_t <- x_t %>%
+    filter(x_t$industryparentname!=codec$parentname[i])
+  x_f$parentcode_indus=codec$parentcode[i] #add in english industry-parent names
+  
+  x_g <- rbind(x_g, x_f)
+  }
+x <- x_g %>%
+  select(industryparentname, everything())
+remove(x_f,x_t, x_g, x_loop)
+
+full_merged_ds <- x %>%
+  filter(!(parentcode_indus %in% c("00.0","U", "T")))
+
+
+# Filter the data for the desired year
+full_merged_ds_year <- full_merged_ds %>%
+  filter(year == 2017) %>%
+  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - ")) %>%
+  arrange(parentcode_indus)
+
+
+# Create the crossbar plot
+crossbar_plot <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
+  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
+  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+  scale_fill_manual(values = custom_palette) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", y = "Monthly Wage (NOK)", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) by Industry in 2017") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
+
+# Print the crossbar plot
+print(crossbar_plot)
+
+# Create the crossbar plot with unionization rates
+crossbar_plot_union <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
+  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
+  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+  scale_fill_manual(values = custom_palette) +
+  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
+  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+
+# Print the crossbar plot with unionization rates
+print(crossbar_plot_union)
+
+
+# Reorder the parentcode_indus factor levels by ascending unionization rate
+full_merged_ds_year$parentcode_indus <- factor(
+  full_merged_ds_year$parentcode_indus,
+  levels = full_merged_ds_year[order(full_merged_ds_year$union_density), "parentcode_indus"]
+)
+
+# Reorder the parentcode_indus factor levels by ascending unionization rate
+full_merged_ds_year$parentcode_indus <- with(full_merged_ds_year, reorder(parentcode_indus, union_density, FUN = median))
+
+# Recreate the crossbar plot with unionization rates and sorted x-axis
+crossbar_plot_union_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
+  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
+  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+  scale_fill_manual(values = custom_palette) +
+  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
+  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017 (Sorted by Unionization Rate)") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+
+# Sort the data by unionization rate and reorder the factor levels for parentcode_indus
+full_merged_ds_year_sorted <- full_merged_ds_year %>%
+  arrange(union_density) %>%
+  mutate(parentcode_indus = factor(parentcode_indus, levels = unique(parentcode_indus)))
+
+# Recreate the crossbar plot with unionization rates and sorted x-axis
+crossbar_plot_union_sorted <- ggplot(full_merged_ds_year_sorted, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
+  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
+  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+  geom_line(data = full_merged_ds_year_sorted, aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+  scale_fill_manual(values = custom_palette) +
+  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
+  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017 (Sorted by Unionization Rate)") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+
+# Print the crossbar plot with unionization rates and sorted x-axis
+print(crossbar_plot_union_sorted)
+
+
+#Wage vs Labour Union Density, scatterplot
+
+
+# Filter out data for the year 2015
+full_merged_ds_filtered <- full_merged_ds %>%
+  filter(!is.na(union_density))
+
+
+# Create the scatterplot
+scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = factor(year))) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_discrete(name = "Year") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(
+    x = "Unionization Rate",
+    y = "Mean Monthly Wage (NOK)",
+    title = "Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year (excluding 2015)"
+  )
+
+# Print the scatterplot
+print(scatter_plot)
+
+# Create the scatterplot with black industry code labels inside colored points
+scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = factor(year))) +
+  geom_point(size = 3.5, alpha = 0.7) +
+  geom_text(aes(label = parentcode_indus), color = "black", size = 3, fontface = "bold") +
+  scale_color_discrete(name = "Year") +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(
+    x = "Unionization Rate",
+    y = "Mean Monthly Wage (NOK)",
+    title = "Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year and Industry (excluding 2015)"
+  )
+
+# Print the scatterplot
+print(scatter_plot)
+
+# Regression
+ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = as.factor(year), label = parentcode_indus)) +
+  geom_point(size = 3) +
+  geom_text(aes(label = parentcode_indus), color = "black", size = 3, check_overlap = TRUE) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
+  scale_color_manual(values = c("2013" = "red", "2014" = "blue", "2016" = "green", "2017" = "purple")) +
+  theme_minimal() +
+  labs(x = "Union Density", y = "Mean Wage (NOK)", color = "Year", title = "Mean Wage vs. Union Density by Industry and Year") +
+  guides(color = guide_legend(title = "Year"))
