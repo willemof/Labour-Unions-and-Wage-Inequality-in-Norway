@@ -203,11 +203,50 @@ results <- weighted_data %>%
     union_density = survey_mean(is.union, na.rm = TRUE),
     male_ratio = survey_mean(is.male, na.rm = TRUE),
     population_count = survey_total (na.rm = TRUE),
+    #control variables: education
+    has.education.primary = survey_mean(has.education.primary, na.rm =TRUE),
+    has.education.juniorhigh = survey_mean(has.education.juniorhigh, na.rm =TRUE),
+    has.education.some.hs = survey_mean(has.education.some.hs, na.rm =TRUE),
+    has.education.finished.hs = survey_mean(has.education.finished.hs, na.rm =TRUE),
+    has.education.bachelor = survey_mean(has.education.bachelor, na.rm =TRUE),
+    has.education.master = survey_mean(has.education.master, na.rm =TRUE),
+    has.education.doctor = survey_mean(has.education.doctor, na.rm =TRUE),
+    has.education.ungiven = survey_mean(has.education.ungiven, na.rm =TRUE),
+    #control variables: age
+    teenager = survey_mean(lessthantwenty, na.rm =TRUE),
+    twenties = survey_mean(twenty, na.rm =TRUE),
+    thirties = survey_mean(thirty, na.rm =TRUE),
+    fourties = survey_mean(fourty, na.rm =TRUE),
+    fifties = survey_mean(fifty, na.rm =TRUE),
+    sixties = survey_mean(sixty, na.rm =TRUE),
+    seventies = survey_mean(seventyplus, na.rm =TRUE),
+    #control variable: sector
+    sector.private = survey_mean(sector.private, na.rm =TRUE),
+    sector.municipal = survey_mean(sector.municipal, na.rm =TRUE),
+    sector.county = survey_mean(sector.county, na.rm =TRUE),
+    sector.centralgov = survey_mean(sector.centralgov, na.rm =TRUE),
+    #control variable: collective agreement
+    collective.agreement.yes = survey_mean(collective.agreement.yes, na.rm =TRUE),
+    collective.agreement.combination = survey_mean(collective.agreement.combination, na.rm =TRUE),
+    collective.agreement.no = survey_mean(collective.agreement.no, na.rm =TRUE),
+    #control variable: employment type
+    employment.onleave.employee = survey_mean(employment.onleave.employee, na.rm =TRUE),
+    employment.employee = survey_mean(employment.employee, na.rm =TRUE),
+    employment.selfemployed = survey_mean(employment.selfemployed, na.rm =TRUE),
+    employment.onleave.selfemployed = survey_mean(employment.onleave.selfemployed, na.rm =TRUE),
+    employment.onleave.familyemploy = survey_mean(employment.onleave.familyemploy, na.rm =TRUE),
+    employment.familyemploy = survey_mean(employment.familyemploy, na.rm =TRUE),
+    employment.employee.ungiven = survey_mean(employment.employee.ungiven, na.rm =TRUE),
+    employment.military = survey_mean(employment.military, na.rm =TRUE),
+    #control variable: full-time/parttime
+    fulltime = survey_mean(fulltime, na.rm =TRUE),
+    parttime = survey_mean(parttime, na.rm =TRUE),
+    
     sample_size = n()
     ) %>%
   tibble()
-  
-  
+
+
 
 ## visualizing distribution of industries
 micro_data <- x_m
@@ -582,3 +621,6 @@ ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, colo
   theme_minimal() +
   labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Industry", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
   guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
+
+
+

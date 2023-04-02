@@ -51,3 +51,4 @@ library(viridis)   # custom colours for data visualization
 
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
+
