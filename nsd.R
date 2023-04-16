@@ -41,6 +41,7 @@ x <- x %>% select(number, hnar, everything())
 #setting up for loop to enter industry names codes, parent codes
 
 
+level2tolevel1indus$parentname[level2tolevel1indus$parentname %in% c("Activities of household as employers; undifferentiated goods- and services-producing activities of households for own account")] <- "Activities of household as employers"
 
 x$hnar[x$hnar == "0"] <- "Uspesifisert eller uidentifiserbar næring"
 x$hnar <- str_trim(x$hnar)

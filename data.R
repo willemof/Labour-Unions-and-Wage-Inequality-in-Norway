@@ -1,5 +1,6 @@
 #wage table with union rates for sector, industry, occupation, part-time, full-time
 
+#Data Sources / Collection
 monthlywage15_22 <- read_csv(file = ("csv/monthlywage15_22_long.csv"))
 production13_17 <- read_csv(file = ("csv/production13_17.csv"))
 wage13 <- read_csv(file=("csv/ssb/earningsindustry1314.csv"))
@@ -17,9 +18,7 @@ good_names <- c("Electricity, gas, steam and air conditioning supply",
                 "Public administration and defence; compulsory social security")
 text_changer <- tibble(bad_names, good_names)
 
-
-#continuing the filtering
-
+#Register Data Processing
 
 filter_wage13 <- wage13 %>%
   filter(year %in% c("2013", "2014")) %>%
@@ -34,10 +33,10 @@ filter_monthlywage <- monthlywage15_22 %>%
   filter(year %in% c("2015", "2016", "2017")) %>%
   filter(occupation %in% c("All occupations")) %>%
   filter(sector %in% c("Sum all sectors")) %>%
-  filter(!(industry_sic2007 %in% c("All industries",
-                                   "Activities of household as employers",
-                                   "Activities of extraterritorial organisations and bodies",
-                                   "Unspecified"))) %>%
+  filter(!(industry_sic2007 %in% c("All industries"))) %>%
+#                                   "Activities of household as employers",
+#                                   "Activities of extraterritorial organisations and bodies",
+#                                   "Unspecified"))) %>%
   filter((sex %in% c("Both sexes"))) %>%
   filter((sector %in% c("Sum all sectors"))) %>%
   filter((contractual_usual_working_hours_per_week %in% c("All employees")))
@@ -117,6 +116,8 @@ wages13_17 <- rbind(merging_wage13, merging_wage15)
 
 remove(merging_wage13, merging_wage15)
 
+
+#Processing Microdata
 #Survey data
 microdata <- read_csv(file = ("csv/microdata.csv"))
 
@@ -127,8 +128,9 @@ microdata <- microdata %>%
 
 
 x_m <- microdata
-x_m <- x_m %>%
-  filter(!(parentcode_indus %in% c("U", "T","00.0")))
+#x_m <- x_m %>%
+#  filter(!(parentcode_indus %in% c("U", "T","00.0")))
+
 
 #dummy variable for education from least educated to most educated
 x_m<- x_m %>%
@@ -160,6 +162,13 @@ x_m<- x_m %>%
   mutate(sector.county = fifelse(x_m$eier == "Fylkeskommunal forvaltning", 1,0, na = 0), .keep = "unused") %>%
   mutate(sector.centralgov = fifelse(x_m$eier == "Statlig forvaltning", 1,0, na = 0), .keep = "unused")
 
+#x_m <- x_m %>%
+#  mutate(sector = fifelse(x_M$eier == "Privat virksomhet", "private sector", "", na ="")) %>%
+#           mutate(sector = fifelse(x_M$eier == "Kommunal forvaltning", "public sector", "", na ="") |
+#                 sector = fifelse(x_M$eier == "Statlig forvaltning", "public sector", "", na ="") |
+#                 sector = fifelse(x_M$eier == "Fylkeskommunal forvaltning", "public sector", "", na ="")) 
+                                  
+                             
 #dummy variable for employment status
 x_m<- x_m %>%
   mutate(employment.onleave.employee = fifelse(x_m$sstat == "Midl.Fravær, ansatte", 1,0, na = 0), .keep = "unused") %>%
@@ -175,6 +184,12 @@ x_m<- x_m %>%
 #dummy variable for employment agreement / collective agreement
 
 x_m<- x_m %>%
+  mutate(tu31 = fifelse(x_m$eier %in% c("Statlig forvaltning", "Kommunal forvaltning",
+                                                             "Fylkeskommunal forvaltning")
+                                            , "Helt eller delvis regulert av tariffavtale/overenskomst",x_m$tu31, na = "N/A"), .keep = "unused")
+
+
+x_m<- x_m %>%
   mutate(collective.agreement.yes = fifelse(x_m$tu31 == "Helt eller delvis regulert av tariffavtale/overenskomst" |
                                               x_m$tu31 == "Helt eller delvis regulert av tariffavtale eller overenskoms"
                                             , 1,0, na = 0), .keep = "unused") %>%
@@ -186,19 +201,45 @@ x_m<- x_m %>%
                                            , 1,0, na = 0), .keep = "unused")
 
 
+
+#Looking at unemployed population
+x_e <- x_m %>%
+  filter((betrkt %in% c("Arbeidsledig")))
+
+
 # full time or part time
 x_m<- x_m %>%
-  mutate(fulltime = fifelse(x_m$ans == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
-  mutate(parttime = fifelse(x_m$ans == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") 
+  mutate(fullemploy = fifelse(x_m$ans == "Fast ansatt", 1,0, na = 0), .keep = "unused") %>%
+  mutate(tempemploy = fifelse(x_m$ans == "Midlertidig ansatt", 1,0, na = 0), .keep = "unused") ###I'm not sure if this is right, this isn't
+#part time, this is a short-term contract / temporary <--- look into this
+
+# full time or part time
+x_m<- x_m %>%
+  mutate(fulltime = fifelse(x_m$nj59e == "Heltidsjobb", 1,0, na = 0), .keep = "unused") %>%
+  mutate(parttime = fifelse(x_m$nj59e == "Deltidsjobb", 1,0, na = 0), .keep = "unused")
 
 
 
+#test adding in sectors in the style of industry
+x_m <- x_m %>%
+  mutate(sector = fifelse(x_m$eier %in% c("Statlig forvaltning", "Kommunal forvaltning",
+                                                     "Fylkeskommunal forvaltning"),
+                          "public sector", fifelse(x_m$eier %in% c("Privat virksomhet"),
+                                                   "private sector", "N/A")))
+
+
+
+x_m <- x_m %>%
+  filter(!(sstat %in% c("Midl.Fravær, selvstendige", "Sysselsatte, selvstendige"))) %>%
+  filter((betrkt %in% c("Yrkesaktiv")))
 weighted_data <- x_m %>%
   as_survey_design(weights = tuvekt)
 
+weighted_data_e <- x_e %>%
+  as_survey_design(weights = tuvekt)
 
 results <- weighted_data %>%
-  group_by(year, industryparentname) %>%
+  group_by(year, industryparentname, parentcode_indus) %>%
   summarize(
     union_density = survey_mean(is.union, na.rm = TRUE),
     male_ratio = survey_mean(is.male, na.rm = TRUE),
@@ -247,113 +288,136 @@ results <- weighted_data %>%
   tibble()
 
 
+sector_results <- weighted_data %>%
+  group_by(year, sector) %>%
+  summarize(
+    union_density = survey_mean(is.union, na.rm = TRUE),
+    male_ratio = survey_mean(is.male, na.rm = TRUE),
+    population_count = survey_total (na.rm = TRUE),
+    #control variables: education
+    has.education.primary = survey_mean(has.education.primary, na.rm =TRUE),
+    has.education.juniorhigh = survey_mean(has.education.juniorhigh, na.rm =TRUE),
+    has.education.some.hs = survey_mean(has.education.some.hs, na.rm =TRUE),
+    has.education.finished.hs = survey_mean(has.education.finished.hs, na.rm =TRUE),
+    has.education.bachelor = survey_mean(has.education.bachelor, na.rm =TRUE),
+    has.education.master = survey_mean(has.education.master, na.rm =TRUE),
+    has.education.doctor = survey_mean(has.education.doctor, na.rm =TRUE),
+    has.education.ungiven = survey_mean(has.education.ungiven, na.rm =TRUE),
+    #control variables: age
+    teenager = survey_mean(lessthantwenty, na.rm =TRUE),
+    twenties = survey_mean(twenty, na.rm =TRUE),
+    thirties = survey_mean(thirty, na.rm =TRUE),
+    fourties = survey_mean(fourty, na.rm =TRUE),
+    fifties = survey_mean(fifty, na.rm =TRUE),
+    sixties = survey_mean(sixty, na.rm =TRUE),
+    seventies = survey_mean(seventyplus, na.rm =TRUE),
+    #control variable: sector
+    sector.private = survey_mean(sector.private, na.rm =TRUE),
+    sector.municipal = survey_mean(sector.municipal, na.rm =TRUE),
+    sector.county = survey_mean(sector.county, na.rm =TRUE),
+    sector.centralgov = survey_mean(sector.centralgov, na.rm =TRUE),
+    #control variable: collective agreement
+    collective.agreement.any = survey_mean(collective.agreement.yes|collective.agreement.combination, na.rm =TRUE),
+    collective.agreement.yes = survey_mean(collective.agreement.yes, na.rm =TRUE),
+    collective.agreement.combination = survey_mean(collective.agreement.combination, na.rm =TRUE),
+    collective.agreement.no = survey_mean(collective.agreement.no, na.rm =TRUE),
+    #control variable: employment type
+    employment.onleave.employee = survey_mean(employment.onleave.employee, na.rm =TRUE),
+    employment.employee = survey_mean(employment.employee, na.rm =TRUE),
+    employment.selfemployed = survey_mean(employment.selfemployed, na.rm =TRUE),
+    employment.onleave.selfemployed = survey_mean(employment.onleave.selfemployed, na.rm =TRUE),
+    employment.onleave.familyemploy = survey_mean(employment.onleave.familyemploy, na.rm =TRUE),
+    employment.familyemploy = survey_mean(employment.familyemploy, na.rm =TRUE),
+    employment.employee.ungiven = survey_mean(employment.employee.ungiven, na.rm =TRUE),
+    employment.military = survey_mean(employment.military, na.rm =TRUE),
+    #control variable: full-time/parttime
+    fulltime = survey_mean(fulltime, na.rm =TRUE),
+    parttime = survey_mean(parttime, na.rm =TRUE),
+    
+    sample_size = n()
+  ) %>%
+  tibble() 
 
-## visualizing distribution of industries
-micro_data <- x_m
+
+####Unemployed
+unemployed_results <- weighted_data_e %>%
+  group_by(year, parentcode_indus) %>%
+  summarize(
+    union_density = survey_mean(is.union, na.rm = TRUE),
+    male_ratio = survey_mean(is.male, na.rm = TRUE),
+    population_count = survey_total (na.rm = TRUE),
+    #control variables: education
+    has.education.primary = survey_mean(has.education.primary, na.rm =TRUE),
+    has.education.juniorhigh = survey_mean(has.education.juniorhigh, na.rm =TRUE),
+    has.education.some.hs = survey_mean(has.education.some.hs, na.rm =TRUE),
+    has.education.finished.hs = survey_mean(has.education.finished.hs, na.rm =TRUE),
+    has.education.bachelor = survey_mean(has.education.bachelor, na.rm =TRUE),
+    has.education.master = survey_mean(has.education.master, na.rm =TRUE),
+    has.education.doctor = survey_mean(has.education.doctor, na.rm =TRUE),
+    has.education.ungiven = survey_mean(has.education.ungiven, na.rm =TRUE),
+    #control variables: age
+    teenager = survey_mean(lessthantwenty, na.rm =TRUE),
+    twenties = survey_mean(twenty, na.rm =TRUE),
+    thirties = survey_mean(thirty, na.rm =TRUE),
+    fourties = survey_mean(fourty, na.rm =TRUE),
+    fifties = survey_mean(fifty, na.rm =TRUE),
+    sixties = survey_mean(sixty, na.rm =TRUE),
+    seventies = survey_mean(seventyplus, na.rm =TRUE),
+    #control variable: sector
+    sector.private = survey_mean(sector.private, na.rm =TRUE),
+    sector.municipal = survey_mean(sector.municipal, na.rm =TRUE),
+    sector.county = survey_mean(sector.county, na.rm =TRUE),
+    sector.centralgov = survey_mean(sector.centralgov, na.rm =TRUE),
+    #control variable: collective agreement
+    collective.agreement.any = survey_mean(collective.agreement.yes|collective.agreement.combination, na.rm =TRUE),
+    collective.agreement.yes = survey_mean(collective.agreement.yes, na.rm =TRUE),
+    collective.agreement.combination = survey_mean(collective.agreement.combination, na.rm =TRUE),
+    collective.agreement.no = survey_mean(collective.agreement.no, na.rm =TRUE),
+    #control variable: employment type
+    employment.onleave.employee = survey_mean(employment.onleave.employee, na.rm =TRUE),
+    employment.employee = survey_mean(employment.employee, na.rm =TRUE),
+    employment.selfemployed = survey_mean(employment.selfemployed, na.rm =TRUE),
+    employment.onleave.selfemployed = survey_mean(employment.onleave.selfemployed, na.rm =TRUE),
+    employment.onleave.familyemploy = survey_mean(employment.onleave.familyemploy, na.rm =TRUE),
+    employment.familyemploy = survey_mean(employment.familyemploy, na.rm =TRUE),
+    employment.employee.ungiven = survey_mean(employment.employee.ungiven, na.rm =TRUE),
+    employment.military = survey_mean(employment.military, na.rm =TRUE),
+    sample_size = n()
+  ) %>%
+  tibble() 
+
+unemployed_results <- unemployed_results %>%
+  select(collective.agreement.any, everything())
+
+##Unemployed end
+
+#Sector stats
+sector_results <- sector_results %>%
+  select(collective.agreement.any, everything())
 
 
-# Sampled proportions by year
-sampled_proportions <- microdata %>%
-  count(year, industryparentname, parentcode_indus) %>%
-  group_by(year) %>%
-  mutate(proportion = n / sum(n)) %>%
-  ungroup() %>%
-  mutate(data_type = "Sampled") %>%
-  rename(weighted_n = n)
-
-# Weighted proportions by year
-weighted_proportions <- microdata %>%
-  group_by(year, industryparentname, parentcode_indus) %>%
-  summarize(weighted_n = sum(tuvekt)) %>%
-  group_by(year) %>%
-  mutate(proportion = weighted_n / sum(weighted_n)) %>%
-  ungroup() %>%
-  mutate(data_type = "Weighted")
 
 
 
-# Combine the two data sets
-combined_proportions <- rbind(sampled_proportions, weighted_proportions)
-
-library(viridis)
-
-# Filter the data to include only the year 2017
-data_2017 <- combined_proportions %>%
-  filter(year == 2017) %>%
-  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
-
-# Filter the weighted_proportions data to include only the year 2017
-weighted_proportions_2017 <- weighted_proportions %>%
-  filter(year == 2017) %>%
-  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
-
-# Custom color palette
-custom_palette <- c(
-  "#000000", "#FF0000", "#00FF00", "#0000FF",
-  "#FFFF00", "#FF00FF", "#00FFFF", "#F99999",
-  "#008000", "#000080", "#808000", "#800080",
-  "#008080", "#8F6999", "#808080", "#FFA500",
-  "#A52A2A", "#C0C0C0", "#2E8B57"
-)
+#Filtering away 2 industry categories
 
 # Filter the data for the desired year
-year_data <- weighted_proportions %>%
-  filter(year == 2017) %>%
-  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - ")) %>%
-  arrange(desc(proportion))
-year_data_filtered <- year_data %>%
-  filter(!parentcode_indus %in% c("00.0", "U", "T"))
+#year_data <- results %>%
+#  filter(year == 2016) %>%
+#  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - ")) %>%
+#  arrange(desc(proportion))
+#year_data_filtered <- year_data #%>%
+#  filter(!parentcode_indus %in% c("00.0", "U", "T"))
 
-# Calculate breaks for the primary y-axis
-primary_breaks <- scales::pretty_breaks()(year_data_filtered$proportion)
+# Because the main industries, T and U, represents such a small part of the labour market,
+#The labour force survey has too few observations to make an accurate enough inference
+#Thus we wil drop the industries so that are results can be more accurate.
 
-# Calculate breaks for the secondary y-axis
-secondary_breaks <- primary_breaks * sum(year_data_filtered$weighted_n) / 1000
+#Dropping Main industries; T and U
 
+#year_data_filtered <- year_data_filtered %>%
+#  filter(!(parentcode_indus %in% c("T","U")))
 
-# Create the bar plot
-bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = proportion, fill = industry_label)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = custom_palette) +
-  scale_y_continuous(
-    breaks = primary_breaks,
-    sec.axis = sec_axis(
-      trans = ~. * sum(year_data_filtered$weighted_n) / 1000,
-      name = "Number of Employees (1 000)",
-      labels = scales::number_format(accuracy = 1, scale = 1, big.mark = ",", label.padding = 0.5),
-      breaks = secondary_breaks
-    )
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", y = "Proportion of Labor Force", title = "Proportion of Labor Force by Industry in 2017") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
-
-# Print the plot
-print(bar_plot)
-
-
-# Create the pie chart
-pie_chart <- ggplot(year_data_filtered, aes(x = "", y = proportion, fill = industry_label)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar("y", start = 0) +
-  scale_fill_manual(values = custom_palette) +
-  theme_void() +
-  theme(
-    legend.position = "right",
-    legend.title = element_text(size = 12, face = "bold"),
-    legend.text = element_text(size = 10)
-  ) +
-  labs(fill = "Industry", title = "Proportion of Labor Force by Industry in 2017")
-
-# Print the pie chart
-print(pie_chart)
 
 
 
@@ -388,239 +452,85 @@ x <- x_g %>%
   select(industryparentname, everything())
 remove(x_f,x_t, x_g, x_loop)
 
-full_merged_ds <- x %>%
-  filter(!(parentcode_indus %in% c("00.0","U", "T")))
+full_merged_ds <- x #%>%
+ # filter(!(parentcode_indus %in% c("00.0","U", "T")))
 
+full_merged_ds <- full_merged_ds %>%
+  filter(!(parentcode_indus %in% c("T","U")))
 
 # Filter the data for the desired year
 full_merged_ds_year <- full_merged_ds %>%
-  filter(year == 2017) %>%
+  filter(year == 2016) %>%
   mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - ")) %>%
   arrange(parentcode_indus)
 
 
-# Create the crossbar plot
-crossbar_plot <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
-  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
-  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
-  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
-  scale_fill_manual(values = custom_palette) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", y = "Monthly Wage (NOK)", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) by Industry in 2017") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
-
-# Print the crossbar plot
-print(crossbar_plot)
-
-# Create the crossbar plot with unionization rates
-crossbar_plot_union <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
-  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
-  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
-  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
-  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
-  scale_fill_manual(values = custom_palette) +
-  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
-  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
-
-# Print the crossbar plot with unionization rates
-print(crossbar_plot_union)
 
 
-# Reorder the parentcode_indus factor levels by ascending unionization rate
-full_merged_ds_year$parentcode_indus <- factor(
-  full_merged_ds_year$parentcode_indus,
-  levels = full_merged_ds_year[order(full_merged_ds_year$union_density), "parentcode_indus"]
-)
+df <- full_merged_ds %>%
+  na.omit #this is the full dataset
 
-# Reorder the parentcode_indus factor levels by ascending unionization rate
-full_merged_ds_year$parentcode_indus <- with(full_merged_ds_year, reorder(parentcode_indus, union_density, FUN = median))
+df <- df %>%
+  mutate(collectivelybargained = (population_count*collective.agreement.yes + population_count*collective.agreement.combination), .keep = c("all")) %>%
+  select(collectivelybargained, everything())
+df <- df %>%
+  mutate(collective_rate = collectivelybargained / population_count, .keep = c("all"))
+# group the data by year and calculate the total collectively bargained amount for each year
+summary_df <- df %>% 
+  group_by(year = lubridate::year(date)) %>% 
+  summarize(collectivelybargained = (population_count*collective.agreement.yes + population_count*collective.agreement.combination))
 
-# Recreate the crossbar plot with unionization rates and sorted x-axis
-crossbar_plot_union_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
-  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
-  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
-  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
-  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
-  scale_fill_manual(values = custom_palette) +
-  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
-  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017 (Sorted by Unionization Rate)") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+# join the summary data frame with the original data frame and calculate the national colle
+summary_df <- df %>% 
+  group_by(year = lubridate::year(date)) %>% 
+  summarize(total_collectively_bargained = sum(population_count * collective_rate, na.rm = TRUE))
+summary_df
 
-# Sort the data by unionization rate and reorder the factor levels for parentcode_indus
-full_merged_ds_year_sorted <- full_merged_ds_year %>%
-  arrange(union_density) %>%
-  mutate(parentcode_indus = factor(parentcode_indus, levels = unique(parentcode_indus)))
-
-# Recreate the crossbar plot with unionization rates and sorted x-axis
-crossbar_plot_union_sorted <- ggplot(full_merged_ds_year_sorted, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
-  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
-  geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
-  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
-  geom_line(data = full_merged_ds_year_sorted, aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
-  scale_fill_manual(values = custom_palette) +
-  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
-  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2017 (Sorted by Unionization Rate)") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
-
-# Print the crossbar plot with unionization rates and sorted x-axis
-print(crossbar_plot_union_sorted)
+sunny <- df %>%
+  group_by(as.character(year)) %>% 
+  summarize(total_total = sum(collectivelybargained, na.rm = TRUE))
+sunny 
 
 
-#Wage vs Labour Union Density, scatterplot
+summy <- df %>%
+  group_by(as.character(year)) %>% 
+  summarize(total_total = sum(population_count, na.rm = TRUE))
+summy 
 
 
-# Filter away data for the year 2015
-full_merged_ds_filtered <- full_merged_ds %>%
-  filter(!is.na(union_density))
+sunny <- df %>%
+  group_by(year = lubridate::year(date)) %>% 
+  summarize
+summary_df$year <- as.character(summary_df$year)
+summary_dff <- df %>% 
+  group_by(year = lubridate::year(date)) %>% 
+  summarize(bargained = sum(population_count, na.rm = TRUE))
+summary_dff$year <- as.character(summary_dff$year)
+class(summary_dff$year)
+summary_dff
+national_rates <- tibble(year = summary_df$year, national_rate = summary_df$total_collectively_bargained / summary_dff$bargained)
+national_rates
+# group the data by year and calculate the summary statistic
+summary_df <- df %>% 
+  group_by(year = lubridate::year(date)) %>% 
+  summarize(sum_colbargained = sum(collectivelybargained, na.rm = TRUE))
 
-
-# Create the scatterplot
-scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = factor(year))) +
-  geom_point(size = 3, alpha = 0.7) +
-  scale_color_discrete(name = "Year") +
-  theme_minimal() +
-  theme(
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(
-    x = "Unionization Rate",
-    y = "Mean Monthly Wage (NOK)",
-    title = "Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year (excluding 2015)"
-  )
-
-# Print the scatterplot
-print(scatter_plot)
-
-# Create the scatterplot with black industry code labels inside colored points
-scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = factor(year))) +
-  geom_point(size = 3.5, alpha = 0.7) +
-  geom_text(aes(label = parentcode_indus), color = "black", size = 3, fontface = "bold") +
-  scale_color_discrete(name = "Year") +
-  theme_minimal() +
-  theme(
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(
-    x = "Unionization Rate",
-    y = "Mean Monthly Wage (NOK)",
-    title = "Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year and Industry (excluding 2015)"
-  )
-
-# Print the scatterplot
-print(scatter_plot)
-
-# Regression
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = as.factor(year), label = parentcode_indus)) +
-  geom_point(size = 3) +
-  geom_text(aes(label = parentcode_indus), color = "black", size = 3, check_overlap = TRUE) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = c("2013" = "pink", "2014" = "lightblue", "2016" = "green", "2017" = "purple")) +
-  theme_minimal() +
-  labs(x = "Union Density", y = "Mean Wage (NOK)", color = "Year", title = "Mean Wage vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Year"))
-
-# Create a new variable for the mean-median gap
-full_merged_ds_filtered <- full_merged_ds_filtered %>%
-  mutate(mean_median_gap = mean_nok - median_nok)
-
-# Create a scatterplot with the mean-median gap on the y-axis
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = as.factor(year), label = parentcode_indus)) +
-  geom_point(size = 3) +
-  geom_text(aes(label = parentcode_indus), color = "black", size = 3, check_overlap = TRUE) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = c("2013" = "red", "2014" = "blue", "2016" = "green", "2017" = "purple")) +
-  theme_minimal() +
-  labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Year", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Year"))
+# add the summary column to the original data frame
+df <- df %>% 
+  left_join(summary_df, by = "year") %>%
+  select(sum_colbargained, everything())
 
 
 
-# Create a scatterplot with the mean-median gap on the y-axis
-full_merged_ds_filtered <- full_merged_ds_filtered %>%
-  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - "))
-
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = industry_label)) +
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = custom_palette, labels = full_merged_ds_filtered$industry_label) +
-  theme_minimal() +
-  labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Industry", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
-
-#no white text but good legend
-
-# Create a scatterplot with the mean-median gap on the y-axis
-full_merged_ds_filtered <- full_merged_ds_filtered %>%
-  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - "))
-
-legend_labels <- full_merged_ds_filtered %>%
-  select(parentcode_indus, industry_label) %>%
-  distinct() %>%
-  arrange(parentcode_indus)
-
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = industry_label)) +
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = custom_palette, labels = legend_labels$industry_label) +
-  theme_minimal() +
-  labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Industry", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
+summary_df <- df %>% 
+  group_by(year) %>% 
+  mutate(sum_colbargained =
+           summarize(total = sum(collectivelybargained, na.rm = TRUE)), .keep = C("all"))
+# print the summary data frame
+summary_df
 
 
-#White text on point, mean median gap labour union density regression
-full_merged_ds_filtered <- full_merged_ds_filtered %>%
-  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - "),
-         year_label = as.character(year - 2010))
-
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = industry_label)) +
-  geom_point(size = 3, show.legend = FALSE) +
-  geom_text(aes(label = year_label), color = "white", size = 3) +
-  geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = custom_palette, labels = legend_labels$industry_label) +
-  theme_minimal() +
-  labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Industry", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
+#Ask Chat GTP to better structure the code <----------- I should do this
 
 
 
