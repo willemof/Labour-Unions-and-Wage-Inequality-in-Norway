@@ -1,3 +1,7 @@
+#ols methodology with non-log wages
+
+#OLS methodology
+
 # Methodology. Run data.R first
 
 # Selecting variables of interest for OLS (and testing)
@@ -45,10 +49,10 @@ write.csv(OLS_regression_table, "OLS_regression_table.csv", row.names = FALSE)
 
 #OLS lower quartile
 
-OLS_lowq_ind0 <- plm(logdataset$lower_quartile_nok ~ df$union_density, data = df)
-OLS_lowq_ind1 <- plm(logdataset$lower_quartile_nok ~ df$union_density + df$collective_rate, data = df)
-OLS_lowq_ind2 <- plm(logdataset$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
-OLS_lowq_ind3 <- plm(logdataset$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
+OLS_lowq_ind0 <- plm(df$lower_quartile_nok ~ df$union_density, data = df)
+OLS_lowq_ind1 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate, data = df)
+OLS_lowq_ind2 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
+OLS_lowq_ind3 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
 OLS_lowq_ind4 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor, data = df)
 OLS_lowq_ind5 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master , data = df)
 OLS_lowq_ind6 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master +df$has.education.doctor, data = df)
@@ -65,19 +69,19 @@ OLS_lowq_ind14 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_r
 #OLS_lowq_list <- list(OLS_lowq_ind0, OLS_lowq_ind1, OLS_lowq_ind2, OLS_lowq_ind3, OLS_lowq_ind4, OLS_lowq_ind5,OLS_lowq_ind6,OLS_lowq_ind7,OLS_lowq_ind8,OLS_lowq_ind9,OLS_lowq_ind10,OLS_lowq_ind11,OLS_lowq_ind12, OLS_lowq_ind13)
 OLS_lowq_list <- list(OLS_lowq_ind0, OLS_lowq_ind1, OLS_lowq_ind2, OLS_lowq_ind6, OLS_lowq_ind14, OLS_lowq_ind12, OLS_lowq_ind13)
 OLS_lowq_table <- stargazer(OLS_lowq_list,
-                                  title = "OLS Regression Results",
-                                  align = TRUE,
-                                  type = "text",
-                                  model.names = TRUE,
-                                  dep.var.labels.include = TRUE)
+                            title = "OLS Regression Results",
+                            align = TRUE,
+                            type = "text",
+                            model.names = TRUE,
+                            dep.var.labels.include = TRUE)
 capture.output(OLS_lowq_table, file = "OLS_lowq_table_output.txt")
 
 #OLS upper quartile
 
-OLS_highq_ind0 <- plm(logdataset$upper_quartile_nok ~ df$union_density, data = df)
-OLS_highq_ind1 <- plm(logdataset$upper_quartile_nok ~ df$union_density + df$collective_rate, data = df)
-OLS_highq_ind2 <- plm(logdataset$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
-OLS_highq_ind3 <- plm(logdataset$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
+OLS_highq_ind0 <- plm(df$upper_quartile_nok ~ df$union_density, data = df)
+OLS_highq_ind1 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate, data = df)
+OLS_highq_ind2 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
+OLS_highq_ind3 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
 OLS_highq_ind4 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor, data = df)
 OLS_highq_ind5 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master , data = df)
 OLS_highq_ind6 <- plm(df$upper_quartile_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master +df$has.education.doctor, data = df)
@@ -95,19 +99,19 @@ OLS_highq_ind14 <- plm(df$lower_quartile_nok ~ df$union_density + df$collective_
 OLS_highq_list <- list(OLS_highq_ind0, OLS_highq_ind1, OLS_highq_ind2, OLS_highq_ind6, OLS_highq_ind14, OLS_highq_ind12, OLS_highq_ind13)
 
 OLS_highq_table <- stargazer(OLS_highq_list,
-                            title = "OLS Regression Results",
-                            align = TRUE,
-                            type = "text",
-                            model.names = TRUE,
-                            dep.var.labels.include = TRUE)
+                             title = "OLS Regression Results",
+                             align = TRUE,
+                             type = "text",
+                             model.names = TRUE,
+                             dep.var.labels.include = TRUE)
 capture.output(OLS_highq_table, file = "OLS_highq_table_output.txt")
 
 #OLS median
 
-OLS_median_ind0 <- plm(logdataset$median_nok ~ df$union_density, data = df)
-OLS_median_ind1 <- plm(logdataset$median_nok ~ df$union_density + df$collective_rate, data = df)
-OLS_median_ind2 <- plm(logdataset$median_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
-OLS_median_ind3 <- plm(logdataset$median_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
+OLS_median_ind0 <- plm(df$median_nok ~ df$union_density, data = df)
+OLS_median_ind1 <- plm(df$median_nok ~ df$union_density + df$collective_rate, data = df)
+OLS_median_ind2 <- plm(df$median_nok ~ df$union_density + df$collective_rate + df$male_ratio, data = df)
+OLS_median_ind3 <- plm(df$median_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs, data = df)
 OLS_median_ind4 <- plm(df$median_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor, data = df)
 OLS_median_ind5 <- plm(df$median_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master , data = df)
 OLS_median_ind6 <- plm(df$median_nok ~ df$union_density + df$collective_rate + df$male_ratio + df$has.education.finished.hs + df$has.education.bachelor + df$has.education.master +df$has.education.doctor, data = df)
@@ -124,93 +128,20 @@ OLS_median_ind14 <- plm(df$median_nok ~ df$union_density + df$collective_rate + 
 #OLS_median_list <- list(OLS_median_ind0, OLS_median_ind1, OLS_median_ind2, OLS_median_ind3, OLS_median_ind4, OLS_median_ind5,OLS_median_ind6,OLS_median_ind7,OLS_median_ind8,OLS_median_ind9,OLS_median_ind10,OLS_median_ind11,OLS_median_ind12, OLS_median_ind13)
 OLS_median_list <- list(OLS_median_ind0, OLS_median_ind1, OLS_median_ind2, OLS_median_ind6, OLS_median_ind14, OLS_median_ind12, OLS_median_ind13)
 OLS_median_table <- stargazer(OLS_median_list,
+                              title = "OLS Regression Results",
+                              align = TRUE,
+                              type = "text",
+                              model.names = TRUE,
+                              dep.var.labels.include = TRUE)
+capture.output(OLS_median_table, file = "OLS_median_table_output.txt")
+
+#combining stargazer for all OLSs
+
+OLS_total_list <- list(OLS_median_list, OLS_highq_list, OLS_lowq_list, OLS_model_list)
+OLS_total_table <- stargazer(OLS_total_list,
                              title = "OLS Regression Results",
                              align = TRUE,
                              type = "text",
                              model.names = TRUE,
                              dep.var.labels.include = TRUE)
-capture.output(OLS_median_table, file = "OLS_median_table_output.txt")
-
-# Estimate the fixed effects model
-FE_reg_ind1 <- plm(dataset$mean_nok ~ dataset$union_density, data = dataset, effect = "time", model = "within")
-FE_reg_ind2 <- plm(dataset$mean_nok ~ dataset$union_density +
-                     dataset$collective_rate, data = dataset, effect = "time", model = "within")
-FE_reg_ind3 <- plm(dataset$mean_nok ~ dataset$union_density + dataset$collective_rate +
-                     dataset$male_ratio, data = dataset, effect = "time", model = "within")
-FE_reg_ind10 <- plm(dataset$mean_nok ~ dataset$union_density + dataset$collective_rate + dataset$male_ratio + dataset$teenager + dataset$twenties + dataset$thirties + dataset$fourties + dataset$fifties + dataset$sixties, data = dataset, effect = "time", model = "within")
-
-FE_model_list <- list(FE_reg_ind1,FE_reg_ind2,FE_reg_ind3, FE_reg_ind10)
-# Create a stargazer table for the fixed effects model
-FE_regression_table <- stargazer(FE_model_list,
-                                 title = "Fixed Effects Regression Results",
-                                 align = TRUE,
-                                 type = "text",
-                                 model.names = TRUE,
-                                 dep.var.labels.include = TRUE)
-
-# Save the table to a text file
-capture.output(FE_regression_table, file = "FE_regression_output.txt")
-write.csv(FE_regression_table, "FE_regression_table.csv", row.names = FALSE)
-
-# Merge the two tables
-merged_table <- paste(OLS_regression_table, FE_regression_table)
-
-# Save the merged table to a text file
-capture.output(merged_table, file = "combined_regression_table_output.txt")
-write.csv(regression_table, "regression_table.csv", row.names = FALSE)
-
-
-###In this section I will regress first lower quartile, then median, then upper quartile
-
-
-FE_reg_low <- plm(logdataset$lower_quartile_nok ~ dataset$union_density + dataset$collective_rate
-                     , data = dataset, effect = "twoways", model = "within")
-
-FE_reg_med <- plm(logdataset$median_nok ~ dataset$union_density + dataset$collective_rate
-                  , data = dataset, effect = "twoways", model = "within")
-
-FE_reg_upper <- plm(logdataset$upper_quartile_nok ~ dataset$union_density + dataset$collective_rate
-                  , data = dataset, effect = "twoways", model = "within")
-FE_distribution_list <- list(FE_reg_low, FE_reg_med, FE_reg_upper)
-
-FE_distrib_reg_table <- stargazer(FE_distribution_list,
-                                 title = "Fixed Effects Regression on wage quartiles Results",
-                                 align = TRUE,
-                                 type = "text",
-                                 model.names = TRUE,
-                                 dep.var.labels.include = TRUE)
-
-capture.output(FE_distrib_reg_table, file = "distribution_regression.txt")
-
-FE_reg_low_control <- plm(logdataset$lower_quartile_nok ~ dataset$union_density + dataset$collective_rate
-                  + dataset$male_ratio + dataset$has.education.bachelor + dataset$has.education.master 
-                  + dataset$has.education.doctor, data = dataset, effect = "twoways", model = "within")
-
-FE_reg_med_control <- plm(logdataset$median_nok ~ dataset$union_density + dataset$collective_rate
-                          + dataset$male_ratio + dataset$has.education.bachelor + dataset$has.education.master 
-                          + dataset$has.education.doctor, data = dataset, effect = "twoways", model = "within")
-
-FE_reg_upper_control <- plm(logdataset$upper_quartile_nok ~ dataset$union_density + dataset$collective_rate
-                            + dataset$male_ratio + dataset$has.education.bachelor + dataset$has.education.master 
-                            + dataset$has.education.doctor, data = dataset, effect = "twoways", model = "within")
-
-FE_distribution_list_control <- list(FE_reg_low_control, FE_reg_med_control, FE_reg_upper_control)
-
-FE_distrib_reg_table_control <- stargazer(FE_distribution_list_control,
-                                  title = "Fixed Effects Regression on log(wage) quartiles Results",
-                                  align = TRUE,
-                                  type = "text",
-                                  model.names = TRUE,
-                                  dep.var.labels.include = TRUE,
-                                  covariate.labels = c("Union Density", "Collective Bargaining", 
-                                                       "Male prevalence", "Bachelor degree prevalence",
-                                                       "Master degree prevalence", "Doctor degree prevalence"),
-                                  column.labels = c("Fixed Effects"), 
-                                  add.lines = list(c("Entity"), c("Time")), 
-                                  single.row = TRUE, 
-                                  header = FALSE, 
-                                  digits = 2)
-
-
-capture.output(FE_distrib_reg_table_control, file = "distribution_regression_control.txt")
-
+capture.output(OLS_total_table, file = "OLS_total_table_output.txt")

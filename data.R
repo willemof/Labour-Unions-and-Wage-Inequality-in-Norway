@@ -522,15 +522,15 @@ df <- df %>%
 
 
 
-summary_df <- df %>% 
-  group_by(year) %>% 
-  mutate(sum_colbargained =
-           summarize(total = sum(collectivelybargained, na.rm = TRUE)), .keep = C("all"))
+#summary_df <- df %>% 
+#  group_by(year) %>% 
+#  mutate(sum_colbargained =
+#           summarize(total = sum(collectivelybargained, na.rm = TRUE)), .keep = c("all"))
 # print the summary data frame
-summary_df
-
-
-#Ask Chat GTP to better structure the code <----------- I should do this
+#summary_df
+#
+#
+#
 
 
 
