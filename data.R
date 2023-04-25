@@ -522,12 +522,12 @@ df <- df %>%
   filter(!(parentcode_indus %in% c("U", "T", "00.0")))
 
 
-
-df$union_density_manuf <- ifelse(df$industryparentname == "Manufacturing",
-                                                 logdataset$union_density,
-                                                 0)
-
-
+#
+#df$union_density_manuf <- ifelse(df$industryparentname == "Manufacturing",
+#                                                 logdataset$union_density,
+#                                                 0)
+#
+#
 #summary_df <- df %>% 
 #  group_by(year) %>% 
 #  mutate(sum_colbargained =
