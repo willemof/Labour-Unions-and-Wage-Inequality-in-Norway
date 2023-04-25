@@ -518,7 +518,8 @@ summary_df <- df %>%
 # add the summary column to the original data frame
 df <- df %>% 
   left_join(summary_df, by = "year") %>%
-  select(sum_colbargained, everything())
+  select(sum_colbargained, everything()) %>%
+  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
 
 
 
