@@ -22,6 +22,9 @@ install.packages("gower")
 install.packages("hardhat")
 install.packages("ModelMetrics")
 
+install.packages("ineq") # gini
+install.packages("svglite") # for visualisation
+
 
 #To update R, get package installR and run updateR()
 
@@ -48,7 +51,8 @@ library(stargazer) #Data-visulization / regression tables
 library(srvyr)     # Survey-handler - for weighting
 library(viridis)   # custom colours for data visualization
 library(quantreg) #for quanitle regression
-
+library(ineq) # decile_wage
+library(svglite) # for visualisation
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
 

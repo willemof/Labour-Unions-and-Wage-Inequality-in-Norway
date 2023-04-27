@@ -29,7 +29,7 @@ df <- df %>%
 #  select(colnames(sampled_proportions))
 
 # Combine the two data sets
-combined_proportions <- rbind(sampled_proportions, weighted_proportions)
+#combined_proportions <- rbind(sampled_proportions, weighted_proportions)
 
 library(viridis)
 
@@ -377,7 +377,7 @@ ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, colo
 
 
 
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = industry_label)) +
+x <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = industry_label)) +
   geom_point(size = 3, show.legend = FALSE) +
   geom_text(aes(label = year_label), color = "white", size = 3) +
   geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
@@ -387,3 +387,8 @@ ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = ind
   guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
 
 
+# Export the plot as a PDF
+ggsave(paste0("visualisations/","x",".svg"), x, width = 11, height = 8.5, units = "in")
+
+
+file = (paste0("visualisations/","Mean Wage vs. Union Density by Industry and Year"))
