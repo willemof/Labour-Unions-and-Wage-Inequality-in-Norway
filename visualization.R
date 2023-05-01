@@ -86,23 +86,32 @@ named_color_vector <- setNames(custom_palette, industry_names)
 year_data_filtered <- df %>%
   filter(year == 2016)
 
+year_data_filtered <- year_data_filtered %>%
+  mutate(proportion = population_count / sum(population_count))
+
+
 # Calculate breaks for the primary y-axis
-primary_breaks <- scales::pretty_breaks()(year_data_filtered$population_count)
+primary_breaks <- scales::pretty_breaks()(year_data_filtered$proportion)
 
 # Calculate breaks for the secondary y-axis
-secondary_breaks <- primary_breaks * sum(year_data_filtered$population_count) / 1000
+secondary_breaks <- primary_breaks * total_employees
 
+# Function to generate custom labels for secondary y-axis
+custom_labels <- function(breaks) {
+  labels <- scales::number(breaks / 1000, accuracy = 1, scale = 1, big.mark = ",", label.padding = 0.5)
+  return(labels)
+}
 
 # Create the bar plot
-bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = population_count, fill = industry_label)) +
+bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = proportion, fill = industry_label)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = named_color_vector) +
   scale_y_continuous(
-    breaks = primary_breaks,
+    labels = scales::percent_format(),
     sec.axis = sec_axis(
-      trans = ~. * sum(year_data_filtered$population_count) / 1000,
-      name = "Number of Employees (1 000)",
-      labels = scales::number_format(accuracy = 1, scale = 1, big.mark = ",", label.padding = 0.5),
+      trans = ~. * total_employees,
+      name = "Number of Employees (per 1,000)",
+      labels = custom_labels,
       breaks = secondary_breaks
     )
   ) +
@@ -121,34 +130,6 @@ bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = population_
 print(bar_plot)
 
 
-
-bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = population_count , fill = industry_label )) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = named_color_vector) +
-  scale_y_continuous(
-    breaks = primary_breaks,
-    sec.axis = sec_axis(
-      trans = ~. * sum(year_data_filtered$population_count) / 1000,
-      name = "Number of Employees (1 000)",
-      labels = scales::number_format(accuracy = 1, scale = 1, big.mark = ",", label.padding = 0.5),
-      breaks = secondary_breaks
-    )
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", y = "Proportion of Labor Force", title = "Proportion of Labor Force by Industry in 2016") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
-
-# Print the plot
-print(bar_plot)
-
-#
 # Create the pie chart
 pie_chart <- ggplot(year_data_filtered, aes(x = "", y = population_count, fill = industry_label)) +
   geom_bar(stat = "identity", width = 1) +
@@ -165,8 +146,35 @@ pie_chart <- ggplot(year_data_filtered, aes(x = "", y = population_count, fill =
 # Print the pie chart
 print(pie_chart)
 
+# Create the pie chart without a legend
+pie_chart <- ggplot(year_data_filtered, aes(x = "", y = population_count, fill = industry_label)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = named_color_vector) +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )  +
+  guides(fill = FALSE)
 
-###Second section
+
+# Modify the pie chart to make it smaller
+pie_chart <- pie_chart +
+  theme(plot.margin = margin(0, 0, 0, 0)) +
+  coord_polar("y", start = 0, clip = "off") +
+  theme(plot.background = element_blank())
+
+# Place the pie chart inside the bar plot
+combined_plot <- ggdraw(bar_plot) +
+  draw_plot(pie_chart, x = 0.75, y = 0.75, width = 0.25, height = 0.25)
+
+# Print the combined plot
+print(combined_plot)
+
+
+####Second section
 
 
 full_merged_ds_year <- full_merged_ds_year %>%

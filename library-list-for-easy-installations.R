@@ -53,6 +53,9 @@ library(viridis)   # custom colours for data visualization
 library(quantreg) #for quanitle regression
 library(ineq) # decile_wage
 library(svglite) # for visualisation
+library(gridExtra) #for visualisation
+library(cowplot) #for visualisation
+library(patchwork) #for visualisation
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
 
