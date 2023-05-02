@@ -83,7 +83,25 @@ OLS_regression_table <- stargazer(OLS_model_list,
 
 # Save the table to a text file
 capture.output(OLS_regression_table, file = "results/Pooled_OLS_regression_table_output.txt")
+#   OLS_pool_vif0 <- vif(OLS_pool_ind0) #vif requires multiple independent variables
+OLS_pool_vif1 <- vif(OLS_pool_ind1)
+OLS_pool_vif2 <- vif(OLS_pool_ind2)
+OLS_pool_vif3 <- vif(OLS_pool_ind3)
+OLS_pool_vif6 <- vif(OLS_pool_ind6)
+OLS_pool_vif12 <- vif(OLS_pool_ind12)
+OLS_pool_vif13 <- vif(OLS_pool_ind13)
+OLS_pool_vif14 <- vif(OLS_pool_ind14)
+OLS_pool_vif15 <- vif(OLS_pool_ind15)
+OLS_vif_list <- list(OLS_pool_vif1, OLS_pool_vif2, OLS_pool_vif6, OLS_pool_vif14, OLS_pool_vif12, OLS_pool_vif13, OLS_pool_vif15)
 
+OLS_vif_table <- stargazer(OLS_vif_list,
+                                  title = "Pooled OLS VIF Results"
+                                ,  out = "results/Pooled_ols_vif_table_output.html"
+                                ,  align = TRUE
+                                ,  type = "text"
+                                # , model.names = TRUE
+                                # , dep.var.labels.include = TRUE
+)
 
 # Estimate the fixed effects model (twoway)
 
@@ -171,8 +189,31 @@ capture.output(FE_regression_table, file = "results/FE_entity_effect_output.txt"
 
 
 #Here we make a regression for one specification but with different models
-#This is found in results 5.1
+#This is found in results 5.10
 specification_list <- list(OLS_pool_ind12, FE_entity_ind12, FE_time_ind12, FE_reg_ind12)
+
+
+FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset,  model = "within")
+
+
+# Fixed effects transformation
+#logdataset_transformed <- demean(logdataset, index = "your_index_variable")
+#
+# OLS regression on transformed variables
+#FE_12_ols <- lm(mean_nok ~ union_density + collective_rate + male_ratio +
+#                  has.education.finished.hs + has.education.bachelor + has.education.master +
+#                  has.education.doctor + teenager + twenties + thirties +
+#                  fourties + fifties + sixties,
+#                data = logdataset_transformed)
+#
+# Calculate VIF
+#FE_vif12 <- vif(FE_12_ols)
+#
+#
+#
+#FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset,  model = "within")
+#FE_vif12 <- vif(FE_12)
+
 
 
 regression_table <- stargazer(specification_list,
@@ -192,7 +233,6 @@ regression_table <- stargazer(specification_list,
                                  dep.var.labels.include = TRUE,
                               add.lines = list(c("Time FE", "No", "No", "Yes", "Yes"),
                                                c("Industry FE", "No", "Yes", "No", "Yes")))
-
 
 
 #Next we make a regression table for Results 5.2
@@ -359,4 +399,6 @@ FE_regression_table <- stargazer(FE_model_list,
                                  model.names = TRUE,
                                  dep.var.labels.include = TRUE)
 
+
+plm::pdim(FE_reg_ind12)
 

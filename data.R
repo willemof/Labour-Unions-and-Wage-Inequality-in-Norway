@@ -228,15 +228,24 @@ x_m <- x_m %>%
                                                    "private sector", "N/A")))
 
 
+x_m <- x_m %>%
+  mutate(betrakt = fifelse((is.na(betrkt) & (x_m$sstat %in% c("Sysselsatte, ansatte", "Midl.Fravær, ansatte"))) 
+                           | betrkt %in% c("Yrkesaktiv"), "Yrkesaktiv", "Ikke Yrkesaktiv"))
+
+
+x_m <- x_m %>%
+  select(betrakt, betrkt, sstat, everything())
 
 x_m <- x_m %>%
   filter(!(sstat %in% c("Midl.Fravær, selvstendige", "Sysselsatte, selvstendige"))) %>%
-  filter((betrkt %in% c("Yrkesaktiv")))
+  filter((betrakt %in% c("Yrkesaktiv")))
+
+
 weighted_data <- x_m %>%
   as_survey_design(weights = tuvekt)
 
-weighted_data_e <- x_e %>%
-  as_survey_design(weights = tuvekt)
+#weighted_data_e <- x_e %>%
+#  as_survey_design(weights = tuvekt)
 
 results <- weighted_data %>%
   group_by(year, industryparentname, parentcode_indus) %>%
@@ -340,54 +349,54 @@ sector_results <- weighted_data %>%
 
 
 ####Unemployed
-unemployed_results <- weighted_data_e %>%
-  group_by(year, parentcode_indus) %>%
-  summarize(
-    union_density = survey_mean(is.union, na.rm = TRUE),
-    male_ratio = survey_mean(is.male, na.rm = TRUE),
-    population_count = survey_total (na.rm = TRUE),
-    #control variables: education
-    has.education.primary = survey_mean(has.education.primary, na.rm =TRUE),
-    has.education.juniorhigh = survey_mean(has.education.juniorhigh, na.rm =TRUE),
-    has.education.some.hs = survey_mean(has.education.some.hs, na.rm =TRUE),
-    has.education.finished.hs = survey_mean(has.education.finished.hs, na.rm =TRUE),
-    has.education.bachelor = survey_mean(has.education.bachelor, na.rm =TRUE),
-    has.education.master = survey_mean(has.education.master, na.rm =TRUE),
-    has.education.doctor = survey_mean(has.education.doctor, na.rm =TRUE),
-    has.education.ungiven = survey_mean(has.education.ungiven, na.rm =TRUE),
-    #control variables: age
-    teenager = survey_mean(lessthantwenty, na.rm =TRUE),
-    twenties = survey_mean(twenty, na.rm =TRUE),
-    thirties = survey_mean(thirty, na.rm =TRUE),
-    fourties = survey_mean(fourty, na.rm =TRUE),
-    fifties = survey_mean(fifty, na.rm =TRUE),
-    sixties = survey_mean(sixty, na.rm =TRUE),
-    seventies = survey_mean(seventyplus, na.rm =TRUE),
-    #control variable: sector
-    sector.private = survey_mean(sector.private, na.rm =TRUE),
-    sector.municipal = survey_mean(sector.municipal, na.rm =TRUE),
-    sector.county = survey_mean(sector.county, na.rm =TRUE),
-    sector.centralgov = survey_mean(sector.centralgov, na.rm =TRUE),
-    #control variable: collective agreement
-    collective.agreement.any = survey_mean(collective.agreement.yes|collective.agreement.combination, na.rm =TRUE),
-    collective.agreement.yes = survey_mean(collective.agreement.yes, na.rm =TRUE),
-    collective.agreement.combination = survey_mean(collective.agreement.combination, na.rm =TRUE),
-    collective.agreement.no = survey_mean(collective.agreement.no, na.rm =TRUE),
-    #control variable: employment type
-    employment.onleave.employee = survey_mean(employment.onleave.employee, na.rm =TRUE),
-    employment.employee = survey_mean(employment.employee, na.rm =TRUE),
-    employment.selfemployed = survey_mean(employment.selfemployed, na.rm =TRUE),
-    employment.onleave.selfemployed = survey_mean(employment.onleave.selfemployed, na.rm =TRUE),
-    employment.onleave.familyemploy = survey_mean(employment.onleave.familyemploy, na.rm =TRUE),
-    employment.familyemploy = survey_mean(employment.familyemploy, na.rm =TRUE),
-    employment.employee.ungiven = survey_mean(employment.employee.ungiven, na.rm =TRUE),
-    employment.military = survey_mean(employment.military, na.rm =TRUE),
-    sample_size = n()
-  ) %>%
-  tibble() 
-
-unemployed_results <- unemployed_results %>%
-  select(collective.agreement.any, everything())
+#unemployed_results <- weighted_data_e %>%
+#  group_by(year, parentcode_indus) %>%
+#  summarize(
+#    union_density = survey_mean(is.union, na.rm = TRUE),
+#    male_ratio = survey_mean(is.male, na.rm = TRUE),
+#    population_count = survey_total (na.rm = TRUE),
+#    #control variables: education
+#    has.education.primary = survey_mean(has.education.primary, na.rm =TRUE),
+#    has.education.juniorhigh = survey_mean(has.education.juniorhigh, na.rm =TRUE),
+#    has.education.some.hs = survey_mean(has.education.some.hs, na.rm =TRUE),
+#    has.education.finished.hs = survey_mean(has.education.finished.hs, na.rm =TRUE),
+#    has.education.bachelor = survey_mean(has.education.bachelor, na.rm =TRUE),
+#    has.education.master = survey_mean(has.education.master, na.rm =TRUE),
+#    has.education.doctor = survey_mean(has.education.doctor, na.rm =TRUE),
+#    has.education.ungiven = survey_mean(has.education.ungiven, na.rm =TRUE),
+#    #control variables: age
+#    teenager = survey_mean(lessthantwenty, na.rm =TRUE),
+#    twenties = survey_mean(twenty, na.rm =TRUE),
+#    thirties = survey_mean(thirty, na.rm =TRUE),
+#    fourties = survey_mean(fourty, na.rm =TRUE),
+#    fifties = survey_mean(fifty, na.rm =TRUE),
+##    sixties = survey_mean(sixty, na.rm =TRUE),
+#    seventies = survey_mean(seventyplus, na.rm =TRUE),
+#    #control variable: sector
+#    sector.private = survey_mean(sector.private, na.rm =TRUE),
+#    sector.municipal = survey_mean(sector.municipal, na.rm =TRUE),
+##    sector.county = survey_mean(sector.county, na.rm =TRUE),
+#    sector.centralgov = survey_mean(sector.centralgov, na.rm =TRUE),
+#    #control variable: collective agreement
+#    collective.agreement.any = survey_mean(collective.agreement.yes|collective.agreement.combination, na.rm =TRUE),
+#    collective.agreement.yes = survey_mean(collective.agreement.yes, na.rm =TRUE),
+#    collective.agreement.combination = survey_mean(collective.agreement.combination, na.rm =TRUE),
+#    collective.agreement.no = survey_mean(collective.agreement.no, na.rm =TRUE),
+#    #control variable: employment type
+#    employment.onleave.employee = survey_mean(employment.onleave.employee, na.rm =TRUE),
+#    employment.employee = survey_mean(employment.employee, na.rm =TRUE),
+#    employment.selfemployed = survey_mean(employment.selfemployed, na.rm =TRUE),
+#    employment.onleave.selfemployed = survey_mean(employment.onleave.selfemployed, na.rm =TRUE),
+#    employment.onleave.familyemploy = survey_mean(employment.onleave.familyemploy, na.rm =TRUE),
+##    employment.familyemploy = survey_mean(employment.familyemploy, na.rm =TRUE),
+#   employment.employee.ungiven = survey_mean(employment.employee.ungiven, na.rm =TRUE),
+#    employment.military = survey_mean(employment.military, na.rm =TRUE),
+#    sample_size = n()
+#  ) %>%
+#  tibble() 
+#
+#unemployed_results <- unemployed_results %>%
+#  select(collective.agreement.any, everything())
 
 ##Unemployed end
 
@@ -424,7 +433,7 @@ sector_results <- sector_results %>%
 
 
 
-full_merged_ds <- full_join(results, wages13_17)
+full_merged_ds <- left_join(results, wages13_17)
 # there add parentcodes where missing
 x <- full_merged_ds
 x_loop <- x
@@ -521,7 +530,7 @@ df <- df %>%
   select(sum_colbargained, everything()) %>%
   filter(!(parentcode_indus %in% c("U", "T", "00.0")))
 
-
+full_merged_ds_year <- df
 #
 #df$union_density_manuf <- ifelse(df$industryparentname == "Manufacturing",
 #                                                 logdataset$union_density,

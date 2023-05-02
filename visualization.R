@@ -93,7 +93,9 @@ year_data_filtered <- year_data_filtered %>%
 # Calculate breaks for the primary y-axis
 primary_breaks <- scales::pretty_breaks()(year_data_filtered$proportion)
 
+
 # Calculate breaks for the secondary y-axis
+total_employees <- sum(year_data_filtered$population_count)
 secondary_breaks <- primary_breaks * total_employees
 
 # Function to generate custom labels for secondary y-axis
@@ -105,7 +107,7 @@ custom_labels <- function(breaks) {
 # Create the bar plot
 bar_plot <- ggplot(year_data_filtered, aes(x = parentcode_indus, y = proportion, fill = industry_label)) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = named_color_vector) +
+  scale_fill_manual(values = named_color_vector) + #NAMED COLOUR VECTOR DECIDES THE COLOURRRRR
   scale_y_continuous(
     labels = scales::percent_format(),
     sec.axis = sec_axis(
@@ -141,7 +143,7 @@ pie_chart <- ggplot(year_data_filtered, aes(x = "", y = population_count, fill =
     legend.title = element_text(size = 12, face = "bold"),
     legend.text = element_text(size = 10)
   ) +
-  labs(fill = "Industry", title = "Proportion of Labor Force by Industry in 2016")
+  labs(fill = "Industry", title = "Proportioin of Labour Force by Industry in 2016")
 
 # Print the pie chart
 print(pie_chart)
@@ -174,14 +176,20 @@ combined_plot <- ggdraw(bar_plot) +
 print(combined_plot)
 
 
+# Export the plot as a PDF
+ggsave(paste0("visualisations/","Proportioin of Labour Force by Industry in 2016",".svg"), combined_plot, width = 11, height = 8.5, units = "in")
+
+
 ####Second section
 
 
 full_merged_ds_year <- full_merged_ds_year %>%
-  filter(!(parentcode_indus %in% c("U", "T", "00.0")))
+  filter(!(parentcode_indus %in% c("U", "T", "00.0")))%>%
+  mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - "))%>%
+  filter(year == 2016)
 
 # Create the crossbar plot
-crossbar_plot <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+crossbar_plot <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = full_merged_ds_year$industry_label)) +
   geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
   geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
   geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
@@ -200,15 +208,19 @@ crossbar_plot <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = media
 # Print the crossbar plot
 print(crossbar_plot)
 
-# Create the crossbar plot with unionization rates
-crossbar_plot_union <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+
+
+
+# Create the crossbar plot with unionization rates and collective bargaining rates
+crossbar_plot_union_collective <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = full_merged_ds_year$industry_label)) +
   geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok, width = 0.7), position = position_dodge(0.9)) +
   geom_linerange(aes(ymin = median_nok, ymax = median_nok, width = 0.9), position = position_dodge(0.9), size = 1) +
   geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
   geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+  geom_line(aes(y = collective_rate * 100000, group = 2, color = "Collective Bargaining Rate"), size = 1) +
   scale_fill_manual(values = named_color_vector) +
-  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
-  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
+  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%) & Collective Bargaining Rate (%)")) +
+  scale_color_manual(values = c("Unionization Rate" = "darkblue", "Collective Bargaining Rate" = "orange")) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
@@ -217,11 +229,23 @@ crossbar_plot_union <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y =
     panel.ontop = TRUE,
     panel.background = element_rect(fill = NA)
   ) +
-  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016") +
+  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK), Unionization Rates & Collective Bargaining Rates by Industry in 2016") +
   guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
 
-# Print the crossbar plot with unionization rates
-print(crossbar_plot_union)
+# Print the crossbar plot with unionization rates and collective bargaining rates
+print(crossbar_plot_union_collective)
+
+
+# Sort the dataset by union_density in ascending order
+sorted_full_merged_ds_year <- full_merged_ds_year[order(full_merged_ds_year$union_density),]
+
+# Reorder the factor levels of the parentcode_indus column based on the sorted dataset
+sorted_full_merged_ds_year$parentcode_indus <- factor(sorted_full_merged_ds_year$parentcode_indus, levels = unique(sorted_full_merged_ds_year$parentcode_indus))
+
+# Create the crossbar plot with unionization rates and collective bargaining rates, sorted by ascending labor union density
+crossbar_plot_union_collective_sorted <- ggplot(sorted_full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  # The rest of the code remains the same
+
 
 
 # First, calculate the median union_density by parentcode_indus
@@ -261,8 +285,42 @@ crossbar_plot_union_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_ind
 
 crossbar_plot_union_sorted
 
+ggsave(paste0("visualisations/","Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016 (Sorted by Unionization Rate)",".svg"), crossbar_plot_union_sorted, width = 11, height = 8.5, units = "in")
 
 
+# Reorder the parentcode_indus factor levels by ascending median_union_density and median_collective_rate
+full_merged_ds_year$parentcode_indus <- factor(
+  full_merged_ds_year$parentcode_indus,
+  levels = median_union_density[order(median_union_density$median_union_density, median_collective_rate$median_collective_rate), "parentcode_indus"]
+)
+
+# Now recreate the crossbar plot with the sorted x-axis and both union density and collective coverage rate
+crossbar_plot_union_collective_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok), width = 0.7, position = position_dodge(0.9)) +
+  geom_linerange(aes(ymin = median_nok, ymax = median_nok), width = 0.9, position = position_dodge(0.9), size = 1) +
+  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+  geom_line(aes(y = collective_rate * 100000, group = 2, color = "Collective Bargaining Rate"), size = 1) +
+  scale_fill_manual(values = named_color_vector) +
+  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%) & Collective Bargaining Rate (%)"), labels = scales::label_comma(big.mark = " ")) + 
+  scale_color_manual(values = c("Unionization Rate" = "darkblue", "Collective Bargaining Rate" = "orange")) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major = element_line(color = "gray"),
+    panel.grid.minor = element_blank(),
+    panel.ontop = TRUE,
+    panel.background = element_rect(fill = NA)
+  ) +
+  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK), Unionization Rates & Collective Bargaining Rates\n by Industry in 2016 (Sorted by Unionization Rate)") +
+  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+
+crossbar_plot_union_collective_sorted
+
+ggsave(paste0("visualisations/","Distribution of Median, Lower & Upper Quartile Wages (NOK), Unionization Rates & Collective Bargaining Rates by Industry in 2016 (Sorted by Unionization Rate & Collective Rate)",".svg"), crossbar_plot_union_collective_sorted, width = 11, height = 8.5, units = "in")
+
+
+#
 #Wage vs Labour Union Density, scatterplot
 
 
@@ -290,6 +348,8 @@ scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_
 
 # Print the scatterplot
 print(scatter_plot)
+ggsave(paste0("visualisations/","Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year (excluding 2015)",".svg"), scatter_plot, width = 11, height = 8.5, units = "in")
+
 
 # Create the scatterplot with black industry code labels inside colored points
 scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = factor(year))) +
@@ -311,6 +371,8 @@ scatter_plot <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_
 
 # Print the scatterplot
 print(scatter_plot)
+ggsave(paste0("visualisations/","Scatterplot of Mean Monthly Wage (NOK) vs. Labor Union Density by Year and Industry (excluding 2015)",".svg"), scatter_plot, width = 11, height = 8.5, units = "in")
+
 
 # Regression
 ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = as.factor(year), label = parentcode_indus)) +
@@ -396,7 +458,7 @@ x <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color 
 
 
 # Export the plot as a PDF
-ggsave(paste0("visualisations/","x",".svg"), x, width = 11, height = 8.5, units = "in")
+ggsave(paste0("visualisations/","Mean Wage vs. Union Density by Industry and Year",".svg"), x, width = 11, height = 8.5, units = "in")
 
 
 file = (paste0("visualisations/","Mean Wage vs. Union Density by Industry and Year"))
