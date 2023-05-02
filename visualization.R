@@ -243,57 +243,57 @@ sorted_full_merged_ds_year <- full_merged_ds_year[order(full_merged_ds_year$unio
 sorted_full_merged_ds_year$parentcode_indus <- factor(sorted_full_merged_ds_year$parentcode_indus, levels = unique(sorted_full_merged_ds_year$parentcode_indus))
 
 # Create the crossbar plot with unionization rates and collective bargaining rates, sorted by ascending labor union density
-crossbar_plot_union_collective_sorted <- ggplot(sorted_full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+#crossbar_plot_union_collective_sorted <- ggplot(sorted_full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
   # The rest of the code remains the same
 
 
 
 # First, calculate the median union_density by parentcode_indus
-median_union_density <- aggregate(full_merged_ds_year$union_density, by = list(full_merged_ds_year$parentcode_indus), FUN = median)
+#median_union_density <- aggregate(full_merged_ds_year$union_density, by = list(full_merged_ds_year$parentcode_indus), FUN = median)
 
 # Rename the columns of median_union_density
-colnames(median_union_density) <- c("parentcode_indus", "median_union_density")
+#colnames(median_union_density) <- c("parentcode_indus", "median_union_density")
 
 # Merge the median_union_density with the full_merged_ds_year dataframe
-full_merged_ds_year <- merge(full_merged_ds_year, median_union_density, by = "parentcode_indus")
+#full_merged_ds_year <- merge(full_merged_ds_year, median_union_density, by = "parentcode_indus")
 
 # Reorder the parentcode_indus factor levels by ascending median_union_density
-full_merged_ds_year$parentcode_indus <- factor(
-  full_merged_ds_year$parentcode_indus,
-  levels = median_union_density[order(median_union_density$median_union_density), "parentcode_indus"]
-)
+#full_merged_ds_year$parentcode_indus <- factor(
+#  full_merged_ds_year$parentcode_indus,
+#  levels = median_union_density[order(median_union_density$median_union_density), "parentcode_indus"]
+#)
 
 # Now recreate the crossbar plot with the sorted x-axis
-crossbar_plot_union_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
-  geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok), width = 0.7, position = position_dodge(0.9)) +
-  geom_linerange(aes(ymin = median_nok, ymax = median_nok), width = 0.9, position = position_dodge(0.9), size = 1) +
-  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
-  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
-  scale_fill_manual(values = named_color_vector) +
-  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
-  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "gray"),
-    panel.grid.minor = element_blank(),
-    panel.ontop = TRUE,
-    panel.background = element_rect(fill = NA)
-  ) +
-  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016 (Sorted by Unionization Rate)") +
-  guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
+#crossbar_plot_union_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
+ # geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok), width = 0.7, position = position_dodge(0.9)) +
+#  geom_linerange(aes(ymin = median_nok, ymax = median_nok), width = 0.9, position = position_dodge(0.9), size = 1) +
+#  geom_point(aes(y = median_nok), color = "white", size = 2, position = position_dodge(0.9)) +
+#  geom_line(aes(y = union_density * 100000, group = 1, color = "Unionization Rate"), size = 1) +
+#  scale_fill_manual(values = named_color_vector) +
+#  scale_y_continuous(name = "Monthly Wage (NOK)", sec.axis = sec_axis(~./100000, name = "Unionization Rate (%)")) +
+#  scale_color_manual(values = c("Unionization Rate" = "darkblue")) +
+#  theme_minimal() +
+#  theme(
+#    axis.text.x = element_text(angle = 45, hjust = 1),
+#    panel.grid.major = element_line(color = "gray"),
+#    panel.grid.minor = element_blank(),
+#    panel.ontop = TRUE,
+#    panel.background = element_rect(fill = NA)
+#  ) +
+#  labs(x = "Industry Code", title = "Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016 (Sorted by Unionization Rate)") +
+ # guides(fill = guide_legend(title = "Industry", nrow = NULL, ncol = 1), color = guide_legend(title = NULL))
 
-crossbar_plot_union_sorted
+#crossbar_plot_union_sorted
 
-ggsave(paste0("visualisations/","Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016 (Sorted by Unionization Rate)",".svg"), crossbar_plot_union_sorted, width = 11, height = 8.5, units = "in")
+#ggsave(paste0("visualisations/","Distribution of Median, Lower & Upper Quartile Wages (NOK) & Unionization Rates by Industry in 2016 (Sorted by Unionization Rate)",".svg"), crossbar_plot_union_sorted, width = 11, height = 8.5, units = "in")
+#
 
-
-# Reorder the parentcode_indus factor levels by ascending median_union_density and median_collective_rate
-full_merged_ds_year$parentcode_indus <- factor(
-  full_merged_ds_year$parentcode_indus,
-  levels = median_union_density[order(median_union_density$median_union_density, median_collective_rate$median_collective_rate), "parentcode_indus"]
-)
-
+## Reorder the parentcode_indus factor levels by ascending median_union_density and median_collective_rate
+#full_merged_ds_year$parentcode_indus <- factor(
+#  full_merged_ds_year$parentcode_indus,
+#  levels = median_union_density[order(median_union_density$median_union_density, median_collective_rate$median_collective_rate), "parentcode_indus"]
+#)
+#######
 # Now recreate the crossbar plot with the sorted x-axis and both union density and collective coverage rate
 crossbar_plot_union_collective_sorted <- ggplot(full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
   geom_crossbar(aes(ymin = lower_quartile_nok, ymax = upper_quartile_nok), width = 0.7, position = position_dodge(0.9)) +

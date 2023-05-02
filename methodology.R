@@ -29,10 +29,10 @@ OLS_reg_ind6 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate
 #OLS_reg_ind9 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties, data = logdf)
 #OLS_reg_ind10 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties, data = logdf)
 #OLS_reg_ind11 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties, data = logdf)
-OLS_reg_ind12 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixties, data = logdf)
-OLS_reg_ind13 <- plm(logdf$mean_nok ~ logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixties, data = logdf)
-OLS_reg_ind14 <- lm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixties, data = logdf)
-OLS_reg_ind15 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixties, data = logdf)
+OLS_reg_ind12 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixtyplus, data = logdf)
+OLS_reg_ind13 <- plm(logdf$mean_nok ~ logdf$collective_rate + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixtyplus, data = logdf)
+OLS_reg_ind14 <- lm(logdf$mean_nok ~ logdf$union_density + logdf$collective_rate + logdf$male_ratio +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixtyplus, data = logdf)
+OLS_reg_ind15 <- plm(logdf$mean_nok ~ logdf$union_density + logdf$male_ratio +logdf$has.education.finished.hs + logdf$has.education.bachelor + logdf$has.education.master +logdf$has.education.doctor +  logdf$teenager + logdf$twenties + logdf$thirties + logdf$fourties + logdf$fifties + logdf$sixtyplus, data = logdf)
 
 # Summary for OLS models
 #OLS_model_list <- list(OLS_reg_ind0, OLS_reg_ind1, OLS_reg_ind2, OLS_reg_ind3, OLS_reg_ind4, OLS_reg_ind5,OLS_reg_ind6,OLS_reg_ind7,OLS_reg_ind8,OLS_reg_ind9,OLS_reg_ind10,OLS_reg_ind11,OLS_reg_ind12, OLS_reg_ind13)
@@ -64,11 +64,12 @@ OLS_pool_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset
 #OLS_pool_ind9 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties, data = logdataset, model = "pooling")
 #OLS_pool_ind10 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties, data = logdataset, model = "pooling")
 #OLS_pool_ind11 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties, data = logdataset, model = "pooling")
-OLS_pool_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
-OLS_pool_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
-OLS_pool_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
-OLS_pool_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
+OLS_pool_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
+OLS_pool_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
+OLS_pool_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
+OLS_pool_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
 
+plm(logdataset$mean_nok ~logdataset$sixtyplus, data = logdataset, model = "pooling")
 # Summary for OLS models
 #OLS_model_list <- list(OLS_pool_ind0, OLS_pool_ind1, OLS_pool_ind2, OLS_pool_ind3, OLS_pool_ind4, OLS_pool_ind5,OLS_pool_ind6,OLS_pool_ind7,OLS_pool_ind8,OLS_pool_ind9,OLS_pool_ind10,OLS_pool_ind11,OLS_pool_ind12, OLS_pool_ind13)
 OLS_model_list <- list(OLS_pool_ind0, OLS_pool_ind1, OLS_pool_ind2, OLS_pool_ind6, OLS_pool_ind14, OLS_pool_ind12, OLS_pool_ind13, OLS_pool_ind15)
@@ -88,12 +89,12 @@ OLS_pool_vif1 <- vif(OLS_pool_ind1)
 OLS_pool_vif2 <- vif(OLS_pool_ind2)
 OLS_pool_vif3 <- vif(OLS_pool_ind3)
 OLS_pool_vif6 <- vif(OLS_pool_ind6)
-OLS_pool_vif12 <- vif(OLS_pool_ind12)
-OLS_pool_vif13 <- vif(OLS_pool_ind13)
-OLS_pool_vif14 <- vif(OLS_pool_ind14)
-OLS_pool_vif15 <- vif(OLS_pool_ind15)
-OLS_vif_list <- list(OLS_pool_vif1, OLS_pool_vif2, OLS_pool_vif6, OLS_pool_vif14, OLS_pool_vif12, OLS_pool_vif13, OLS_pool_vif15)
-
+#OLS_pool_vif12 <- vif(OLS_pool_ind12)
+#OLS_pool_vif13 <- vif(OLS_pool_ind13)
+#OLS_pool_vif14 <- vif(OLS_pool_ind14)
+#OLS_pool_vif15 <- vif(OLS_pool_ind15)
+OLS_vif_list <- list(OLS_pool_vif1, OLS_pool_vif2, OLS_pool_vif6#, OLS_pool_vif14, OLS_pool_vif12, OLS_pool_vif13, OLS_pool_vif15
+                      )
 OLS_vif_table <- stargazer(OLS_vif_list,
                                   title = "Pooled OLS VIF Results"
                                 ,  out = "results/Pooled_ols_vif_table_output.html"
@@ -110,10 +111,10 @@ FE_reg_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$c
 FE_reg_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "twoway", model = "within")
 FE_reg_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "twoway", model = "within")
 FE_reg_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "twoway", model = "within")
-FE_reg_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
-FE_reg_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
-FE_reg_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
-FE_reg_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
+FE_reg_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
+FE_reg_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
+FE_reg_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
+FE_reg_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
 
 FE_model_list <- list(FE_reg_ind0, FE_reg_ind1, FE_reg_ind2, FE_reg_ind6, FE_reg_ind14, FE_reg_ind12, FE_reg_ind13,FE_reg_ind15)
 
@@ -136,10 +137,10 @@ FE_time_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$
 FE_time_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "within")
 FE_time_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "within")
 FE_time_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "within")
-FE_time_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
-FE_time_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
-FE_time_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
-FE_time_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
+FE_time_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
+FE_time_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
+FE_time_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
+FE_time_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
 
 FE_model_list <- list(FE_time_ind0, FE_time_ind1, FE_time_ind2, FE_time_ind6, FE_time_ind14, FE_time_ind12, FE_time_ind13,FE_time_ind15)
 
@@ -165,10 +166,10 @@ FE_entity_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdatase
 FE_entity_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "individual", model = "within")
 FE_entity_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "individual", model = "within")
 FE_entity_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "individual", model = "within")
-FE_entity_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
-FE_entity_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
-FE_entity_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
-FE_entity_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
+FE_entity_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
+FE_entity_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
+FE_entity_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
+FE_entity_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
 
 FE_model_list <- list(FE_entity_ind0, FE_entity_ind1, FE_entity_ind2, FE_entity_ind6, FE_entity_ind14, FE_entity_ind12, FE_entity_ind13,FE_entity_ind15)
 
@@ -193,7 +194,7 @@ capture.output(FE_regression_table, file = "results/FE_entity_effect_output.txt"
 specification_list <- list(OLS_pool_ind12, FE_entity_ind12, FE_time_ind12, FE_reg_ind12)
 
 
-FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset,  model = "within")
+FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset,  model = "within")
 
 
 # Fixed effects transformation
@@ -203,7 +204,7 @@ FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collect
 #FE_12_ols <- lm(mean_nok ~ union_density + collective_rate + male_ratio +
 #                  has.education.finished.hs + has.education.bachelor + has.education.master +
 #                  has.education.doctor + teenager + twenties + thirties +
-#                  fourties + fifties + sixties,
+#                  fourties + fifties + sixtyplus,
 #                data = logdataset_transformed)
 #
 # Calculate VIF
@@ -211,7 +212,7 @@ FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collect
 #
 #
 #
-#FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset,  model = "within")
+#FE_12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset,  model = "within")
 #FE_vif12 <- vif(FE_12)
 
 
@@ -225,7 +226,7 @@ regression_table <- stargazer(specification_list,
                                                    "V - Education - High School","V - Education - Bachelor"
                                                    ,"V - Education - Master","V - Education - Doctor",
                               "V - Age-Group (15-19)","V - Age-Group (20-29)","V - Age-Group (30-39)","V - Age-Group (40-49)",
-                              "V - Age-Group (50-59)", "V - Age-Group (60-69)"),
+                              "V - Age-Group (50-59)", "V - Age-Group (60-74)"),
                                  align = TRUE,
                                  type = "text",
                                  model.names = TRUE,
@@ -239,13 +240,13 @@ regression_table <- stargazer(specification_list,
 
 ##Median
 #pooled ols
-OLS_pool_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
+OLS_pool_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
 #entity fixed effects
-FE_entity_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
+FE_entity_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
 #time fixed effects
-FE_time_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
+FE_time_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
 #twoway fixed effects
-FE_reg_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
+FE_reg_median <- plm(logdataset$median_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
 
 
 
@@ -260,7 +261,7 @@ FE_regression_table <- stargazer(specification_list,
                                                       "V - Education - High School","V - Education - Bachelor"
                                                       ,"V - Education - Master","V - Education - Doctor",
                                                       "V - Age-Group (15-19)","V - Age-Group (20-29)","V - Age-Group (30-39)","V - Age-Group (40-49)",
-                                                      "V - Age-Group (50-59)", "V - Age-Group (60-69)"),
+                                                      "V - Age-Group (50-59)", "V - Age-Group (60-74)"),
                                  align = TRUE,
                                  type = "text",
                                  model.names = TRUE,
@@ -271,13 +272,13 @@ FE_regression_table <- stargazer(specification_list,
 
 ##Lower Quartile
 #pooled ols
-OLS_pool_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
+OLS_pool_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
 #entity fixed effects
-FE_entity_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
+FE_entity_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
 #time fixed effects
-FE_time_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
+FE_time_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
 #twoway fixed effects
-FE_reg_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
+FE_reg_lowq <- plm(logdataset$lower_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
 
 
 
@@ -292,7 +293,7 @@ FE_regression_table <- stargazer(specification_list,
                                                       "V - Education - High School","V - Education - Bachelor"
                                                       ,"V - Education - Master","V - Education - Doctor",
                                                       "V - Age-Group (15-19)","V - Age-Group (20-29)","V - Age-Group (30-39)","V - Age-Group (40-49)",
-                                                      "V - Age-Group (50-59)", "V - Age-Group (60-69)"),
+                                                      "V - Age-Group (50-59)", "V - Age-Group (60-74)"),
                                  align = TRUE,
                                  type = "text",
                                  model.names = TRUE,
@@ -303,13 +304,13 @@ FE_regression_table <- stargazer(specification_list,
 
 ##Upper Quartile
 #pooled ols
-OLS_pool_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, model = "pooling")
+OLS_pool_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, model = "pooling")
 #entity fixed effects
-FE_entity_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "individual", model = "within")
+FE_entity_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "individual", model = "within")
 #time fixed effects
-FE_time_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "within")
+FE_time_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "within")
 #twoway fixed effects
-FE_reg_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "twoway", model = "within")
+FE_reg_upperq <- plm(logdataset$upper_quartile_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "twoway", model = "within")
 
 
 
@@ -326,7 +327,7 @@ FE_regression_table <- stargazer(specification_list,
                                                     "V - Education - High School","V - Education - Bachelor"
                                                     ,"V - Education - Master","V - Education - Doctor",
                                                     "V - Age-Group (15-19)","V - Age-Group (20-29)","V - Age-Group (30-39)","V - Age-Group (40-49)",
-                                                    "V - Age-Group (50-59)", "V - Age-Group (60-69)"),
+                                                    "V - Age-Group (50-59)", "V - Age-Group (60-74)"),
                                align = TRUE,
                                type = "text",
                                model.names = TRUE,
@@ -361,7 +362,7 @@ vregression_table <- stargazer(specification_list,
                                                     "V - Education - High School","V - Education - Bachelor"
                                                     ,"V - Education - Master","V - Education - Doctor",
                                                     "V - Age-Group (15-19)","V - Age-Group (20-29)","V - Age-Group (30-39)","V - Age-Group (40-49)",
-                                                    "V - Age-Group (50-59)", "V - Age-Group (60-69)"),
+                                                    "V - Age-Group (50-59)", "V - Age-Group (60-74)"),
                                align = TRUE,
                                type = "text",
                                model.names = TRUE,
@@ -379,16 +380,16 @@ vregression_table <- stargazer(specification_list,
 
 random_ind0 <- plm(logdataset$mean_nok ~ logdataset$union_density, effect = "time", data = logdataset, model = "random")
 random_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate, data = logdataset, effect = "time", model = "random")
-random_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "random")
-random_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "random")
-random_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "random")
-random_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+#random_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "random")
+#random_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "random")
+#random_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "random")
+#random_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "random")
+#random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "random")
+#random_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "random")
+#random_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixtyplus, data = logdataset, effect = "time", model = "random")
 
-FE_model_list <- list(random_ind0, random_ind1, random_ind2, random_ind6, random_ind14, random_ind12, random_ind13,random_ind15)
-
+FE_model_list <- list(random_ind0, random_ind1 #, random_ind2, random_ind6, random_ind14, random_ind12, random_ind13,random_ind15)
+                        )
 # Create a stargazer table for the fixed effects model
 FE_regression_table <- stargazer(FE_model_list,
                                  title = "Random Time Effects Regression Results",
