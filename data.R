@@ -146,12 +146,13 @@ x_m<- x_m %>%
 
 #dummy variable for age
 x_m<- x_m %>%
-  mutate(lessthantwenty = fifelse(x_m$alder_aar <= 20, 1,0, na = 0), .keep = "unused") %>%
-  mutate(twenty = fifelse(x_m$alder_aar >20 & x_m$alder_aar <= 30, 1,0, na = 0), .keep = "unused") %>%
-  mutate(thirty = fifelse(x_m$alder_aar >30 & x_m$alder_aar <= 40, 1,0, na = 0), .keep = "unused") %>%
-  mutate(fourty = fifelse(x_m$alder_aar >40 & x_m$alder_aar <= 50, 1,0, na = 0), .keep = "unused") %>%
-  mutate(fifty = fifelse(x_m$alder_aar >50 & x_m$alder_aar <= 60, 1,0, na = 0), .keep = "unused") %>%
-  mutate(sixty = fifelse(x_m$alder_aar >60 & x_m$alder_aar <= 74, 1,0, na = 0), .keep = "unused")
+  mutate(lessthantwenty = fifelse(x_m$alder_aar < 20, 1,0, na = 0), .keep = "unused") %>%
+  mutate(twenty = fifelse(x_m$alder_aar >=20 & x_m$alder_aar < 30, 1,0, na = 0), .keep = "unused") %>%
+  mutate(thirty = fifelse(x_m$alder_aar >=30 & x_m$alder_aar < 40, 1,0, na = 0), .keep = "unused") %>%
+  mutate(fourty = fifelse(x_m$alder_aar >=40 & x_m$alder_aar < 50, 1,0, na = 0), .keep = "unused") %>%
+  mutate(fifty = fifelse(x_m$alder_aar >=50 & x_m$alder_aar < 60, 1,0, na = 0), .keep = "unused") %>%
+  mutate(sixty = fifelse(x_m$alder_aar >=60 & x_m$alder_aar < 70, 1,0, na = 0), .keep = "unused") %>%
+  mutate(seventy = fifelse(x_m$alder_aar >=70, 1,0, na = 0), .keep = "unused")
 
 
 #dummy variable for sector
@@ -267,7 +268,8 @@ results <- weighted_data %>%
     thirties = survey_mean(thirty, na.rm =TRUE),
     fourties = survey_mean(fourty, na.rm =TRUE),
     fifties = survey_mean(fifty, na.rm =TRUE),
-    sixtyplus = survey_mean(sixty, na.rm =TRUE),
+    sixties = survey_mean(sixty, na.rm =TRUE),
+    seventies = survey_mean(seventy, na.rm =TRUE),
     #seventies = survey_mean(seventyplus, na.rm =TRUE),
     #control variable: sector
     sector.private = survey_mean(sector.private, na.rm =TRUE),
