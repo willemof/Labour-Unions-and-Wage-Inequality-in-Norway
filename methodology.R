@@ -377,27 +377,27 @@ vregression_table <- stargazer(specification_list,
 
 # Estimate the fixed effects model (twoway)
 
-random_ind0 <- plm(logdataset$mean_nok ~ logdataset$union_density, effect = "time", data = logdataset, model = "random")
-random_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate, data = logdataset, effect = "time", model = "random")
-random_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "random")
-random_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "random")
-random_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "random")
-random_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-random_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+#random_ind0 <- plm(logdataset$mean_nok ~ logdataset$union_density, effect = "time", data = logdataset, model = "random")
+#random_ind1 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate, data = logdataset, effect = "time", model = "random")
+#random_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "random")
+#random_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "random")
+#random_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "random")
+#random_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+#random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+#random_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+#random_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
 
-FE_model_list <- list(random_ind0, random_ind1, random_ind2, random_ind6, random_ind14, random_ind12, random_ind13,random_ind15)
+#FE_model_list <- list(random_ind0, random_ind1, random_ind2, random_ind6, random_ind14, random_ind12, random_ind13,random_ind15)
 
 # Create a stargazer table for the fixed effects model
-FE_regression_table <- stargazer(FE_model_list,
-                                 title = "Random Time Effects Regression Results",
-                                 out = "results/Random_output.html",
-                                 
-                                 align = TRUE,
-                                 type = "text",
-                                 model.names = TRUE,
-                                 dep.var.labels.include = TRUE)
+#FE_regression_table <- stargazer(FE_model_list,
+ #                                title = "Random Time Effects Regression Results",
+#                                 out = "results/Random_output.html",
+#                                 
+#                                 align = TRUE,
+#                                 type = "text",
+#                                 model.names = TRUE,
+#                                 dep.var.labels.include = TRUE)
 
 
 plm::pdim(FE_reg_ind12)

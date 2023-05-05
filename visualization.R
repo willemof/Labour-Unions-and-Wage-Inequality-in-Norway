@@ -244,11 +244,6 @@ sorted_full_merged_ds_year$parentcode_indus <- factor(sorted_full_merged_ds_year
 
 
 
-# Reorder the parentcode_indus factor levels by ascending median_union_density
-full_merged_ds_year$parentcode_indus <- factor(
-  full_merged_ds_year$parentcode_indus,
-  levels = median_union_density[order(median_union_density$median_union_density), "parentcode_indus"]
-)
 
 # Now recreate the crossbar plot with the sorted x-axis
 crossbar_plot_union_sorted <- ggplot(sorted_full_merged_ds_year, aes(x = parentcode_indus, y = median_nok, fill = industry_label)) +
@@ -357,14 +352,26 @@ ggsave(paste0("visualisations/","Scatterplot of Mean Monthly Wage (NOK) vs. Labo
 
 
 # Regression
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = as.factor(year), label = parentcode_indus)) +
-  geom_point(size = 3) +
-  geom_text(aes(label = parentcode_indus), color = "black", size = 3, check_overlap = TRUE) +
+scatter_plot <-  ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = as.factor(year), label = parentcode_indus)) +
+  geom_point(size = 4) +
+  geom_text(aes(label = parentcode_indus), color = "black", size = 4, check_overlap = FALSE) +
   geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
-  scale_color_manual(values = c("2013" = "pink", "2014" = "lightblue", "2016" = "green", "2017" = "purple")) +
+  scale_color_manual(values = c("2013" = "pink", "2014" = "yellow", "2016" = "turquoise", "2017" = "lightgreen")) +
   theme_minimal() +
   labs(x = "Union Density", y = "Mean Wage (NOK)", color = "Year", title = "Mean Wage vs. Union Density by Industry and Year") +
-  guides(color = guide_legend(title = "Year"))
+  guides(color = guide_legend(title = "Year")) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 14)
+  )
+
+scatter_plot
+
+
+ggsave(paste0("visualisations/","Mean Wage vs. Union Density by Industry and Year)",".svg"), scatter_plot, width = 11, height = 8.5, units = "in")
 
 # Create a new variable for the mean-median gap
 full_merged_ds_filtered <- full_merged_ds_filtered %>%
@@ -416,10 +423,18 @@ ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, colo
 #White text on point, mean median gap labour union density regression
 full_merged_ds_filtered <- full_merged_ds_filtered %>%
   mutate(industry_label = paste(parentcode_indus, industryparentname, sep = " - "),
-         year_label = as.character(year - 2010))
+         year_label = as.character(year - 2010)) 
+filtered_data <- full_merged_ds_filtered %>%
+  filter(industry_label != "00.0 - Unspecified or unidentifiable industry")
 
-ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = industry_label)) +
-  geom_point(size = 3, show.legend = FALSE) +
+legend_labels <- legend_labels %>%
+  filter(industry_label != "00.0 - Unspecified or unidentifiable industry")
+
+filtered_palette <- custom_palette[filtered_legend_labels$industry_label]
+
+
+mean_median_vis <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, color = industry_label)) +
+  geom_point(size = 3, show.legend = TRUE) +
   geom_text(aes(label = year_label), color = "white", size = 3) +
   geom_smooth(method = "lm", se = FALSE, linetype = "solid", size = 1, color = "black") +
   scale_color_manual(values = custom_palette, labels = legend_labels$industry_label) +
@@ -427,6 +442,7 @@ ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_median_gap, colo
   labs(x = "Union Density", y = "Mean-Median Wage Gap (NOK)", color = "Industry", title = "Mean-Median Wage Gap vs. Union Density by Industry and Year") +
   guides(color = guide_legend(title = "Industry", nrow = NULL, ncol = 1))
 
+ggsave(paste0("visualisations/","Mean-Median Wage Gap vs. Union Density by Industry and Year",".svg"), mean_median_vis, width = 11, height = 8.5, units = "in")
 
 
 x <- ggplot(full_merged_ds_filtered, aes(x = union_density, y = mean_nok, color = industry_label)) +
