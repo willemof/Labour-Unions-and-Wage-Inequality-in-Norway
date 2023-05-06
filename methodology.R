@@ -92,16 +92,46 @@ OLS_pool_vif12 <- vif(OLS_pool_ind12)
 OLS_pool_vif13 <- vif(OLS_pool_ind13)
 OLS_pool_vif14 <- vif(OLS_pool_ind14)
 OLS_pool_vif15 <- vif(OLS_pool_ind15)
-OLS_vif_list <- list(OLS_pool_vif1, OLS_pool_vif2, OLS_pool_vif6, OLS_pool_vif14, OLS_pool_vif12, OLS_pool_vif13, OLS_pool_vif15)
 
-OLS_vif_table <- stargazer(OLS_vif_list,
-                                  title = "Pooled OLS VIF Results"
-                                ,  out = "results/Pooled_ols_vif_table_output.html"
-                                ,  align = TRUE
-                                ,  type = "text"
-                                # , model.names = TRUE
-                                # , dep.var.labels.include = TRUE
+# Combine the VIF values into a data frame
+vif_df <- bind_rows(
+  VIF1 = OLS_pool_vif1,
+  VIF2 = OLS_pool_vif2,
+  VIF6 = OLS_pool_vif6,
+  VIF14 = OLS_pool_vif14,
+  VIF12 = OLS_pool_vif12,
+  VIF13 = OLS_pool_vif13,
+  VIF15 = OLS_pool_vif15
 )
+
+# Create a VIF table using kable
+vif_table <- kable(vif_df, caption = "Pooled OLS VIF Results", digits = 2, format = "html")
+
+# Customize the table appearance
+vif_table_styled <- vif_table %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Save the table as an HTML file
+html_content <- paste0(
+  "<!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset=\"UTF-8\">
+  <title>Pooled OLS VIF Results</title>
+  <link rel=\"stylesheet\" href=\"bootstrap.min.css\">
+  </head>
+  <body>
+  ", vif_table_styled, "
+  </body>
+  </html>"
+)
+
+html_content %>% writeLines("results/Pooled_OLS_VIF_Table_Output.html")
+
+
+# Display the VIF table
+print(vif_table)
+
 
 # Estimate the fixed effects model (twoway)
 

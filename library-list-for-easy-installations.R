@@ -58,6 +58,10 @@ library(cowplot) #for visualisation
 library(patchwork) #for visualisation
 library(ggrepel) #for scatterplot letter showing up despite text overal
 library(car) #for robustness check
+library(knitr) # For Tables for VIF
+library(kableExtra)
+library(htmltools)
+library(magrittr) # for the pipe operator %>% if it's not loaded already
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path) )
 
