@@ -1,0 +1,77 @@
+union_density,collective_rate,industry_label,year
+0.3426591007712715,0.43366333429123005,"A - Agriculture, forestry and fishing",2013
+0.27911632106290807,0.500044281726843,"A - Agriculture, forestry and fishing",2014
+0.2603444322987722,0.43608810590650776,"A - Agriculture, forestry and fishing",2016
+0.2754466387032905,0.586477608607864,"A - Agriculture, forestry and fishing",2017
+0.6362922503472047,0.45575908498357787,B - Mining and quarrying,2013
+0.6787487553063569,0.6503093662748634,B - Mining and quarrying,2014
+0.712387737382962,0.6170726621975023,B - Mining and quarrying,2016
+0.6774864230394918,0.5881620303785597,B - Mining and quarrying,2017
+0.5195644389001721,0.4723782564814835,C - Manufacturing,2013
+0.5158740157965097,0.633659527494407,C - Manufacturing,2014
+0.5437717781847636,0.5670162958214238,C - Manufacturing,2016
+0.5619099685425724,0.5659819242816345,C - Manufacturing,2017
+0.6956298233306764,0.5203116138532404,"D - Electricity, gas, steam and air conditioning supply",2013
+0.8155417283811087,0.8503925175988993,"D - Electricity, gas, steam and air conditioning supply",2014
+0.6126352971174369,0.671132530942719,"D - Electricity, gas, steam and air conditioning supply",2016
+0.7793978027240881,0.7407485452588247,"D - Electricity, gas, steam and air conditioning supply",2017
+0.5704682356222899,0.6141270953000029,"E - Water supply; sewerage, waste management and remediation activities",2013
+0.5821097097387847,0.8014351187460675,"E - Water supply; sewerage, waste management and remediation activities",2014
+0.5573512879571497,0.7680325478200142,"E - Water supply; sewerage, waste management and remediation activities",2016
+0.6135319747727406,0.879452733276429,"E - Water supply; sewerage, waste management and remediation activities",2017
+0.36320555429832246,0.345850223913493,F - Construction,2013
+0.39678802231299787,0.5660620506820608,F - Construction,2014
+0.34632399493877936,0.4767653636941113,F - Construction,2016
+0.3385262010726868,0.48106414574124,F - Construction,2017
+0.25998141574065753,0.37602884908570494,G - Wholesale and retail trade; repair of motor vehicles and motorcycles,2013
+0.26014856072263265,0.5164977919365038,G - Wholesale and retail trade; repair of motor vehicles and motorcycles,2014
+0.265932886318865,0.48131146562233273,G - Wholesale and retail trade; repair of motor vehicles and motorcycles,2016
+0.28204445095482167,0.46689924892153944,G - Wholesale and retail trade; repair of motor vehicles and motorcycles,2017
+0.5572319408793514,0.5972566874100877,H - Transportation and storage,2013
+0.5733985643806884,0.7164694379108582,H - Transportation and storage,2014
+0.5369757616575633,0.7022476044493942,H - Transportation and storage,2016
+0.5416079521088663,0.6750166337918002,H - Transportation and storage,2017
+0.253033263903386,0.3395309555230429,I - Accommodation and food service activities,2013
+0.264462368232892,0.5614657314367286,I - Accommodation and food service activities,2014
+0.2849857232203003,0.5369492533595723,I - Accommodation and food service activities,2016
+0.20073141112219217,0.4258103834168122,I - Accommodation and food service activities,2017
+0.38683123900094246,0.24827858616514986,J - Information and communication,2013
+0.40429220532517895,0.4073484155617679,J - Information and communication,2014
+0.39066596614329524,0.3427813225301362,J - Information and communication,2016
+0.3520511519376258,0.3341654222949903,J - Information and communication,2017
+0.5879826772724374,0.48317524040525583,K - Financial and insurance activities,2013
+0.6637581439885537,0.6397556828936645,K - Financial and insurance activities,2014
+0.5747389727262755,0.5477918721929222,K - Financial and insurance activities,2016
+0.5227682090968525,0.6005922168850509,K - Financial and insurance activities,2017
+0.13979576472242708,0.21181900394389488,L - Real estate activities,2013
+0.18395178252078553,0.2869428437275416,L - Real estate activities,2014
+0.3010987185381673,0.30492765612462286,L - Real estate activities,2016
+0.3443510580176937,0.2915693307700959,L - Real estate activities,2017
+0.37620659557737723,0.2290021864370197,"M - Professional, scientific and technical activities",2013
+0.44110412250527226,0.40270876067583017,"M - Professional, scientific and technical activities",2014
+0.4456486451530856,0.3673855764326126,"M - Professional, scientific and technical activities",2016
+0.4442146554992532,0.3838622390665086,"M - Professional, scientific and technical activities",2017
+0.3102495548313041,0.4492806068315972,N - Administrative and support service activities,2013
+0.37188754689740516,0.6170802087928767,N - Administrative and support service activities,2014
+0.38151866535988477,0.5522054198000761,N - Administrative and support service activities,2016
+0.35280119330496784,0.5479785920589555,N - Administrative and support service activities,2017
+0.8333639718564217,0.9944639120797424,O - Public administration and defence; compulsory social security,2013
+0.8542036682942038,1,O - Public administration and defence; compulsory social security,2014
+0.8247944769126704,0.9986170138249459,O - Public administration and defence; compulsory social security,2016
+0.8249543707816093,0.9972946208017147,O - Public administration and defence; compulsory social security,2017
+0.8158793035910646,0.9396559927701089,P - Education,2013
+0.845505454511975,0.958560138490466,P - Education,2014
+0.8114892008732398,0.9574625423004846,P - Education,2016
+0.8012976435289255,0.9664153281521018,P - Education,2017
+0.7334938619232277,0.9122000604504065,Q - Human health and social work activities,2013
+0.7687927116508251,0.9476111179173871,Q - Human health and social work activities,2014
+0.7340444596135014,0.9386539335971361,Q - Human health and social work activities,2016
+0.7518646977130735,0.9305699528229252,Q - Human health and social work activities,2017
+0.4627037418087872,0.5236040333383455,"R - Arts, entertainment and recreation",2013
+0.48118179693226626,0.6438034388851751,"R - Arts, entertainment and recreation",2014
+0.4274435073061656,0.6530665475616804,"R - Arts, entertainment and recreation",2016
+0.33881573501216977,0.5741864081892781,"R - Arts, entertainment and recreation",2017
+0.4267141658242933,0.5201305284695391,S - Other service activities,2013
+0.43743178745460853,0.6541462019830986,S - Other service activities,2014
+0.442428877027484,0.5798573239025627,S - Other service activities,2016
+0.3596808511257068,0.5600384342210064,S - Other service activities,2017

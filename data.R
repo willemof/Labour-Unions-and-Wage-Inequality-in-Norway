@@ -505,8 +505,11 @@ sunny
 summy <- df %>%
   group_by(as.character(year)) %>% 
   summarize(total_total = sum(population_count, na.rm = TRUE))
-summy 
 
+se <- df %>% 
+  group_by(as.character(year)) %>% 
+  summarize(total_total_se = sum(population_count_se, na.rm = TRUE))
+se
 
 sunny <- df %>%
   group_by(year = lubridate::year(date)) %>% 
@@ -547,6 +550,4 @@ full_merged_ds_year <- df
 #
 #
 #
-
-
 

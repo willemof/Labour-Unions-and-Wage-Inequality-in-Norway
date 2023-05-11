@@ -412,8 +412,10 @@ vregression_table <- stargazer(specification_list,
 #random_ind2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio, data = logdataset, effect = "time", model = "random")
 #random_ind3 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs, data = logdataset, effect = "time", model = "random")
 #random_ind6 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio + logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor, data = logdataset, effect = "time", model = "random")
-#random_ind12 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
-#random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
+random_2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate, data = logdataset, index = c("industry", "year"), effect = "twoway", model = "random")
+nonrandom_2 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate, data = logdataset, index = c("industry", "year"), effect = "twoway", model = "within")
+
+random_ind13 <- plm(logdataset$mean_nok ~ logdataset$collective_rate + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
 #random_ind14 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$collective_rate + logdataset$male_ratio +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
 #random_ind15 <- plm(logdataset$mean_nok ~ logdataset$union_density + logdataset$male_ratio +logdataset$has.education.finished.hs + logdataset$has.education.bachelor + logdataset$has.education.master +logdataset$has.education.doctor +  logdataset$teenager + logdataset$twenties + logdataset$thirties + logdataset$fourties + logdataset$fifties + logdataset$sixties, data = logdataset, effect = "time", model = "random")
 
@@ -428,7 +430,22 @@ vregression_table <- stargazer(specification_list,
 #                                 type = "text",
 #                                 model.names = TRUE,
 #                                 dep.var.labels.include = TRUE)
-
-
+random_2
+nonrandom_2
 plm::pdim(FE_reg_ind12)
+hausman_test <- phtest(OLS_pool_ind1, nonrandom_2)
+plm::phtest(OLS_pool_ind1, nonrandom_2)
+plm::phtest(random_2, nonrandom_2)
+
+
+rando <- list(OLS_pool_ind1, nonrandom_2)
+
+randorano <- stargazer(rando,
+                                 title = "rando Regression results",
+                                 out = "results/rando.html",
+                                 
+                                 align = TRUE,
+                                 type = "text",
+                                 model.names = TRUE,
+                                 dep.var.labels.include = TRUE)
 

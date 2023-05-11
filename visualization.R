@@ -460,3 +460,9 @@ ggsave(paste0("visualisations/","Mean Wage vs. Union Density by Industry and Yea
 
 
 file = (paste0("visualisations/","Mean Wage vs. Union Density by Industry and Year"))
+
+
+docu <- df %>%
+  select(union_density, collective_rate ,industry_label, year)
+
+write_csv(docu, (file = ("csv/ludcolbargperindustry.csv")))

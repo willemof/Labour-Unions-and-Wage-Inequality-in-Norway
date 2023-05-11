@@ -8,7 +8,7 @@ fun <- function(x) {
 # Plot
 curve(fun, from = 0, to = 6,
       xlab = "centralization of wage setting", 
-      ylab = "Real wage"))
+      ylab = "Real wage")
 
 
 s <- seq(0, 6, length.out = 1000)
